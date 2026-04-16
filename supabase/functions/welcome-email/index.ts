@@ -136,7 +136,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Connection Foundation <onboarding@resend.dev>',
+        from: 'Connection Foundation <delivered-by-resend@cf.goldcoast.com.au>',
         to: [email],
         subject: `Welcome to Connection Foundation, ${name} 🌱`,
         html: emailHtml,
