@@ -1116,6 +1116,24 @@
       });
 
       if (res.ok || res.status === 201) {
+        // Registration succeeded, now trigger welcome email
+        try {
+          await fetch(`${SUPABASE_URL}/functions/v1/welcome-email`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_KEY,
+            },
+            body: JSON.stringify({
+              type: 'INSERT',
+              record: { name, email, english_level: level, preferred_session: session, source: 'landing_page' }
+            })
+          });
+        } catch(emailErr) {
+          console.error('Email send error:', emailErr);
+          // Continue anyway - registration was successful
+        }
+
         document.getElementById('form-main').style.display = 'none';
         document.getElementById('form-success').classList.add('visible');
       } else {
