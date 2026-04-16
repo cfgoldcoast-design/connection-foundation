@@ -1117,8 +1117,9 @@
 
       if (res.ok || res.status === 201) {
         // Registration succeeded, now trigger welcome email
+        let emailSent = false;
         try {
-          await fetch(`${SUPABASE_URL}/functions/v1/welcome-email`, {
+          const emailRes = await fetch(`${SUPABASE_URL}/functions/v1/welcome-email`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1129,9 +1130,19 @@
               record: { name, email, english_level: level, preferred_session: session, source: 'landing_page' }
             })
           });
+          emailSent = emailRes.ok;
+          if (!emailSent) {
+            console.error('Email send failed:', emailRes.status, await emailRes.text());
+          }
         } catch(emailErr) {
           console.error('Email send error:', emailErr);
-          // Continue anyway - registration was successful
+        }
+
+        if (!emailSent) {
+          btn.textContent = 'Reserve my spot →';
+          btn.disabled = false;
+          alert('Registration saved, but we had trouble sending your welcome email. Please check your inbox or contact us at cf.goldcoast@gmail.com');
+          return;
         }
 
         document.getElementById('form-main').style.display = 'none';
