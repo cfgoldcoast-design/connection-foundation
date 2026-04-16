@@ -1110,7 +1110,6 @@
         headers: {
           'Content-Type': 'application/json',
           'apikey': SUPABASE_KEY,
-          'Authorization': `Bearer ${SUPABASE_KEY}`,
           'Prefer': 'return=minimal'
         },
         body: JSON.stringify({ name, email, english_level: level, preferred_session: session, source: 'landing_page' })
