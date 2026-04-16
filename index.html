@@ -1136,6 +1136,11 @@
 
         document.getElementById('form-main').style.display = 'none';
         document.getElementById('form-success').classList.add('visible');
+      } else if (res.status === 409) {
+        btn.textContent = 'Reserve my spot →';
+        btn.disabled = false;
+        alert('This email is already registered! Check your inbox for the welcome email, or contact us at cf.goldcoast@gmail.com');
+        return;
       } else {
         const errText = await res.text();
         console.error('Supabase error:', res.status, errText);
