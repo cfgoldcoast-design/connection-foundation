@@ -17,7 +17,17 @@ const LEVEL_LABELS: Record<string, string> = {
   'advanced':     'Advanced',
 }
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, apikey, Authorization',
+}
+
 serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
+
   try {
     const payload = await req.json()
     const record = payload.record
@@ -134,10 +144,10 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: err }), { status: 500 })
     }
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 })
+    return new Response(JSON.stringify({ success: true }), { status: 200, headers: corsHeaders })
 
   } catch (err) {
     console.error('Function error:', err)
-    return new Response(JSON.stringify({ error: String(err) }), { status: 500 })
+    return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: corsHeaders })
   }
 })
