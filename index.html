@@ -1120,13 +1120,15 @@
         document.getElementById('form-main').style.display = 'none';
         document.getElementById('form-success').classList.add('visible');
       } else {
+        const errText = await res.text();
+        console.error('Supabase error:', res.status, errText);
         btn.textContent = 'Reserve my spot →';
         btn.disabled = false;
         alert('Registration failed. Please try again or contact us at cf.goldcoast@gmail.com');
         return;
       }
     } catch(e) {
-      console.error(e);
+      console.error('Fetch error:', e);
       btn.textContent = 'Reserve my spot →';
       btn.disabled = false;
       alert('Something went wrong. Please check your connection and try again.');
