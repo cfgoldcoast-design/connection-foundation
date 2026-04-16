@@ -30,8 +30,13 @@ serve(async (req) => {
 
   try {
     const payload = await req.json()
-    const record = payload.record
+    const record = payload.record || payload
     const { name, email, english_level, preferred_session } = record
+
+    if (!name || !email) {
+      console.error('Missing required fields:', { name, email, english_level, preferred_session })
+      return new Response(JSON.stringify({ error: 'Missing name or email' }), { status: 400, headers: corsHeaders })
+    }
 
     const session = SESSION_LABELS[preferred_session] ?? preferred_session
     const level   = LEVEL_LABELS[english_level] ?? english_level
