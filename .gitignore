@@ -5,3 +5,4 @@ node_modules/
 dist/
 .vercel/
 supabase/.temp/
+client_secret_*.json

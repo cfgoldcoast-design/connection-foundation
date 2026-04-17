@@ -1,7 +1,8 @@
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "npm:@supabase/supabase-js@2";
 
-const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
 const WA_LINK = 'https://chat.whatsapp.com/CFbvAyzsyCf8XbCkOU8Yys?mode=gi_t'
+const SITE_LINK = 'https://connection-foundation.vercel.app'
 
 const SESSION_LABELS: Record<string, string> = {
   'fri-5pm': 'Friday at 5:00 pm',
@@ -23,10 +24,15 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type, apikey, Authorization',
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
+
+  const supabase = createClient(
+    Deno.env.get("SUPABASE_URL") ?? "",
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+  );
 
   try {
     const payload = await req.json()
@@ -34,13 +40,41 @@ serve(async (req) => {
     const { name, email, english_level, preferred_session } = record
 
     if (!name || !email) {
-      console.error('Missing required fields:', { name, email, english_level, preferred_session })
-      return new Response(JSON.stringify({ error: 'Missing name or email' }), { status: 400, headers: corsHeaders })
+      return new Response(JSON.stringify({ error: 'Missing name or email' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
     const session = SESSION_LABELS[preferred_session] ?? preferred_session
     const level   = LEVEL_LABELS[english_level] ?? english_level
 
+    const { data: token } = await supabase
+      .from("gmail_oauth_tokens").select("*").limit(1).maybeSingle();
+    if (!token?.refresh_token) throw new Error("No Gmail connected — run OAuth flow first");
+
+    let accessToken = token.access_token;
+    const expired = !token.access_token_expires_at ||
+      new Date(token.access_token_expires_at) <= new Date(Date.now() + 30_000);
+    if (expired) {
+      const r = await fetch("https://oauth2.googleapis.com/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          client_id: Deno.env.get("GOOGLE_CLIENT_ID") ?? "",
+          client_secret: Deno.env.get("GOOGLE_CLIENT_SECRET") ?? "",
+          refresh_token: token.refresh_token,
+          grant_type: "refresh_token",
+        }),
+      });
+      if (!r.ok) throw new Error(`Token refresh failed: ${r.status} ${await r.text()}`);
+      const j = await r.json();
+      accessToken = j.access_token;
+      await supabase.from("gmail_oauth_tokens").update({
+        access_token: accessToken,
+        access_token_expires_at: new Date(Date.now() + j.expires_in * 1000).toISOString(),
+        updated_at: new Date().toISOString(),
+      }).eq("id", token.id);
+    }
+
+    const subject = `Welcome to Connection Foundation, ${name} 🌱`
     const emailHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -117,6 +151,9 @@ serve(async (req) => {
         </tr>
         <tr>
           <td style="background:#F5EDE0;border-radius:0 0 20px 20px;padding:24px 48px;text-align:center;">
+            <p style="margin:0 0 8px;font-size:13px;color:#2B6B6B;">
+              <a href="${SITE_LINK}" style="color:#2B6B6B;text-decoration:none;font-weight:600;">Visit our website →</a>
+            </p>
             <p style="margin:0;font-size:12px;color:#9AABBB;line-height:1.6;">
               Connection Foundation · Mermaid Waters, Gold Coast, Australia<br>
               <a href="mailto:cf.goldcoast@gmail.com" style="color:#2B6B6B;">cf.goldcoast@gmail.com</a>
@@ -129,30 +166,58 @@ serve(async (req) => {
 </body>
 </html>`
 
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Connection Foundation <delivered-by-resend@cf.goldcoast.com.au>',
-        to: [email],
-        subject: `Welcome to Connection Foundation, ${name} 🌱`,
-        html: emailHtml,
-      }),
-    })
+    const boundary = "bdry_" + Math.random().toString(36).slice(2);
+    const mime = [
+      `From: Connection Foundation <${token.email}>`,
+      `To: ${email}`,
+      `Subject: =?UTF-8?B?${btoa(unescape(encodeURIComponent(subject)))}?=`,
+      `MIME-Version: 1.0`,
+      `Content-Type: multipart/alternative; boundary="${boundary}"`,
+      ``,
+      `--${boundary}`,
+      `Content-Type: text/plain; charset="UTF-8"`,
+      ``,
+      emailHtml.replace(/<[^>]*>/g, ""),
+      ``,
+      `--${boundary}`,
+      `Content-Type: text/html; charset="UTF-8"`,
+      `Content-Transfer-Encoding: base64`,
+      ``,
+      btoa(unescape(encodeURIComponent(emailHtml))),
+      ``,
+      `--${boundary}--`,
+    ].join("\r\n");
+    const raw = btoa(unescape(encodeURIComponent(mime)))
+      .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 
-    if (!res.ok) {
-      const err = await res.text()
-      console.error('Resend error:', err)
-      return new Response(JSON.stringify({ error: err }), { status: 500 })
+    const sendRes = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ raw }),
+    });
+
+    if (!sendRes.ok) {
+      const err = await sendRes.text();
+      await supabase.from("email_retry_log").insert({
+        email_type: "welcome", payload: { to: email, subject }, last_error: `${sendRes.status}: ${err}`,
+      });
+      throw new Error(`Gmail API ${sendRes.status}: ${err}`);
     }
 
-    return new Response(JSON.stringify({ success: true }), { status: 200, headers: corsHeaders })
+    await supabase.from("email_retry_log").insert({
+      email_type: "welcome", payload: { to: email, subject }, succeeded_at: new Date().toISOString(),
+    });
+
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    })
 
   } catch (err) {
     console.error('Function error:', err)
-    return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: corsHeaders })
+    return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 })
