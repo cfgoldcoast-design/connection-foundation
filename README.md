@@ -9,10 +9,11 @@ Free English conversation circle. Landing page + registration + automated welcom
 ```
 ├── index.html                                  # Landing page (static, served by Vercel)
 ├── images/                                     # Site images (referenced from index.html)
-│   ├── hero-bg.jpg
-│   ├── about.jpg
-│   ├── why-different.jpg
-│   └── testimonials-bg.jpg
+│   ├── hero-bg.jpg                             # Hero section background
+│   ├── about.jpg                               # "Real people" section
+│   ├── why-different.jpg                       # "What makes this different" section
+│   ├── testimonials-bg.jpg                     # Testimonials background
+│   └── bk.jpg, bk2.jpg, bk3.jpg                # Event banner backgrounds
 ├── supabase/
 │   ├── setup.sql                               # Initial DB schema (members table)
 │   └── functions/
@@ -21,6 +22,19 @@ Free English conversation circle. Landing page + registration + automated welcom
 ├── vercel.json                                 # Vercel config (static site)
 └── EMAIL-SETUP-GUIDE.md                        # Gmail OAuth playbook (reference)
 ```
+
+## Local preview (no commit needed)
+
+To test changes before pushing:
+
+```bash
+# From the project root
+python -m http.server 8000
+```
+
+Open http://localhost:8000 in your browser. Any change to `index.html` or anything in `images/` is reflected just by refreshing the page (Ctrl+Shift+R to force-bypass cache).
+
+Only push to `master` once you're happy with the result — Vercel auto-deploys every push.
 
 ## How it works
 
@@ -38,6 +52,26 @@ All site images live in `images/`. To swap one:
 3. Vercel auto-deploys in ~30 seconds
 
 Recommended dimensions: ~1600×900 for backgrounds, ~1200×800 for content images. Keep each under 150 KB for fast load.
+
+## Event banner (next event promo)
+
+Between the hero and "How it works" sections there is an event banner promoting the next get-together. To update it, edit `index.html` and look for the `<!-- NEXT EVENT BANNER -->` block:
+
+- Background image → `background-image: url('images/bk.jpg')` (swap for `bk2.jpg` or `bk3.jpg`, or replace the file)
+- Title, date, time, location → plain text inside the `.event-banner-content` div
+- CTA button → `<a href="#join">` scrolls to the registration form
+
+## Session video (YouTube embed)
+
+The "See it for yourself" section embeds a YouTube video. To replace it, edit `index.html`, search for the `<!-- VIDEO: REAL SESSION -->` block and change the iframe `src`:
+
+```html
+<iframe src="https://www.youtube.com/embed/<VIDEO_ID>" ...></iframe>
+```
+
+Where `<VIDEO_ID>` is the part after `youtu.be/` in the share link (e.g. for `https://youtu.be/BQ1oa4aXs6c` the ID is `BQ1oa4aXs6c`).
+
+**Do NOT commit large video files to the repo.** Always host on YouTube/Vimeo and embed.
 
 ## Email system — Gmail OAuth
 
