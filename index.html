@@ -1177,6 +1177,38 @@
   </div>
 </section>
 
+<!-- PROGRAMMES (inline block, no section) -->
+<div style="background: var(--warm-white); padding: 0 40px 80px;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="section-label" style="margin-bottom: 20px;">Our programmes</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="programmes-grid">
+      <div class="why-card">
+        <div class="why-card-icon">💬</div>
+        <div>
+          <h4>Language Café</h4>
+          <p>Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
+          <span style="display:inline-block;margin-top:12px;background:var(--teal-pale);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:0.5px;padding:4px 12px;border-radius:12px;">All levels welcome</span>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">📖</div>
+        <div>
+          <h4>DSA — Discourse on Social Action</h4>
+          <p>A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
+          <span style="display:inline-block;margin-top:12px;background:var(--teal-pale);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:0.5px;padding:4px 12px;border-radius:12px;">Intermediate English</span>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-family:'Lato',sans-serif;font-size:14px;color:var(--mid);margin-top:24px;">Not sure which one is for you? <a href="#join" style="color:var(--teal);font-weight:700;">Tell us when you register</a> and we'll guide you.</p>
+  </div>
+</div>
+
+<style>
+  @media (max-width: 768px) {
+    .programmes-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+
 <!-- SESSIONS -->
 <section class="sessions-bg" id="sessions">
   <div class="section-inner" style="position:relative;z-index:1;">
@@ -1373,13 +1405,13 @@
     <button class="modal-close" onclick="closeModal('qr-modal')" aria-label="Close">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
     </button>
-    <div class="modal-label">Community Get-Together</div>
-    <h3 class="modal-title">Scan to confirm your spot</h3>
-    <p class="modal-sub">Open the camera on your phone and point it at the code below.</p>
+    <div class="modal-label">You came along — thank you</div>
+    <h3 class="modal-title">Thanks for being here</h3>
+    <p class="modal-sub">Open the camera on your phone and scan the code below to register your visit and stay in touch.</p>
     <div class="qr-wrap">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fconnection-foundation.vercel.app%2F%3Ffeedback%3D1" alt="QR code — scan with your phone"/>
     </div>
-    <p class="qr-hint">You'll be taken to a short form to register your attendance.</p>
+    <p class="qr-hint">It takes less than a minute.</p>
   </div>
 </div>
 
@@ -1470,14 +1502,18 @@
       return;
     }
 
+    if (!FEEDBACK_WEBHOOK_URL || FEEDBACK_WEBHOOK_URL.indexOf('script.google.com') === -1) {
+      alert('The feedback form is not yet connected to the Google Sheet. Please contact cf.goldcoast@gmail.com');
+      return;
+    }
+
     btn.disabled = true;
     btn.textContent = 'Sending...';
 
     try {
       // text/plain avoids CORS preflight with Google Apps Script Web Apps
-      await fetch(FEEDBACK_WEBHOOK_URL, {
+      const res = await fetch(FEEDBACK_WEBHOOK_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           name, email, phone, session,
@@ -1485,6 +1521,7 @@
           submitted_at: new Date().toISOString()
         })
       });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       document.getElementById('feedback-form-view').style.display = 'none';
       document.getElementById('feedback-success-view').classList.add('active');
     } catch (e) {
