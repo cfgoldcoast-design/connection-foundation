@@ -399,7 +399,7 @@
 
   .sessions-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
   .session-card {
@@ -701,6 +701,157 @@
   }
   .form-success p { color: var(--mid); font-size: 15px; }
 
+  /* ===== MODAL (QR + Feedback) ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 62, 80, 0.65);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: modalFade 0.25s ease;
+  }
+  .modal-overlay.active { display: flex; }
+  @keyframes modalFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal-card {
+    background: var(--warm-white);
+    border-radius: 24px;
+    max-width: 480px;
+    width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 48px 40px;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes modalPop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(43,107,107,0.08);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(43,107,107,0.18); }
+
+  .modal-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--charcoal);
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .modal-sub {
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.65;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .qr-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .qr-wrap img {
+    width: 260px;
+    height: 260px;
+    border-radius: 16px;
+    border: 8px solid #fff;
+    box-shadow: 0 8px 24px rgba(43,107,107,0.18);
+  }
+  .qr-hint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--mid);
+    margin-top: 8px;
+  }
+
+  .modal-card .form-group { margin-bottom: 16px; }
+  .modal-card label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+  .modal-card input,
+  .modal-card select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #fff;
+    color: var(--charcoal);
+    transition: border-color 0.2s;
+  }
+  .modal-card input:focus,
+  .modal-card select:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+  .modal-submit {
+    width: 100%;
+    background: var(--teal);
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 28px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .modal-submit:hover:not(:disabled) { background: var(--teal-light); }
+  .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .modal-success {
+    display: none;
+    text-align: center;
+  }
+  .modal-success.active { display: block; }
+  .modal-success-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+  }
+
   /* ===== EVENT BANNER ===== */
   .event-banner {
     min-height: 500px;
@@ -921,10 +1072,10 @@
       <div>
         <p style="font-size: 16px; margin-bottom: 24px; opacity: 0.95;">Join us for an afternoon of genuine conversation, connection, and good company. All levels welcome.</p>
       </div>
-      <a href="https://chat.whatsapp.com/CFbvAyzsyCf8XbCkOU8Yys?mode=gi_t" target="_blank" rel="noopener noreferrer" class="btn-primary">
+      <button type="button" class="btn-primary" onclick="openQrModal()" style="border:none;cursor:pointer;font-family:inherit;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         Confirm your spot
-      </a>
+      </button>
     </div>
   </div>
 </section>
@@ -1031,23 +1182,29 @@
   <div class="section-inner" style="position:relative;z-index:1;">
     <div class="section-label">Sessions</div>
     <h2 class="section-title">Join us this week</h2>
-    <p class="section-sub">Three active groups running in Mermaid Waters. Drop in anytime — no booking needed for your first session.</p>
+    <p class="section-sub">Active groups running in Mermaid Waters. Drop in anytime — no booking needed for your first session.</p>
     <div class="sessions-grid">
       <div class="session-card">
-        <div class="session-day">Friday</div>
-        <div class="session-time">5:00 pm</div>
+        <div class="session-day">DSA · Friday</div>
+        <div class="session-time">4:00 – 5:00 pm</div>
         <div class="session-loc">Mermaid Waters, Gold Coast</div>
         <span class="session-tag">All levels</span>
       </div>
       <div class="session-card">
-        <div class="session-day">Friday</div>
-        <div class="session-time">8:00 am</div>
+        <div class="session-day">DSA · Friday</div>
+        <div class="session-time">5:00 – 6:00 pm</div>
         <div class="session-loc">Mermaid Waters, Gold Coast</div>
         <span class="session-tag">All levels</span>
       </div>
       <div class="session-card">
-        <div class="session-day">Monday</div>
-        <div class="session-time">5:00 pm</div>
+        <div class="session-day">Language Café · Friday</div>
+        <div class="session-time">6:00 – 7:00 pm</div>
+        <div class="session-loc">Mermaid Waters, Gold Coast</div>
+        <span class="session-tag">All levels</span>
+      </div>
+      <div class="session-card">
+        <div class="session-day">Language Café · Monday</div>
+        <div class="session-time">5:00 – 6:00 pm</div>
         <div class="session-loc">Mermaid Waters, Gold Coast</div>
         <span class="session-tag">All levels</span>
       </div>
@@ -1153,10 +1310,11 @@
           <div class="form-group">
             <label>Preferred session</label>
             <select id="f-session">
-              <option value="" disabled selected>Choose a time</option>
-              <option value="fri-5pm">Friday 5:00 pm</option>
-              <option value="fri-8am">Friday 8:00 am</option>
-              <option value="mon-5pm">Monday 5:00 pm</option>
+              <option value="" disabled selected>Choose a session</option>
+              <option value="dsa-fri-4pm">DSA — Friday 4:00–5:00 pm</option>
+              <option value="dsa-fri-5pm">DSA — Friday 5:00–6:00 pm</option>
+              <option value="cafe-fri-6pm">Language Café — Friday 6:00–7:00 pm</option>
+              <option value="cafe-mon-5pm">Language Café — Monday 5:00–6:00 pm</option>
               <option value="any">Any — I am flexible</option>
             </select>
           </div>
@@ -1209,7 +1367,134 @@
   </div>
 </footer>
 
+<!-- QR MODAL (desktop: show QR to scan from phone) -->
+<div class="modal-overlay" id="qr-modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('qr-modal')" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+    </button>
+    <div class="modal-label">Community Get-Together</div>
+    <h3 class="modal-title">Scan to confirm your spot</h3>
+    <p class="modal-sub">Open the camera on your phone and point it at the code below.</p>
+    <div class="qr-wrap">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fconnection-foundation.vercel.app%2F%3Ffeedback%3D1" alt="QR code — scan with your phone"/>
+    </div>
+    <p class="qr-hint">You'll be taken to a short form to register your attendance.</p>
+  </div>
+</div>
+
+<!-- FEEDBACK MODAL (auto-opens on ?feedback=1, usually via QR scan on phone) -->
+<div class="modal-overlay" id="feedback-modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('feedback-modal')" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+    </button>
+    <div id="feedback-form-view">
+      <div class="modal-label">You came along — thank you</div>
+      <h3 class="modal-title">Thanks for joining our <em style="font-style:italic;color:var(--teal);">Get-Together</em></h3>
+      <p class="modal-sub">We hope the afternoon was as warm for you as it was for us. Leave us your details so we can stay in touch and send you the next session info.</p>
+      <div class="form-group">
+        <label for="fb-name">Full name</label>
+        <input type="text" id="fb-name" placeholder="Your name" autocomplete="name"/>
+      </div>
+      <div class="form-group">
+        <label for="fb-email">Email address</label>
+        <input type="email" id="fb-email" placeholder="you@email.com" autocomplete="email"/>
+      </div>
+      <div class="form-group">
+        <label for="fb-phone">Phone number</label>
+        <input type="tel" id="fb-phone" placeholder="04xx xxx xxx" autocomplete="tel"/>
+      </div>
+      <div class="form-group">
+        <label for="fb-session">Session or group you're interested in</label>
+        <select id="fb-session">
+          <option value="" disabled selected>Choose an option</option>
+          <option value="dsa-fri-4pm">DSA — Friday 4:00–5:00 pm</option>
+          <option value="dsa-fri-5pm">DSA — Friday 5:00–6:00 pm</option>
+          <option value="cafe-fri-6pm">Language Café — Friday 6:00–7:00 pm</option>
+          <option value="cafe-mon-5pm">Language Café — Monday 5:00–6:00 pm</option>
+          <option value="unsure">Not sure yet — just keep me posted</option>
+        </select>
+      </div>
+      <button class="modal-submit" id="fb-btn" onclick="submitFeedback()">Send my details →</button>
+    </div>
+    <div class="modal-success" id="feedback-success-view">
+      <div class="modal-success-icon">🌱</div>
+      <h3 class="modal-title">Thank you!</h3>
+      <p class="modal-sub">We've got your details. We'll be in touch soon with more about the sessions.</p>
+    </div>
+  </div>
+</div>
+
 <script>
+  // === MODAL HANDLING ===
+  // Google Apps Script Web App endpoint that appends a row to the
+  // "Get-together registration april 2026" sheet in cf.goldcoast@gmail.com's Drive.
+  // Setup instructions are in README.md ("Event feedback — Google Sheet").
+  const FEEDBACK_WEBHOOK_URL = 'REPLACE_WITH_APPS_SCRIPT_URL';
+
+  function openQrModal() { document.getElementById('qr-modal').classList.add('active'); }
+  function openFeedbackModal() { document.getElementById('feedback-modal').classList.add('active'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+  // Close on backdrop click + Escape
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('active');
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(o => o.classList.remove('active'));
+    }
+  });
+
+  // Auto-open feedback modal if URL has ?feedback=1 (QR scan lands here)
+  if (new URLSearchParams(window.location.search).get('feedback') === '1') {
+    window.addEventListener('DOMContentLoaded', openFeedbackModal);
+  }
+
+  async function submitFeedback() {
+    const name = document.getElementById('fb-name').value.trim();
+    const email = document.getElementById('fb-email').value.trim();
+    const phone = document.getElementById('fb-phone').value.trim();
+    const session = document.getElementById('fb-session').value;
+    const btn = document.getElementById('fb-btn');
+
+    if (!name || !email || !phone || !session) {
+      alert('Please fill in all fields before continuing.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      // text/plain avoids CORS preflight with Google Apps Script Web Apps
+      await fetch(FEEDBACK_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          name, email, phone, session,
+          event: 'Community Get-Together — April 2026',
+          submitted_at: new Date().toISOString()
+        })
+      });
+      document.getElementById('feedback-form-view').style.display = 'none';
+      document.getElementById('feedback-success-view').classList.add('active');
+    } catch (e) {
+      console.error('Feedback submit error:', e);
+      btn.disabled = false;
+      btn.textContent = 'Send my details →';
+      alert('Something went wrong. Please try again or contact cf.goldcoast@gmail.com');
+    }
+  }
+
   // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {

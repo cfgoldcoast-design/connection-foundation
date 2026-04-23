@@ -61,6 +61,43 @@ Between the hero and "How it works" sections there is an event banner promoting 
 - Title, date, time, location → plain text inside the `.event-banner-content` div
 - CTA button → `<a href="#join">` scrolls to the registration form
 
+## Event feedback — Google Sheet
+
+The event banner's **"Confirm your spot"** button opens a modal with a QR code. When scanned from a phone, it lands on the site with `?feedback=1` which auto-opens a feedback form. Submissions append a row to a Google Sheet on `cf.goldcoast@gmail.com`'s Drive.
+
+### One-time setup
+
+1. Log in to Google Drive as `cf.goldcoast@gmail.com` and create a new Sheet titled **`Get-together registration april 2026`**
+2. Add a header row: `Timestamp | Name | Email | Phone | Session | Event`
+3. In the sheet, go to **Extensions → Apps Script** and paste this code:
+
+```javascript
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    data.submitted_at || new Date().toISOString(),
+    data.name || '',
+    data.email || '',
+    data.phone || '',
+    data.session || '',
+    data.event || ''
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ok: true}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+4. Click **Deploy → New deployment**. Type: **Web app**. Execute as: **Me**. Who has access: **Anyone**. Click **Deploy**
+5. Copy the **Web app URL** (format: `https://script.google.com/macros/s/XXXXX/exec`)
+6. In `index.html`, replace `REPLACE_WITH_APPS_SCRIPT_URL` with that URL and commit
+
+Every form submission from `?feedback=1` will now append a row to the sheet.
+
+### Regenerating the QR code
+
+The QR in the banner modal currently points to `https://connection-foundation.vercel.app/?feedback=1`. It's generated on the fly by `api.qrserver.com` — if the live domain changes, edit the `<img src>` inside the `#qr-modal` block in `index.html`.
+
 ## Session video (YouTube embed)
 
 The "See it for yourself" section embeds a YouTube video. To replace it, edit `index.html`, search for the `<!-- VIDEO: REAL SESSION -->` block and change the iframe `src`:
