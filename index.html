@@ -4,19 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connection Foundation — Free English Conversation · Gold Coast</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/logo-cfgc-transparent.png">
 <style>
   :root {
-    --teal: #2B6B6B;
-    --teal-light: #3D8080;
-    --teal-pale: #EDF3F3;
-    --sage: #9CAF88;
-    --sand: #F5EDE0;
-    --warm-white: #FFF8F0;
-    --coral: #F4A261;
-    --charcoal: #2C3E50;
-    --mid: #5A6A7A;
-    --border: rgba(43,107,107,0.12);
+    /* Rosewood palette — locked */
+    --wine: #5B1F3A;
+    --mulberry: #8B2C4F;
+    --rose: #C97B8E;
+    --blush: #E8B5BD;
+    --ember: #D45D5D;
+    --cream: #F7F0E8;
+    --ink: #2A1A22;
+    --stone: #8A7A7E;
+    /* Semantic roles */
+    --bg: var(--cream);
+    --fg: var(--ink);
+    --primary: var(--wine);
+    --cta: var(--ember);
+    --muted: var(--stone);
+    --border: color-mix(in oklab, var(--ink) 12%, transparent);
+    --max-width: 1280px;
+    /* Legacy aliases — map to new tokens so existing references keep working */
+    --teal: var(--wine);
+    --teal-light: var(--mulberry);
+    --teal-pale: color-mix(in oklab, var(--blush) 40%, var(--cream));
+    --sage: var(--stone);
+    --sand: var(--blush);
+    --warm-white: var(--cream);
+    --coral: var(--ember);
+    --charcoal: var(--ink);
+    --mid: var(--stone);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,13 +41,16 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Lato', sans-serif;
-    background: var(--warm-white);
-    color: var(--charcoal);
-    font-size: 16px;
-    line-height: 1.75;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.55;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+  h1, h2, .section-title { text-wrap: balance; }
 
   /* ===== NAV ===== */
   .main-nav {
@@ -46,7 +66,7 @@
     border-bottom: 1px solid var(--border);
     transition: box-shadow 0.3s;
   }
-  .main-nav.scrolled { box-shadow: 0 2px 24px rgba(43,107,107,0.08); }
+  .main-nav.scrolled { box-shadow: 0 2px 24px color-mix(in oklab, var(--wine) 8%, transparent); }
 
   .nav-logo {
     display: flex;
@@ -54,20 +74,21 @@
     gap: 12px;
     text-decoration: none;
   }
+  .nav-logo-img { height: 38px; width: auto; display: block; }
+  @media (max-width: 768px) { .nav-logo-img { height: 30px; } }
   .nav-logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--teal);
-    letter-spacing: 1px;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
     line-height: 1.1;
   }
   .nav-logo-sub {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--sage);
+    color: var(--stone);
     margin-top: 2px;
   }
   .nav-links {
@@ -81,21 +102,23 @@
     text-decoration: none;
     transition: color 0.15s;
   }
-  .nav-links a:hover { color: var(--teal); }
-  .nav-links a.current { color: var(--teal); font-weight: 700; }
+  .nav-links a:hover { color: var(--wine); }
+  .nav-links a.current { color: var(--wine); font-weight: 500; }
   .nav-cta {
-    background: var(--teal);
+    background: var(--ember);
     color: #fff !important;
     padding: 10px 22px;
-    border-radius: 24px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
     text-transform: none;
     text-decoration: none;
-    transition: background 0.2s, transform 0.1s;
+    border: none;
+    box-shadow: none;
+    transition: background 0.2s;
   }
-  .nav-cta:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .nav-cta:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
   @media (max-width: 768px) {
     .main-nav { padding: 14px 20px; }
     .nav-links a:not(.nav-cta) { display: none; }
@@ -116,9 +139,7 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(156,175,136,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(43,107,107,0.07) 0%, transparent 60%);
+    background: none;
     pointer-events: none;
   }
 
@@ -129,7 +150,7 @@
     right: -120px; top: 10%;
     width: 480px; height: 480px;
     border-radius: 50%;
-    border: 1px solid rgba(43,107,107,0.08);
+    border: 1px solid color-mix(in oklab, var(--wine) 10%, transparent);
   }
   .hero-bg::after {
     content: '';
@@ -137,11 +158,11 @@
     right: -60px; top: 5%;
     width: 360px; height: 360px;
     border-radius: 50%;
-    border: 1px solid rgba(43,107,107,0.06);
+    border: 1px solid color-mix(in oklab, var(--wine) 8%, transparent);
   }
 
   .hero-inner {
-    max-width: 1100px;
+    max-width: var(--max-width);
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -155,15 +176,15 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(43,107,107,0.08);
-    border: 1px solid rgba(43,107,107,0.15);
-    border-radius: 20px;
+    background: color-mix(in oklab, var(--wine) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--wine) 15%, transparent);
+    border-radius: 999px;
     padding: 6px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--teal);
+    color: var(--wine);
     margin-bottom: 24px;
     animation: fadeUp 0.6s ease both;
   }
@@ -179,28 +200,28 @@
   }
 
   .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 5vw, 64px);
+    font-size: clamp(48px, 6vw, 80px);
     font-weight: 500;
-    line-height: 1.1;
-    color: var(--charcoal);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--ink);
     margin-bottom: 24px;
     animation: fadeUp 0.6s 0.1s ease both;
   }
   .hero h1 em {
-    font-style: italic;
-    color: var(--teal);
+    font-style: normal;
+    color: var(--wine);
   }
 
   .hero-sub {
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.65;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--stone);
+    line-height: 1.55;
     margin-bottom: 40px;
     animation: fadeUp 0.6s 0.2s ease both;
   }
-  .hero-sub strong { color: var(--charcoal); font-weight: 700; }
+  .hero-sub strong { color: var(--ink); font-weight: 500; }
 
   .hero-actions {
     display: flex;
@@ -213,37 +234,38 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--teal);
+    background: var(--ember);
     color: #fff;
-    padding: 16px 32px;
-    border-radius: 32px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     text-decoration: none;
-    transition: all 0.2s;
-    box-shadow: 0 4px 24px rgba(43,107,107,0.25);
+    border: none;
+    box-shadow: none;
+    transition: background 0.2s;
   }
-  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(43,107,107,0.3); }
+  .btn-primary:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
 
   .btn-secondary {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     background: transparent;
-    color: var(--teal);
-    padding: 16px 32px;
-    border-radius: 32px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    color: var(--ink);
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     text-decoration: none;
-    border: 2px solid var(--teal);
-    transition: all 0.2s;
+    border: 1px solid var(--ink);
+    transition: background 0.2s;
   }
-  .btn-secondary:hover { background: var(--teal-pale); transform: translateY(-2px); }
+  .btn-secondary:hover { background: color-mix(in oklab, var(--ink) 6%, transparent); }
 
   .hero-stats {
     display: flex;
@@ -254,7 +276,6 @@
     animation: fadeUp 0.6s 0.4s ease both;
   }
   .stat-num {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
     font-weight: 600;
     color: var(--teal);
@@ -277,14 +298,17 @@
   }
 
   .hero-logo-card {
-    background: var(--teal);
-    border-radius: 32px;
-    width: 220px; height: 220px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    width: 240px; height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 24px 64px rgba(43,107,107,0.3);
+    padding: 36px;
+    box-shadow: none;
   }
+  .hero-logo-card img { width: 100%; height: auto; display: block; }
 
   .hero-cards {
     display: grid;
@@ -293,16 +317,15 @@
     width: 100%;
   }
   .hero-card {
-    background: #fff;
+    background: var(--cream);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 2px;
     padding: 18px;
-    transition: transform 0.2s;
+    transition: border-color 0.2s;
   }
-  .hero-card:hover { transform: translateY(-3px); }
-  .hero-card-icon { font-size: 22px; margin-bottom: 8px; }
-  .hero-card h4 { font-size: 13px; font-weight: 700; color: var(--teal); margin-bottom: 4px; }
-  .hero-card p { font-size: 12px; color: var(--mid); line-height: 1.4; }
+  .hero-card:hover { border-color: var(--ink); }
+  .hero-card h4 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.01em; }
+  .hero-card p { font-size: 13px; color: var(--stone); line-height: 1.5; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -311,35 +334,35 @@
 
   /* ===== SECTIONS ===== */
   section {
-    padding: 96px 40px;
+    padding: 120px 40px;
   }
   .section-inner {
-    max-width: 1100px;
+    max-width: var(--max-width);
     margin: 0 auto;
   }
   .section-label {
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--coral);
+    color: var(--ember);
     margin-bottom: 12px;
   }
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 500;
-    color: var(--charcoal);
-    line-height: 1.15;
+    color: var(--ink);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
     margin-bottom: 20px;
   }
-  .section-title em { font-style: italic; color: var(--teal); }
+  .section-title em { font-style: normal; color: var(--wine); }
   .section-sub {
     font-size: 17px;
-    font-weight: 300;
-    color: var(--mid);
+    font-weight: 400;
+    color: var(--stone);
     max-width: 560px;
-    line-height: 1.7;
+    line-height: 1.55;
     margin-bottom: 56px;
   }
 
@@ -352,30 +375,30 @@
     gap: 32px;
   }
   .step {
-    background: var(--warm-white);
-    border-radius: 20px;
+    background: var(--cream);
+    border-radius: 2px;
     padding: 36px 28px;
     position: relative;
     border: 1px solid var(--border);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s;
   }
-  .step:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(43,107,107,0.1); }
+  .step:hover { border-color: var(--ink); }
   .step-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px;
-    font-weight: 600;
-    color: rgba(43,107,107,0.1);
+    font-size: 56px;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    color: color-mix(in oklab, var(--wine) 22%, transparent);
     line-height: 1;
     margin-bottom: 16px;
   }
   .step h3 {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
-    font-weight: 600;
-    color: var(--teal);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--ink);
     margin-bottom: 12px;
   }
-  .step p { font-size: 15px; color: var(--mid); line-height: 1.65; }
+  .step p { font-size: 15px; color: var(--stone); line-height: 1.65; }
 
   /* ===== WHY CF ===== */
   .why-grid {
@@ -384,37 +407,28 @@
     gap: 24px;
   }
   .why-card {
-    background: var(--warm-white);
-    border-radius: 20px;
+    background: var(--cream);
+    border-radius: 2px;
     padding: 32px;
     border: 1px solid var(--border);
-    display: flex;
-    gap: 20px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s;
   }
-  .why-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(43,107,107,0.08); }
-  .why-card-icon {
-    width: 48px; height: 48px;
-    background: var(--teal-pale);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
+  .why-card:hover { border-color: var(--ink); }
   .why-card h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    font-weight: 600;
-    color: var(--teal);
-    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 10px;
   }
-  .why-card p { font-size: 14px; color: var(--mid); line-height: 1.65; }
+  .why-card p { font-size: 15px; color: var(--stone); line-height: 1.65; }
 
   /* ===== SESSIONS ===== */
-  .sessions-bg { background: var(--teal); }
-  .sessions-bg .section-title { color: #fff; }
-  .sessions-bg .section-label { color: var(--coral); }
-  .sessions-bg .section-sub { color: rgba(255,255,255,0.7); }
+  .sessions-bg { background: var(--mulberry); }
+  .sessions-bg .section-title { color: var(--cream); }
+  .sessions-bg .section-title em { color: var(--blush); }
+  .sessions-bg .section-label { color: var(--blush); }
+  .sessions-bg .section-sub { color: color-mix(in oklab, var(--cream) 75%, transparent); }
 
   .sessions-grid {
     display: grid;
@@ -422,57 +436,56 @@
     gap: 20px;
   }
   .session-card {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
+    background: color-mix(in oklab, var(--cream) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--cream) 15%, transparent);
+    border-radius: 2px;
     padding: 28px;
-    transition: background 0.2s;
+    transition: border-color 0.2s;
   }
-  .session-card:hover { background: rgba(255,255,255,0.13); }
+  .session-card:hover { border-color: var(--cream); }
   .session-day {
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--coral);
+    color: var(--blush);
     margin-bottom: 8px;
   }
   .session-time {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 28px;
-    font-weight: 600;
-    color: #fff;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--cream);
     margin-bottom: 4px;
   }
   .session-loc {
     font-size: 13px;
-    color: rgba(255,255,255,0.6);
+    color: color-mix(in oklab, var(--cream) 60%, transparent);
     margin-bottom: 16px;
   }
   .session-tag {
     display: inline-block;
-    background: rgba(255,255,255,0.12);
-    border-radius: 12px;
+    background: color-mix(in oklab, var(--cream) 12%, transparent);
+    border-radius: 999px;
     padding: 4px 12px;
     font-size: 11px;
-    color: rgba(255,255,255,0.8);
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    color: color-mix(in oklab, var(--cream) 85%, transparent);
+    font-weight: 500;
+    letter-spacing: 0.06em;
   }
 
   .location-note {
     margin-top: 40px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px;
+    background: color-mix(in oklab, var(--cream) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--cream) 12%, transparent);
+    border-radius: 2px;
     padding: 24px 28px;
     display: flex;
     gap: 16px;
     align-items: flex-start;
   }
-  .location-note-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-  .location-note p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; }
-  .location-note strong { color: #fff; }
+  .location-note p { font-size: 14px; color: color-mix(in oklab, var(--cream) 75%, transparent); line-height: 1.6; }
+  .location-note strong { color: var(--cream); font-weight: 500; }
 
   /* ===== TESTIMONIALS ===== */
   .testimonials-bg { background: var(--sand); }
@@ -484,16 +497,15 @@
   }
   .testimonial {
     background: var(--warm-white);
-    border-radius: 20px;
+    border-radius: 2px;
     padding: 32px;
     border: 1px solid var(--border);
     position: relative;
   }
   .testimonial::before {
     content: '"';
-    font-family: 'Cormorant Garamond', serif;
     font-size: 72px;
-    color: rgba(43,107,107,0.12);
+    color: color-mix(in oklab, var(--wine) 15%, transparent);
     position: absolute;
     top: 12px; left: 24px;
     line-height: 1;
@@ -504,7 +516,6 @@
     line-height: 1.7;
     margin-bottom: 24px;
     margin-top: 16px;
-    font-style: italic;
   }
   .testimonial-author { display: flex; align-items: center; gap: 12px; }
   .testimonial-avatar {
@@ -514,7 +525,7 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 16px;
   }
-  .testimonial-name { font-size: 13px; font-weight: 700; color: var(--charcoal); }
+  .testimonial-name { font-size: 14px; font-weight: 500; color: var(--ink); }
   .testimonial-origin { font-size: 11px; color: var(--mid); }
 
   /* ===== FORM ===== */
@@ -530,11 +541,11 @@
   }
 
   .form-card {
-    background: #fff;
-    border-radius: 24px;
+    background: var(--cream);
+    border-radius: 2px;
     padding: 48px;
     border: 1px solid var(--border);
-    box-shadow: 0 8px 48px rgba(43,107,107,0.07);
+    box-shadow: none;
   }
 
   .form-group {
@@ -542,11 +553,11 @@
   }
   .form-group label {
     display: block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--mid);
+    color: var(--stone);
     margin-bottom: 8px;
   }
   .form-group input,
@@ -555,7 +566,6 @@
     padding: 14px 18px;
     border: 1.5px solid var(--border);
     border-radius: 12px;
-    font-family: 'Lato', sans-serif;
     font-size: 15px;
     color: var(--charcoal);
     background: var(--warm-white);
@@ -566,7 +576,7 @@
   .form-group input:focus,
   .form-group select:focus {
     border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(43,107,107,0.08);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--wine) 8%, transparent);
   }
   .form-group select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A6A7A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -578,21 +588,21 @@
 
   .form-submit {
     width: 100%;
-    background: var(--teal);
+    background: var(--ember);
     color: #fff;
     border: none;
-    padding: 18px;
-    border-radius: 14px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    padding: 16px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.2s;
     margin-top: 8px;
+    box-shadow: none;
   }
-  .form-submit:hover { background: var(--teal-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(43,107,107,0.25); }
+  .form-submit:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
 
   .form-privacy {
     font-size: 12px;
@@ -603,7 +613,6 @@
   }
 
   .form-info h3 {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 28px;
     font-weight: 500;
     color: var(--teal);
@@ -635,64 +644,66 @@
     margin-top: 1px;
   }
 
-  /* ===== WHATSAPP FLOAT ===== */
+  /* ===== JOIN FLOAT ===== */
   .wa-float {
     position: fixed;
     bottom: 28px; right: 28px;
     z-index: 200;
     width: 56px; height: 56px;
-    background: #25D366;
+    background: var(--ember);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    box-shadow: none;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: background 0.2s;
   }
-  .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
+  .wa-float:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
   .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
   /* ===== FOOTER ===== */
   .main-footer {
-    background: var(--charcoal);
-    color: rgba(255, 248, 240, 0.7);
-    padding: 56px 40px 28px;
+    background: var(--wine);
+    color: color-mix(in oklab, var(--cream) 70%, transparent);
+    padding: 80px 40px 32px;
     text-align: center;
   }
   .footer-bigger {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 24px;
-    color: rgba(255,248,240,0.85);
-    border-bottom: 1px solid rgba(244,162,97,0.5);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    border-bottom: 1px solid color-mix(in oklab, var(--ember) 60%, transparent);
     padding-bottom: 4px;
     display: inline-block;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
     text-decoration: none;
     transition: color 0.2s, border-color 0.2s;
   }
-  .footer-bigger:hover { color: var(--coral); border-bottom-color: var(--coral); }
+  .footer-bigger:hover { color: var(--ember); border-bottom-color: var(--ember); }
   .main-footer .footer-links {
     display: flex;
     justify-content: center;
     gap: 28px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     flex-wrap: wrap;
   }
   .main-footer .footer-links a {
-    color: rgba(255,248,240,0.6);
-    font-size: 13px;
+    color: color-mix(in oklab, var(--cream) 70%, transparent);
+    font-size: 14px;
     text-decoration: none;
     transition: color 0.2s;
   }
-  .main-footer .footer-links a:hover { color: var(--coral); }
+  .main-footer .footer-links a:hover { color: var(--ember); }
   .footer-meta {
     font-size: 11px;
-    color: rgba(255,248,240,0.4);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: color-mix(in oklab, var(--cream) 50%, transparent);
     line-height: 1.7;
     max-width: 600px;
     margin: 0 auto;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,248,240,0.1);
+    padding-top: 24px;
+    border-top: 1px solid color-mix(in oklab, var(--cream) 12%, transparent);
   }
 
   /* ===== SUCCESS STATE ===== */
@@ -702,9 +713,7 @@
     padding: 48px 32px;
   }
   .form-success.visible { display: block; }
-  .form-success-icon { font-size: 48px; margin-bottom: 16px; }
   .form-success h3 {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 28px;
     color: var(--teal);
     margin-bottom: 12px;
@@ -732,14 +741,14 @@
 
   .modal-card {
     background: var(--warm-white);
-    border-radius: 24px;
+    border-radius: 2px;
     max-width: 480px;
     width: 100%;
     max-height: 92vh;
     overflow-y: auto;
     padding: 48px 40px;
     position: relative;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    box-shadow: 0 8px 24px var(--border);
     animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @keyframes modalPop {
@@ -750,7 +759,7 @@
     position: absolute;
     top: 16px;
     right: 16px;
-    background: rgba(43,107,107,0.08);
+    background: color-mix(in oklab, var(--wine) 8%, transparent);
     border: none;
     width: 36px;
     height: 36px;
@@ -762,19 +771,18 @@
     justify-content: center;
     transition: background 0.2s;
   }
-  .modal-close:hover { background: rgba(43,107,107,0.18); }
+  .modal-close:hover { background: color-mix(in oklab, var(--wine) 18%, transparent); }
 
   .modal-label {
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--coral);
+    color: var(--ember);
     margin-bottom: 10px;
     text-align: center;
   }
   .modal-title {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 30px;
     font-weight: 500;
     color: var(--charcoal);
@@ -798,9 +806,9 @@
   .qr-wrap img {
     width: 260px;
     height: 260px;
-    border-radius: 16px;
-    border: 8px solid #fff;
-    box-shadow: 0 8px 24px rgba(43,107,107,0.18);
+    border-radius: 2px;
+    border: 8px solid var(--cream);
+    box-shadow: none;
   }
   .qr-hint {
     text-align: center;
@@ -813,43 +821,44 @@
   .modal-card label {
     display: block;
     font-size: 13px;
-    font-weight: 700;
-    color: var(--charcoal);
+    font-weight: 500;
+    color: var(--ink);
     margin-bottom: 6px;
   }
   .modal-card input,
   .modal-card select {
     width: 100%;
     padding: 12px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
     font-size: 15px;
     font-family: inherit;
-    background: #fff;
-    color: var(--charcoal);
+    background: var(--cream);
+    color: var(--ink);
     transition: border-color 0.2s;
   }
   .modal-card input:focus,
   .modal-card select:focus {
     outline: none;
-    border-color: var(--teal);
+    border-color: var(--wine);
   }
   .modal-submit {
     width: 100%;
-    background: var(--teal);
+    background: var(--ember);
     color: #fff;
     padding: 14px;
     border: none;
-    border-radius: 28px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     cursor: pointer;
     margin-top: 10px;
-    transition: background 0.2s, transform 0.1s;
+    transition: background 0.2s;
+    box-shadow: none;
   }
-  .modal-submit:hover:not(:disabled) { background: var(--teal-light); }
+  .modal-submit:hover:not(:disabled) { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
   .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
   .modal-success {
@@ -857,10 +866,6 @@
     text-align: center;
   }
   .modal-success.active { display: block; }
-  .modal-success-icon {
-    font-size: 42px;
-    margin-bottom: 12px;
-  }
 
   /* ===== EVENT BANNER ===== */
   .event-banner {
@@ -871,7 +876,7 @@
     position: relative;
     overflow: hidden;
     margin: 60px 0;
-    border-radius: 20px;
+    border-radius: 2px;
   }
 
   .event-banner-bg {
@@ -886,7 +891,7 @@
   .event-banner-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(43, 107, 107, 0.65) 0%, rgba(43, 107, 107, 0.45) 100%);
+    background: color-mix(in oklab, var(--wine) 55%, transparent);
     z-index: 1;
   }
 
@@ -910,7 +915,6 @@
   }
 
   .event-banner h2 {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 48px;
     font-weight: 500;
     margin-bottom: 24px;
@@ -979,9 +983,7 @@
 <!-- NAV -->
 <nav class="main-nav" id="nav">
   <a href="index.html" class="nav-logo">
-    <svg viewBox="224 238 576 560" width="38" height="37" xmlns="http://www.w3.org/2000/svg">
-      <path style="fill:#2B6B6B" d="M 498.52015,785.88531 C 481.89329,783.46405 461.1066,775.1309 449,766.03325 426.85709,749.3937 411.98262,726.68911 407.50133,702.68912 c -1.28313,-6.87191 -1.38233,-9.12757 -0.45081,-10.25 C 408.06022,691.22251 415.87956,691 457.62244,691 H 507 V 669.00402 647.00803 L 386.25,646.75402 265.5,646.5 l -0.5,-15 -0.5,-15 -19,-0.26231 c -16.42964,-0.22682 -19.1691,-0.48942 -20.25,-1.94112 C 224.26305,612.97103 224,581.12492 224,462.96386 224,319.2516 224.07261,313.24427 225.82874,311.65499 227.34958,310.27865 230.04702,310 241.84975,310 l 14.19228,0 -0.5455,-16.25 C 254.76094,271.83739 253.82855,273 272.13763,273 l 14.02422,0 -0.31663,-16.54531 c -0.26334,-13.76112 -0.0666,-16.71785 1.16908,-17.57061 2.10553,-1.45306 36.56864,-0.35429 51.81679,1.65204 31.43576,4.13627 64.2781,16.21206 89.16891,32.78649 14.0145,9.33204 34.41801,28.1237 45.25228,41.67739 10.86692,13.59454 20.1967,29.34092 26.95889,45.5 C 504.89193,371.68526 511,389.80874 511,392.51196 c 0,3.97545 1.77497,0.52162 4.35419,-8.47262 17.23513,-60.10217 63.07712,-109.47446 122.14581,-131.5523 13.35688,-4.99235 33.61885,-10.03136 48.14622,-11.97364 16.75566,-2.2402 49.79069,-3.22561 51.81497,-1.54561 1.27045,1.05438 1.53881,4.13322 1.53881,17.65465 V 273 h 13.42857 c 10.87446,0 13.72746,0.29889 15,1.57143 1.3048,1.3048 1.57143,4.44372 1.57143,18.5 V 310 l 12.25,0.11842 c 6.7375,0.0651 12.57189,0.0703 12.96531,0.0116 0.39342,-0.0588 1.85592,0.3268 3.25,0.85683 L 800,311.9505 v 150.82475 c 0,115.97481 -0.27728,151.10203 -1.2,152.02475 -0.84774,0.84774 -6.68734,1.2 -19.89301,1.2 -15.29463,0 -18.79286,0.26021 -19.24225,1.43128 -0.30207,0.7872 -0.34789,6.88744 -0.10182,13.55608 0.27222,7.37711 0.0401,12.88598 -0.59294,14.06872 C 757.94848,646.96479 755.74767,647 637.46482,647 H 517 v 26.02475 26.02475 l -2.5651,0.97525 C 512.89905,700.60868 492.82879,701 464.41585,701 H 416.9619 l 0.59003,2.75 c 3.47168,16.18058 11.92889,30.55547 26.11489,44.388 14.681,14.31519 30.26316,22.56591 50.83318,26.91607 7.7343,1.63566 27.28964,1.67329 35,0.0674 31.39945,-6.53996 56.56866,-25.39468 70.25454,-52.62898 C 603.52381,714.99176 607,705.31281 607,702.3185 607,701.25375 600.63636,701 573.93426,701 c -20.88071,0 -33.77854,-0.38147 -35,-1.03518 -2.19222,-1.17324 -2.63573,-5.86335 -0.73426,-7.76482 0.89142,-0.89142 11.01723,-1.2 39.37756,-1.2 33.12826,0 38.3463,0.20333 39.45347,1.53739 1.50985,1.81926 -0.004,12.0045 -3.25782,21.91544 -15.27566,46.53198 -66.82904,78.48416 -115.25306,71.43248 z M 485.69141,634.90186 c -6.18057,-3.26143 -27.04938,-9.88717 -37.49918,-11.90581 C 419.054,617.36727 390.20911,615.78773 324,616.19529 L 274.5,616.5 274.21502,626.75 273.93003,637 381.71502,636.9558 489.5,636.91161 Z M 749.78498,626.75 749.5,616.5 701,616.19613 c -74.35935,-0.46588 -111.39394,2.18682 -138.5,9.92043 -8.4078,2.39883 -25.62068,8.79376 -26.95,10.01248 C 535.00997,636.62414 581.09246,637 642.33498,637 h 107.73499 z m -242.79475,-15.5 c -0.009,-23.9121 -0.0896,-24.91927 -2.36783,-29.75 -4.73389,-10.03768 -12.26128,-15.28589 -28.6224,-19.95596 -13.36602,-3.81515 -22.1498,-8.70292 -30.61872,-17.0379 -10.24127,-10.0793 -14.70634,-19.97416 -15.997,-35.45032 -0.89188,-10.69436 0.005,-11.52103 11.67342,-10.76504 14.51116,0.94014 30.7059,7.52005 41.7641,16.96872 6.73157,5.75179 13.2098,13.80553 19.18776,23.85422 l 4.98899,8.38628 7.2e-4,-38.75 L 507,470 l -7.25,-0.0131 C 477.68784,469.94689 454.61305,459.62817 441.63802,444 434.52389,435.43117 428,418.03034 428,407.62402 c 0,-6.0353 1.96638,-6.99163 12.95971,-6.30286 25.8897,1.62208 45.43131,12.32042 63.34442,34.67884 l 2.80413,3.5 -0.49509,-10.5 c -0.63151,-13.39328 -4.68626,-34.11847 -9.60659,-49.10255 C 479.2157,325.7182 438.29359,282.86027 384.46936,262.03669 362.43053,253.51028 330.58797,248 303.35478,248 L 295,248 v 164 164 l 8.75,0.001 c 12.8591,0.002 45.7811,2.65226 61.3411,4.93886 35.45139,5.20973 62.81259,13.21105 93.96156,27.4775 14.43586,6.61173 34.73702,18.17342 42.02657,23.9345 2.43142,1.92161 4.75827,3.52854 5.17077,3.57096 0.4125,0.0424 0.7456,-11.06037 0.74023,-24.67287 z m 20.15672,18.37353 c 25.13215,-17.13392 61.1286,-33.06863 92.94186,-41.14299 25.6603,-6.51271 73.66904,-12.46317 100.66119,-12.47647 L 729,576 V 412 248 l -8.25,0.0158 c -50.26983,0.0964 -96.0498,14.90526 -131.21089,42.44384 -9.05342,7.09075 -25.77489,23.99639 -32.68038,33.04033 -19.98611,26.17528 -33.2588,57.41171 -37.87096,89.12687 -1.7342,11.92508 -1.16783,12.82546 3.40601,5.41469 10.44216,-16.91891 28.73305,-30.74432 47.58649,-35.96888 8.64421,-2.39543 22.06345,-3.54527 27.51073,-2.35728 5.48558,1.19633 6.23973,3.7029 4.72423,15.70185 -3.3583,26.58938 -18.63337,48.18205 -43.61872,61.65898 -7.77295,4.19267 -21.38947,9.25203 -28.22346,10.48671 -2.13018,0.38486 -4.17887,0.87261 -4.55264,1.0839 -0.37378,0.21129 2.29088,4.31469 5.92145,9.11866 22.56955,29.86401 26.69765,67.79499 9.27446,85.21818 -4.89795,4.89795 -12.56636,8.73272 -19.26632,9.63459 l -4.75,0.63939 v 31.37117 C 517,621.88297 517.17863,636 517.39695,636 c 0.21832,0 4.60582,-2.86941 9.75,-6.37647 z M 629.65446,607.10667 C 641.8105,606.498 682.86118,606 720.87818,606 H 790 V 463 320 H 779.5 769 v 118.06574 c 0,79.47336 -0.33837,118.698 -1.03518,120 -0.94759,1.77059 -2.21686,1.93426 -15,1.93426 H 739 v 11.17126 C 739,585.89847 738.91152,586 726.07795,586 c -34.99671,0 -84.18826,6.44584 -113.76161,14.90681 -10.88253,3.1135 -27.32068,8.87919 -28.57853,10.02393 -0.41921,0.38151 4.76761,-0.0738 11.52627,-1.01188 6.75866,-0.93803 22.23433,-2.20352 34.39038,-2.81219 z m -192.38582,2.4103 c -1.77724,-0.77261 -8.07724,-2.9704 -14,-4.88397 -34.99983,-11.30804 -70.42446,-16.92664 -115.57165,-18.3305 -24.18879,-0.75216 -22.79679,0.22459 -21.97162,-15.41713 L 286.29962,560 l -13.89981,-0.0153 c -7.64489,-0.008 -14.46768,-0.3758 -15.16173,-0.81639 -1.00214,-0.63616 -1.31094,-25.28561 -1.5,-119.73469 L 255.5,320.5 244.75,320.21617 234,319.93234 234,462.96617 V 606 l 67.25,0.0207 c 68.86469,0.0212 105.57853,1.02962 123.25,3.38543 5.5,0.73321 11.35,1.37418 13,1.42437 l 3,0.0913 z m 92.50375,-50.12391 c 16.83235,-9.86373 16.21939,-41.61646 -1.33306,-69.05535 -4.23847,-6.62581 -9.58924,-13.29324 -10.68933,-13.31968 -0.4125,-0.01 -0.75,19.38948 -0.75,43.10978 v 43.12781 l 4.25,-0.67947 c 2.3375,-0.37371 6.17258,-1.8061 8.52239,-3.18309 z m -33.28973,-8.43844 c -8.67435,-22.70051 -29.15431,-39.21266 -52.73266,-42.51619 -5.56991,-0.78039 -5.68619,-0.45291 -3.212,9.04617 2.12235,8.14823 6.56209,15.49368 12.81111,21.19567 7.04882,6.43178 13.07165,9.54671 25.65089,13.2663 5.775,1.70763 12.525,4.10573 15,5.3291 2.475,1.22338 4.65086,1.88426 4.83524,1.46861 0.18438,-0.41564 -0.87428,-3.92099 -2.35258,-7.78966 z M 285.5,416.5 v -133 L 275.25,283.21502 265,282.93003 V 416.5 550.06997 L 275.25,549.78498 285.5,549.5 Z m 473.5,0 V 283 H 749 739 V 416.5 550 h 10 10 z m -254,43.1158 c 0,-2.85355 -8.07253,-17.32306 -12.69811,-22.76059 -8.8436,-10.39596 -20.42902,-18.24188 -32.80189,-22.2142 -6.43927,-2.06734 -19.6238,-3.91721 -20.64446,-2.89655 -1.28131,1.28131 2.03505,12.28017 5.68353,18.84966 8.99444,16.19551 26.83213,26.57913 50.46093,29.37415 9.73353,1.15137 10,1.14198 10,-0.35247 z m 26.43153,-2.75446 c 14.12228,-3.50618 28.8474,-11.02127 38.91455,-19.86034 9.68492,-8.50348 18.46533,-23.5961 21.06514,-36.20884 2.63513,-12.78414 2.97618,-12.19542 -6.602,-11.39663 -29.20332,2.43547 -52.36456,22.42583 -63.32724,54.65745 -1.29621,3.81103 -2.66436,8.9804 -3.04032,11.48749 l -0.68357,4.55835 2.87096,-0.63414 c 1.57902,-0.34878 6.44014,-1.52028 10.80248,-2.60334 z M 495.5,753.96635 c -17.59883,-3.70149 -37.58478,-16.48594 -44.85999,-28.69568 -0.95057,-1.59532 0.85747,-4.93136 3.41427,-6.29972 1.75169,-0.93747 2.95692,-0.14363 9.42802,6.20985 13.05277,12.81555 26.76228,19.13124 44.18608,20.35562 20.16956,1.41733 39.4825,-6.1317 53.95298,-21.08911 6.61404,-6.8366 9.46545,-7.54564 11.59032,-2.88208 1.35755,2.9795 -1.45142,7.66681 -8.26635,13.79401 -11.17284,10.04535 -23.75049,16.22429 -38.8058,19.06389 -10.76299,2.03001 -19.43033,1.9008 -30.63953,-0.45678 z"/>
-    </svg>
+    <img src="images/logo-cfgc-transparent.png" alt="Connection Foundation Gold Coast" class="nav-logo-img">
     <div>
       <div class="nav-logo-text">Connection Foundation</div>
       <div class="nav-logo-sub">Gold Coast · Australia</div>
@@ -1037,30 +1039,24 @@
     </div>
     <div class="hero-visual">
       <div class="hero-logo-card">
-        <svg viewBox="224 238 576 560" width="130" height="126" xmlns="http://www.w3.org/2000/svg">
-          <path style="fill:#FFF8F0" d="M 498.52015,785.88531 C 481.89329,783.46405 461.1066,775.1309 449,766.03325 426.85709,749.3937 411.98262,726.68911 407.50133,702.68912 c -1.28313,-6.87191 -1.38233,-9.12757 -0.45081,-10.25 C 408.06022,691.22251 415.87956,691 457.62244,691 H 507 V 669.00402 647.00803 L 386.25,646.75402 265.5,646.5 l -0.5,-15 -0.5,-15 -19,-0.26231 c -16.42964,-0.22682 -19.1691,-0.48942 -20.25,-1.94112 C 224.26305,612.97103 224,581.12492 224,462.96386 224,319.2516 224.07261,313.24427 225.82874,311.65499 227.34958,310.27865 230.04702,310 241.84975,310 l 14.19228,0 -0.5455,-16.25 C 254.76094,271.83739 253.82855,273 272.13763,273 l 14.02422,0 -0.31663,-16.54531 c -0.26334,-13.76112 -0.0666,-16.71785 1.16908,-17.57061 2.10553,-1.45306 36.56864,-0.35429 51.81679,1.65204 31.43576,4.13627 64.2781,16.21206 89.16891,32.78649 14.0145,9.33204 34.41801,28.1237 45.25228,41.67739 10.86692,13.59454 20.1967,29.34092 26.95889,45.5 C 504.89193,371.68526 511,389.80874 511,392.51196 c 0,3.97545 1.77497,0.52162 4.35419,-8.47262 17.23513,-60.10217 63.07712,-109.47446 122.14581,-131.5523 13.35688,-4.99235 33.61885,-10.03136 48.14622,-11.97364 16.75566,-2.2402 49.79069,-3.22561 51.81497,-1.54561 1.27045,1.05438 1.53881,4.13322 1.53881,17.65465 V 273 h 13.42857 c 10.87446,0 13.72746,0.29889 15,1.57143 1.3048,1.3048 1.57143,4.44372 1.57143,18.5 V 310 l 12.25,0.11842 c 6.7375,0.0651 12.57189,0.0703 12.96531,0.0116 0.39342,-0.0588 1.85592,0.3268 3.25,0.85683 L 800,311.9505 v 150.82475 c 0,115.97481 -0.27728,151.10203 -1.2,152.02475 -0.84774,0.84774 -6.68734,1.2 -19.89301,1.2 -15.29463,0 -18.79286,0.26021 -19.24225,1.43128 -0.30207,0.7872 -0.34789,6.88744 -0.10182,13.55608 0.27222,7.37711 0.0401,12.88598 -0.59294,14.06872 C 757.94848,646.96479 755.74767,647 637.46482,647 H 517 v 26.02475 26.02475 l -2.5651,0.97525 C 512.89905,700.60868 492.82879,701 464.41585,701 H 416.9619 l 0.59003,2.75 c 3.47168,16.18058 11.92889,30.55547 26.11489,44.388 14.681,14.31519 30.26316,22.56591 50.83318,26.91607 7.7343,1.63566 27.28964,1.67329 35,0.0674 31.39945,-6.53996 56.56866,-25.39468 70.25454,-52.62898 C 603.52381,714.99176 607,705.31281 607,702.3185 607,701.25375 600.63636,701 573.93426,701 c -20.88071,0 -33.77854,-0.38147 -35,-1.03518 -2.19222,-1.17324 -2.63573,-5.86335 -0.73426,-7.76482 0.89142,-0.89142 11.01723,-1.2 39.37756,-1.2 33.12826,0 38.3463,0.20333 39.45347,1.53739 1.50985,1.81926 -0.004,12.0045 -3.25782,21.91544 -15.27566,46.53198 -66.82904,78.48416 -115.25306,71.43248 z M 485.69141,634.90186 c -6.18057,-3.26143 -27.04938,-9.88717 -37.49918,-11.90581 C 419.054,617.36727 390.20911,615.78773 324,616.19529 L 274.5,616.5 274.21502,626.75 273.93003,637 381.71502,636.9558 489.5,636.91161 Z M 749.78498,626.75 749.5,616.5 701,616.19613 c -74.35935,-0.46588 -111.39394,2.18682 -138.5,9.92043 -8.4078,2.39883 -25.62068,8.79376 -26.95,10.01248 C 535.00997,636.62414 581.09246,637 642.33498,637 h 107.73499 z m -242.79475,-15.5 c -0.009,-23.9121 -0.0896,-24.91927 -2.36783,-29.75 -4.73389,-10.03768 -12.26128,-15.28589 -28.6224,-19.95596 -13.36602,-3.81515 -22.1498,-8.70292 -30.61872,-17.0379 -10.24127,-10.0793 -14.70634,-19.97416 -15.997,-35.45032 -0.89188,-10.69436 0.005,-11.52103 11.67342,-10.76504 14.51116,0.94014 30.7059,7.52005 41.7641,16.96872 6.73157,5.75179 13.2098,13.80553 19.18776,23.85422 l 4.98899,8.38628 7.2e-4,-38.75 L 507,470 l -7.25,-0.0131 C 477.68784,469.94689 454.61305,459.62817 441.63802,444 434.52389,435.43117 428,418.03034 428,407.62402 c 0,-6.0353 1.96638,-6.99163 12.95971,-6.30286 25.8897,1.62208 45.43131,12.32042 63.34442,34.67884 l 2.80413,3.5 -0.49509,-10.5 c -0.63151,-13.39328 -4.68626,-34.11847 -9.60659,-49.10255 C 479.2157,325.7182 438.29359,282.86027 384.46936,262.03669 362.43053,253.51028 330.58797,248 303.35478,248 L 295,248 v 164 164 l 8.75,0.001 c 12.8591,0.002 45.7811,2.65226 61.3411,4.93886 35.45139,5.20973 62.81259,13.21105 93.96156,27.4775 14.43586,6.61173 34.73702,18.17342 42.02657,23.9345 2.43142,1.92161 4.75827,3.52854 5.17077,3.57096 0.4125,0.0424 0.7456,-11.06037 0.74023,-24.67287 z m 20.15672,18.37353 c 25.13215,-17.13392 61.1286,-33.06863 92.94186,-41.14299 25.6603,-6.51271 73.66904,-12.46317 100.66119,-12.47647 L 729,576 V 412 248 l -8.25,0.0158 c -50.26983,0.0964 -96.0498,14.90526 -131.21089,42.44384 -9.05342,7.09075 -25.77489,23.99639 -32.68038,33.04033 -19.98611,26.17528 -33.2588,57.41171 -37.87096,89.12687 -1.7342,11.92508 -1.16783,12.82546 3.40601,5.41469 10.44216,-16.91891 28.73305,-30.74432 47.58649,-35.96888 8.64421,-2.39543 22.06345,-3.54527 27.51073,-2.35728 5.48558,1.19633 6.23973,3.7029 4.72423,15.70185 -3.3583,26.58938 -18.63337,48.18205 -43.61872,61.65898 -7.77295,4.19267 -21.38947,9.25203 -28.22346,10.48671 -2.13018,0.38486 -4.17887,0.87261 -4.55264,1.0839 -0.37378,0.21129 2.29088,4.31469 5.92145,9.11866 22.56955,29.86401 26.69765,67.79499 9.27446,85.21818 -4.89795,4.89795 -12.56636,8.73272 -19.26632,9.63459 l -4.75,0.63939 v 31.37117 C 517,621.88297 517.17863,636 517.39695,636 c 0.21832,0 4.60582,-2.86941 9.75,-6.37647 z M 629.65446,607.10667 C 641.8105,606.498 682.86118,606 720.87818,606 H 790 V 463 320 H 779.5 769 v 118.06574 c 0,79.47336 -0.33837,118.698 -1.03518,120 -0.94759,1.77059 -2.21686,1.93426 -15,1.93426 H 739 v 11.17126 C 739,585.89847 738.91152,586 726.07795,586 c -34.99671,0 -84.18826,6.44584 -113.76161,14.90681 -10.88253,3.1135 -27.32068,8.87919 -28.57853,10.02393 -0.41921,0.38151 4.76761,-0.0738 11.52627,-1.01188 6.75866,-0.93803 22.23433,-2.20352 34.39038,-2.81219 z m -192.38582,2.4103 c -1.77724,-0.77261 -8.07724,-2.9704 -14,-4.88397 -34.99983,-11.30804 -70.42446,-16.92664 -115.57165,-18.3305 -24.18879,-0.75216 -22.79679,0.22459 -21.97162,-15.41713 L 286.29962,560 l -13.89981,-0.0153 c -7.64489,-0.008 -14.46768,-0.3758 -15.16173,-0.81639 -1.00214,-0.63616 -1.31094,-25.28561 -1.5,-119.73469 L 255.5,320.5 244.75,320.21617 234,319.93234 234,462.96617 V 606 l 67.25,0.0207 c 68.86469,0.0212 105.57853,1.02962 123.25,3.38543 5.5,0.73321 11.35,1.37418 13,1.42437 l 3,0.0913 z m 92.50375,-50.12391 c 16.83235,-9.86373 16.21939,-41.61646 -1.33306,-69.05535 -4.23847,-6.62581 -9.58924,-13.29324 -10.68933,-13.31968 -0.4125,-0.01 -0.75,19.38948 -0.75,43.10978 v 43.12781 l 4.25,-0.67947 c 2.3375,-0.37371 6.17258,-1.8061 8.52239,-3.18309 z m -33.28973,-8.43844 c -8.67435,-22.70051 -29.15431,-39.21266 -52.73266,-42.51619 -5.56991,-0.78039 -5.68619,-0.45291 -3.212,9.04617 2.12235,8.14823 6.56209,15.49368 12.81111,21.19567 7.04882,6.43178 13.07165,9.54671 25.65089,13.2663 5.775,1.70763 12.525,4.10573 15,5.3291 2.475,1.22338 4.65086,1.88426 4.83524,1.46861 0.18438,-0.41564 -0.87428,-3.92099 -2.35258,-7.78966 z M 285.5,416.5 v -133 L 275.25,283.21502 265,282.93003 V 416.5 550.06997 L 275.25,549.78498 285.5,549.5 Z m 473.5,0 V 283 H 749 739 V 416.5 550 h 10 10 z m -254,43.1158 c 0,-2.85355 -8.07253,-17.32306 -12.69811,-22.76059 -8.8436,-10.39596 -20.42902,-18.24188 -32.80189,-22.2142 -6.43927,-2.06734 -19.6238,-3.91721 -20.64446,-2.89655 -1.28131,1.28131 2.03505,12.28017 5.68353,18.84966 8.99444,16.19551 26.83213,26.57913 50.46093,29.37415 9.73353,1.15137 10,1.14198 10,-0.35247 z m 26.43153,-2.75446 c 14.12228,-3.50618 28.8474,-11.02127 38.91455,-19.86034 9.68492,-8.50348 18.46533,-23.5961 21.06514,-36.20884 2.63513,-12.78414 2.97618,-12.19542 -6.602,-11.39663 -29.20332,2.43547 -52.36456,22.42583 -63.32724,54.65745 -1.29621,3.81103 -2.66436,8.9804 -3.04032,11.48749 l -0.68357,4.55835 2.87096,-0.63414 c 1.57902,-0.34878 6.44014,-1.52028 10.80248,-2.60334 z M 495.5,753.96635 c -17.59883,-3.70149 -37.58478,-16.48594 -44.85999,-28.69568 -0.95057,-1.59532 0.85747,-4.93136 3.41427,-6.29972 1.75169,-0.93747 2.95692,-0.14363 9.42802,6.20985 13.05277,12.81555 26.76228,19.13124 44.18608,20.35562 20.16956,1.41733 39.4825,-6.1317 53.95298,-21.08911 6.61404,-6.8366 9.46545,-7.54564 11.59032,-2.88208 1.35755,2.9795 -1.45142,7.66681 -8.26635,13.79401 -11.17284,10.04535 -23.75049,16.22429 -38.8058,19.06389 -10.76299,2.03001 -19.43033,1.9008 -30.63953,-0.45678 z"/>
-        </svg>
+        <img src="images/logo-cfgc-transparent.png" alt="Connection Foundation Gold Coast">
       </div>
       <div class="hero-cards">
         <div class="hero-card">
-          <div class="hero-card-icon">🗣️</div>
           <h4>All levels</h4>
-          <p>From beginner to fluent — everyone is welcome</p>
+          <p>Beginner to fluent — come as you are.</p>
         </div>
         <div class="hero-card">
-          <div class="hero-card-icon">💸</div>
-          <h4>100% free</h4>
-          <p>No fees, no subscriptions, ever</p>
+          <h4>Free, always</h4>
+          <p>No fee. No booking. No catch.</p>
         </div>
         <div class="hero-card">
-          <div class="hero-card-icon">🤝</div>
-          <h4>Real community</h4>
-          <p>Friends, not just classmates</p>
+          <h4>Real people</h4>
+          <p>Friends, not classmates.</p>
         </div>
         <div class="hero-card">
-          <div class="hero-card-icon">📍</div>
           <h4>Mermaid Waters</h4>
-          <p>Mermaid Waters, GC</p>
+          <p>Gold Coast, Australia.</p>
         </div>
       </div>
     </div>
@@ -1071,16 +1067,16 @@
 <section class="how-bg" id="how">
   <div class="section-inner">
     <div class="section-label">How it works</div>
-    <h2 class="section-title">Simple, warm,<br><em>and genuinely different</em></h2>
+    <h2 class="section-title">Simple, warm,<br><em>and yours to join</em></h2>
     <p class="section-sub">No textbooks, no tests, no awkward silence. Just real people having real conversations.</p>
     <div style="width:100%;height:340px;border-radius:20px;overflow:hidden;margin-bottom:40px;position:relative;">
     <img src="images/hero-bg.jpg" 
          alt="People in conversation around a table with coffee" 
          style="width:100%;height:100%;object-fit:cover;object-position:center center;"
          loading="lazy"/>
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 40%, rgba(43,107,107,0.45) 100%);"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 40%, color-mix(in oklab, var(--wine) 50%, transparent) 100%);"></div>
     <div style="position:absolute;bottom:24px;left:32px;">
-      <span style="background:rgba(255,255,255,0.95);color:var(--teal);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:8px 18px;border-radius:20px;">Real sessions, real people</span>
+      <span style="background:var(--cream);color:var(--wine);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:8px 18px;border-radius:999px;">Real sessions, real people</span>
     </div>
   </div>
   <div class="steps">
@@ -1112,49 +1108,45 @@
     <div style="max-width:860px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(43,107,107,0.15);position:relative;padding-bottom:56.25%;height:0;">
       <iframe src="https://www.youtube.com/embed/BQ1oa4aXs6c" title="Connection Foundation — A real session" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
     </div>
-    <p style="max-width:860px;margin:16px auto 0;font-family:'Lato',sans-serif;font-size:13px;color:var(--mid);text-align:center;">Filmed at a real session in Mermaid Waters, Gold Coast.</p>
+    <p style="max-width:860px;margin:16px auto 0;font-size:13px;color:var(--mid);text-align:center;">Filmed at a real session in Mermaid Waters, Gold Coast.</p>
   </div>
 </section>
 
 <!-- WHY CF -->
 <section id="why">
   <div class="section-inner">
-    <div class="section-label">Why Connection Foundation</div>
+    <div class="section-label">Why this</div>
     <h2 class="section-title">Not just another<br><em>language group</em></h2>
     <p class="section-sub">Gold Coast has plenty of English groups. Here is what makes this one different.</p>
-    <div style="width:100%;height:300px;border-radius:20px;overflow:hidden;margin-bottom:40px;position:relative;">
-      <img src="images/why-different.jpg" 
+    <div style="width:100%;height:300px;border-radius:2px;overflow:hidden;margin-bottom:40px;position:relative;border:1px solid var(--border);">
+      <img src="images/why-different.jpg"
            alt="Participant raising hand to speak during a session"
            style="width:100%;height:100%;object-fit:cover;object-position:50% 30%;"/>
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 50%, rgba(43,107,107,0.35) 100%);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 50%, color-mix(in oklab, var(--wine) 45%, transparent) 100%);"></div>
       <div style="position:absolute;bottom:22px;left:28px;">
-        <span style="background:rgba(255,255,255,0.95);color:var(--teal);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 16px;border-radius:20px;">Every voice matters</span>
+        <span style="background:var(--cream);color:var(--wine);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:7px 16px;border-radius:999px;">Every voice matters</span>
       </div>
     </div>
     <div class="why-grid">
       <div class="why-card">
-        <div class="why-card-icon">🛡️</div>
         <div>
           <h4>Zero judgment</h4>
           <p>No corrections mid-sentence. No embarrassing moments. A space where making mistakes is part of the process, not something to fear.</p>
         </div>
       </div>
       <div class="why-card">
-        <div class="why-card-icon">🌍</div>
         <div>
           <h4>Open to everyone</h4>
           <p>Every background, every belief, every nationality. Our core value is unity in diversity — conversations are richer when everyone brings a different perspective.</p>
         </div>
       </div>
       <div class="why-card">
-        <div class="why-card-icon">💬</div>
         <div>
           <h4>Conversations that matter</h4>
           <p>We explore topics like virtues, resilience, community, and purpose. Not just grammar — real things people actually want to talk about.</p>
         </div>
       </div>
       <div class="why-card">
-        <div class="why-card-icon">🌱</div>
         <div>
           <h4>More than English</h4>
           <p>Members visit aged care homes, organise beach cleanups, and support each other through the challenges of life in Australia. Language is the door. Community is the destination.</p>
@@ -1170,23 +1162,21 @@
     <div class="section-label" style="margin-bottom: 20px;">Our programmes</div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="programmes-grid">
       <div class="why-card">
-        <div class="why-card-icon">💬</div>
         <div>
           <h4>Language Café</h4>
           <p>Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
-          <span style="display:inline-block;margin-top:12px;background:var(--teal-pale);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:0.5px;padding:4px 12px;border-radius:12px;">All levels welcome</span>
+          <span style="display:inline-block;margin-top:12px;background:color-mix(in oklab, var(--blush) 40%, var(--cream));color:var(--wine);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:999px;">All levels welcome</span>
         </div>
       </div>
       <div class="why-card">
-        <div class="why-card-icon">📖</div>
         <div>
           <h4>DSA — Discourse on Social Action</h4>
           <p>A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
-          <span style="display:inline-block;margin-top:12px;background:var(--teal-pale);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:0.5px;padding:4px 12px;border-radius:12px;">Intermediate English</span>
+          <span style="display:inline-block;margin-top:12px;background:color-mix(in oklab, var(--blush) 40%, var(--cream));color:var(--wine);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:999px;">Intermediate English</span>
         </div>
       </div>
     </div>
-    <p style="text-align:center;font-family:'Lato',sans-serif;font-size:14px;color:var(--mid);margin-top:24px;">Not sure which one is for you? <a href="#join" style="color:var(--teal);font-weight:700;">Tell us when you register</a> and we'll guide you.</p>
+    <p style="text-align:center;font-size:14px;color:var(--mid);margin-top:24px;">Not sure which one is for you? <a href="#join" style="color:var(--teal);font-weight:700;">Tell us when you register</a> and we'll guide you.</p>
   </div>
 </div>
 
@@ -1207,33 +1197,32 @@
         <div class="session-day">DSA · Friday</div>
         <div class="session-time">4:00 – 5:00 pm</div>
         <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
+        <p style="font-size:13px;color:color-mix(in oklab, var(--cream) 75%, transparent);line-height:1.55;margin:12px 0 14px;">A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
         <span class="session-tag">Intermediate English</span>
       </div>
       <div class="session-card">
         <div class="session-day">DSA · Friday</div>
         <div class="session-time">5:00 – 6:00 pm</div>
         <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
+        <p style="font-size:13px;color:color-mix(in oklab, var(--cream) 75%, transparent);line-height:1.55;margin:12px 0 14px;">A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
         <span class="session-tag">Intermediate English</span>
       </div>
       <div class="session-card">
         <div class="session-day">Language Café · Friday</div>
         <div class="session-time">6:00 – 7:00 pm</div>
         <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
+        <p style="font-size:13px;color:color-mix(in oklab, var(--cream) 75%, transparent);line-height:1.55;margin:12px 0 14px;">Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
         <span class="session-tag">All levels welcome</span>
       </div>
       <div class="session-card">
         <div class="session-day">Language Café · Monday</div>
         <div class="session-time">5:00 – 6:00 pm</div>
         <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
+        <p style="font-size:13px;color:color-mix(in oklab, var(--cream) 75%, transparent);line-height:1.55;margin:12px 0 14px;">Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
         <span class="session-tag">All levels welcome</span>
       </div>
     </div>
     <div class="location-note">
-      <div class="location-note-icon">📍</div>
       <p>Sessions are held in private homes in the <strong>Mermaid Waters area</strong>. Exact address is shared after you register. We are also expanding to new time slots and cities — let us know what works for you in the form below.</p>
     </div>
   </div>
@@ -1243,7 +1232,7 @@
 <section class="testimonials-bg" id="testimonials" style="position:relative;">
   <div style="position:absolute;inset:0;background-image:url('images/hero-bg.jpg');background-size:cover;background-position:center;opacity:0.06;pointer-events:none;"></div>
   <div class="section-inner">
-    <div class="section-label">What members say</div>
+    <div class="section-label">What people say</div>
     <h2 class="section-title">Real stories,<br><em>real connection</em></h2>
     <p class="section-sub">From members who showed up not knowing anyone, and stayed because they found something they weren't expecting.</p>
     <div class="testimonials-grid">
@@ -1341,11 +1330,10 @@
               <option value="any">Any — I am flexible</option>
             </select>
           </div>
-          <button class="form-submit" id="form-btn" onclick="submitForm()">Reserve my spot →</button>
-          <p class="form-privacy">We respect your privacy. No spam, unsubscribe anytime.</p>
+          <button class="form-submit" id="form-btn" onclick="submitForm()">Save my spot →</button>
+          <p class="form-privacy">No spam. Unsubscribe anytime.</p>
         </div>
         <div class="form-success" id="form-success">
-          <div class="form-success-icon">🌱</div>
           <h3>Welcome to the circle!</h3>
           <p>Check your inbox — we've sent you a welcome email with session details, location, and your link to join our WhatsApp group. See you soon.</p>
         </div>
@@ -1356,7 +1344,7 @@
 </section>
 
 <!-- FLOAT JOIN BUTTON -->
-<a href="#join" class="wa-float" aria-label="Join a circle" style="background:var(--teal);box-shadow:0 4px 20px rgba(43,107,107,0.35);">
+<a href="#join" class="wa-float" aria-label="Join a circle" style="background:var(--ember);box-shadow:none;">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
     <circle cx="9" cy="7" r="4"/>
@@ -1431,10 +1419,9 @@
           <option value="unsure">Not sure yet — just keep me posted</option>
         </select>
       </div>
-      <button class="modal-submit" id="fb-btn" onclick="submitFeedback()">Send my details →</button>
+      <button class="modal-submit" id="fb-btn" onclick="submitFeedback()">Send it →</button>
     </div>
     <div class="modal-success" id="feedback-success-view">
-      <div class="modal-success-icon">🌱</div>
       <h3 class="modal-title">Thank you!</h3>
       <p class="modal-sub">We've got your details. We'll be in touch soon with more about the sessions.</p>
     </div>
@@ -1510,7 +1497,7 @@
     } catch (e) {
       console.error('Feedback submit error:', e);
       btn.disabled = false;
-      btn.textContent = 'Send my details →';
+      btn.textContent = 'Send it →';
       alert('Something went wrong. Please try again or contact cf.goldcoast@gmail.com');
     }
   }
@@ -1581,7 +1568,7 @@
         }
 
         if (!emailSent) {
-          btn.textContent = 'Reserve my spot →';
+          btn.textContent = 'Save my spot →';
           btn.disabled = false;
           alert('Registration saved, but we had trouble sending your welcome email. Please check your inbox or contact us at cf.goldcoast@gmail.com');
           return;
@@ -1590,21 +1577,21 @@
         document.getElementById('form-main').style.display = 'none';
         document.getElementById('form-success').classList.add('visible');
       } else if (res.status === 409) {
-        btn.textContent = 'Reserve my spot →';
+        btn.textContent = 'Save my spot →';
         btn.disabled = false;
         alert('This email is already registered! Check your inbox for the welcome email, or contact us at cf.goldcoast@gmail.com');
         return;
       } else {
         const errText = await res.text();
         console.error('Supabase error:', res.status, errText);
-        btn.textContent = 'Reserve my spot →';
+        btn.textContent = 'Save my spot →';
         btn.disabled = false;
         alert('Registration failed. Please try again or contact us at cf.goldcoast@gmail.com');
         return;
       }
     } catch(e) {
       console.error('Fetch error:', e);
-      btn.textContent = 'Reserve my spot →';
+      btn.textContent = 'Save my spot →';
       btn.disabled = false;
       alert('Something went wrong. Please check your connection and try again.');
     }
