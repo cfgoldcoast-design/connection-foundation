@@ -23,6 +23,19 @@ Free English conversation circle. Landing page + registration + automated welcom
 └── EMAIL-SETUP-GUIDE.md                        # Gmail OAuth playbook (reference)
 ```
 
+## Visual identity (Rosewood — May 2026)
+
+Palette and typography are locked in `Visual Identity.md`. Summary:
+
+- **Palette:** Wine `#5B1F3A` (primary) · Mulberry `#8B2C4F` (poster surfaces) · Rose Dust, Blush (decoration only — never text) · Ember `#D45D5D` (CTAs) · Cream `#F7F0E8` (default background) · Ink `#2A1A22` (body text) · Stone `#8A7A7E` (muted).
+- **Typography:** Helvetica only. Stack: `"Helvetica Neue", Helvetica, Arial, sans-serif`. Three weights: 400 / 500 (display, headings) / 700 (emphasis only). No Google Fonts.
+- **Logo:** `images/logo-cfgc-transparent.png` — use the PNG as supplied. Do NOT recreate in SVG or recolour.
+- **Components:** CTAs are Ember pills (radius 999px, no shadow). Cards have a 1px Ink-12% border and radius 2px. Links are Wine, underlined on hover only.
+- **Sections:** 120px desktop / 64px mobile padding. Max content width 1280px.
+- **Tone:** Direct, warm, short. State facts. No marketing-speak. Examples in `Visual Identity.md` section 4.
+
+Tokens are defined as CSS custom properties in `:root` of each HTML file (semantic roles like `--bg`, `--fg`, `--primary`, `--cta` map on top of the raw palette). Legacy aliases (`--teal`, `--coral`, etc.) point at the new tokens so any older references keep working without a sweep.
+
 ## Local preview (no commit needed)
 
 To test changes before pushing:
