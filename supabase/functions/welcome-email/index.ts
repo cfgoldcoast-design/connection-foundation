@@ -3,19 +3,12 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 const WA_LINK = 'https://chat.whatsapp.com/CFbvAyzsyCf8XbCkOU8Yys?mode=gi_t'
 const SITE_LINK = 'https://connection-foundation.vercel.app'
+const CONTACT_EMAIL = 'cf.goldcoast@gmail.com'
 
-const SESSION_LABELS: Record<string, string> = {
-  'fri-5pm': 'Friday at 5:00 pm',
-  'fri-8am': 'Friday at 8:00 am',
-  'mon-5pm': 'Monday at 5:00 pm',
-  'any':     'Flexible — we will find the best fit for you',
-}
-
-const LEVEL_LABELS: Record<string, string> = {
-  'beginner':     'Beginner',
-  'elementary':   'Elementary',
-  'intermediate': 'Intermediate',
-  'advanced':     'Advanced',
+const INTEREST_LABELS: Record<string, string> = {
+  'language-cafe': 'Language Café',
+  'dsa':           'A Discourse on Social Action',
+  'unsure':        'Still deciding — we will walk you through the options',
 }
 
 const corsHeaders = {
@@ -37,14 +30,16 @@ Deno.serve(async (req) => {
   try {
     const payload = await req.json()
     const record = payload.record || payload
-    const { name, email, english_level, preferred_session } = record
+    const { name, email, suburb, preferred_interest } = record
 
     if (!name || !email) {
       return new Response(JSON.stringify({ error: 'Missing name or email' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
-    const session = SESSION_LABELS[preferred_session] ?? preferred_session
-    const level   = LEVEL_LABELS[english_level] ?? english_level
+    const interestLabel = INTEREST_LABELS[preferred_interest] ?? (preferred_interest || 'To be confirmed')
+    const suburbLabel = suburb || 'Mermaid Waters area'
+
+    const unsubscribeLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Unsubscribe — Connection Foundation')}&body=${encodeURIComponent('Please remove me from Connection Foundation communications.\n\nEmail: ' + email)}`
 
     const { data: token } = await supabase
       .from("gmail_oauth_tokens").select("*").limit(1).maybeSingle();
@@ -74,7 +69,16 @@ Deno.serve(async (req) => {
       }).eq("id", token.id);
     }
 
-    const subject = `Welcome to Connection Foundation, ${name} 🌱`
+    const subject = `Welcome to Connection Foundation, ${name}`
+
+    // Rosewood palette (matches the website)
+    const C_WINE = '#5B1F3A'
+    const C_CREAM = '#F7F0E8'
+    const C_INK = '#2A1A22'
+    const C_STONE = '#8A7A7E'
+    const C_EMBER = '#D45D5D'
+    const C_BLUSH = '#E8B5BD'
+
     const emailHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -82,81 +86,85 @@ Deno.serve(async (req) => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0;padding:0;background:#FFF8F0;font-family:Georgia,serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF8F0;padding:40px 20px;">
+<body style="margin:0;padding:0;background:${C_CREAM};font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:${C_INK};">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:${C_CREAM};padding:40px 20px;">
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
         <tr>
-          <td style="background:#2B6B6B;border-radius:20px 20px 0 0;padding:40px 48px;text-align:center;">
-            <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6);">Connection Foundation</p>
-            <h1 style="margin:0;font-size:32px;font-weight:400;color:#FFF8F0;line-height:1.2;">Welcome, ${name} 🌱</h1>
-            <p style="margin:12px 0 0;font-size:15px;color:rgba(255,255,255,0.75);">You are now part of the circle.</p>
+          <td style="background:${C_WINE};border-radius:2px 2px 0 0;padding:48px 48px 40px;text-align:center;">
+            <p style="margin:0 0 12px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:${C_BLUSH};">Connection Foundation · Gold Coast</p>
+            <h1 style="margin:0;font-size:34px;font-weight:500;letter-spacing:-0.025em;color:${C_CREAM};line-height:1.05;">Welcome, ${name}.</h1>
+            <p style="margin:16px 0 0;font-size:16px;color:rgba(247,240,232,0.8);line-height:1.55;">You are now part of the circle.</p>
           </td>
         </tr>
         <tr>
-          <td style="background:#ffffff;padding:40px 48px;">
-            <p style="margin:0 0 20px;font-size:16px;color:#2C3E50;line-height:1.7;">
-              We are really glad you joined. Connection Foundation is a free, open, and judgment-free space to practise English and meet people who care about real conversations.
+          <td style="background:${C_CREAM};padding:40px 48px;">
+            <p style="margin:0 0 20px;font-size:17px;color:${C_INK};line-height:1.6;">
+              We are glad you joined. Connection Foundation is a free, open space for personal and community transformation — through real conversation, study, and friendship.
             </p>
-            <table width="100%" cellpadding="0" cellspacing="0" style="background:#F5EDE0;border-radius:14px;margin:24px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid rgba(42,26,34,0.12);border-radius:2px;margin:28px 0;">
               <tr>
                 <td style="padding:24px 28px;">
-                  <p style="margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#9CAF88;">Your session details</p>
+                  <p style="margin:0 0 14px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:${C_EMBER};">Your details</p>
                   <table width="100%">
                     <tr>
-                      <td style="padding:6px 0;font-size:14px;color:#5A6A7A;width:40%;">Preferred time</td>
-                      <td style="padding:6px 0;font-size:14px;font-weight:700;color:#2C3E50;">${session}</td>
+                      <td style="padding:6px 0;font-size:14px;color:${C_STONE};width:38%;">Suburb</td>
+                      <td style="padding:6px 0;font-size:14px;font-weight:500;color:${C_INK};">${suburbLabel}</td>
                     </tr>
                     <tr>
-                      <td style="padding:6px 0;font-size:14px;color:#5A6A7A;">English level</td>
-                      <td style="padding:6px 0;font-size:14px;font-weight:700;color:#2C3E50;">${level}</td>
+                      <td style="padding:6px 0;font-size:14px;color:${C_STONE};">Preferred interest</td>
+                      <td style="padding:6px 0;font-size:14px;font-weight:500;color:${C_INK};">${interestLabel}</td>
                     </tr>
                     <tr>
-                      <td style="padding:6px 0;font-size:14px;color:#5A6A7A;">Location</td>
-                      <td style="padding:6px 0;font-size:14px;font-weight:700;color:#2C3E50;">Mermaid Waters, Gold Coast</td>
+                      <td style="padding:6px 0;font-size:14px;color:${C_STONE};">Location</td>
+                      <td style="padding:6px 0;font-size:14px;font-weight:500;color:${C_INK};">Mermaid Waters, Gold Coast</td>
                     </tr>
                   </table>
-                  <p style="margin:16px 0 0;font-size:13px;color:#7A9A9A;line-height:1.5;">
-                    Exact address will be shared in the WhatsApp group before your first session.
+                  <p style="margin:16px 0 0;font-size:13px;color:${C_STONE};line-height:1.55;">
+                    We will follow up shortly with session details, the exact address, and a warm welcome before your first meeting.
                   </p>
                 </td>
               </tr>
             </table>
-            <p style="margin:0 0 16px;font-size:16px;color:#2C3E50;line-height:1.7;">
-              Join our WhatsApp group to receive the weekly schedule and location updates.
+            <p style="margin:0 0 20px;font-size:17px;color:${C_INK};line-height:1.6;">
+              Join our WhatsApp group to receive updates and meet the rest of the community.
             </p>
             <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
               <tr>
                 <td align="center">
-                  <a href="${WA_LINK}" style="display:inline-block;background:#25D366;color:#ffffff;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:16px 36px;border-radius:32px;">
-                    Join the WhatsApp Group →
+                  <a href="${WA_LINK}" style="display:inline-block;background:${C_EMBER};color:#ffffff;text-decoration:none;font-size:15px;font-weight:500;padding:14px 28px;border-radius:999px;">
+                    Join the WhatsApp group &rarr;
                   </a>
                 </td>
               </tr>
             </table>
-            <hr style="border:none;border-top:1px solid #EAE0D8;margin:32px 0;">
-            <p style="margin:0 0 12px;font-size:15px;color:#2C3E50;font-weight:600;">What to expect at your first session</p>
-            <ul style="margin:0;padding-left:20px;color:#5A6A7A;font-size:14px;line-height:1.9;">
+            <hr style="border:none;border-top:1px solid rgba(42,26,34,0.12);margin:36px 0;">
+            <p style="margin:0 0 12px;font-size:15px;color:${C_INK};font-weight:500;">A few things you can expect</p>
+            <ul style="margin:0;padding-left:20px;color:${C_STONE};font-size:14px;line-height:1.85;">
               <li>A warm welcome — everyone remembers their first session</li>
-              <li>A short reading we do together as a group</li>
-              <li>An open conversation — no right or wrong answers</li>
+              <li>Open conversations — no right or wrong answers</li>
+              <li>No fees, no booking, no pressure</li>
               <li>Tea, coffee, and good company</li>
-              <li>No homework, no tests, no pressure</li>
             </ul>
-            <p style="margin:28px 0 0;font-size:15px;color:#2C3E50;line-height:1.7;">
-              Any questions? Just reply to this email.
+            <p style="margin:28px 0 0;font-size:15px;color:${C_INK};line-height:1.6;">
+              Any questions? Just reply to this email — we read every message.
             </p>
-            <p style="margin:8px 0 0;font-size:15px;color:#2C3E50;">See you soon 🙏</p>
+            <p style="margin:8px 0 0;font-size:15px;color:${C_INK};">See you soon.</p>
           </td>
         </tr>
         <tr>
-          <td style="background:#F5EDE0;border-radius:0 0 20px 20px;padding:24px 48px;text-align:center;">
-            <p style="margin:0 0 8px;font-size:13px;color:#2B6B6B;">
-              <a href="${SITE_LINK}" style="color:#2B6B6B;text-decoration:none;font-weight:600;">Visit our website →</a>
+          <td style="background:${C_WINE};border-radius:0 0 2px 2px;padding:32px 48px;text-align:center;">
+            <p style="margin:0 0 12px;font-size:13px;color:rgba(247,240,232,0.85);">
+              <a href="${SITE_LINK}" style="color:${C_CREAM};text-decoration:none;font-weight:500;">Visit the site &rarr;</a>
             </p>
-            <p style="margin:0;font-size:12px;color:#9AABBB;line-height:1.6;">
-              Connection Foundation · Mermaid Waters, Gold Coast, Australia<br>
-              <a href="mailto:cf.goldcoast@gmail.com" style="color:#2B6B6B;">cf.goldcoast@gmail.com</a>
+            <p style="margin:0;font-size:12px;color:rgba(247,240,232,0.55);line-height:1.7;">
+              Connection Foundation &middot; Mermaid Waters, Gold Coast, Australia<br>
+              <a href="mailto:${CONTACT_EMAIL}" style="color:${C_CREAM};">${CONTACT_EMAIL}</a>
+            </p>
+            <p style="margin:18px 0 0;font-size:11px;color:rgba(247,240,232,0.5);line-height:1.6;">
+              You are receiving this because you registered on our site.<br>
+              <a href="${unsubscribeLink}" style="color:${C_BLUSH};text-decoration:underline;">Unsubscribe</a>
+              or email <a href="mailto:${CONTACT_EMAIL}" style="color:${C_BLUSH};">${CONTACT_EMAIL}</a> to be removed.
             </p>
           </td>
         </tr>
@@ -171,6 +179,8 @@ Deno.serve(async (req) => {
       `From: Connection Foundation <${token.email}>`,
       `To: ${email}`,
       `Subject: =?UTF-8?B?${btoa(unescape(encodeURIComponent(subject)))}?=`,
+      `List-Unsubscribe: <${unsubscribeLink}>`,
+      `List-Unsubscribe-Post: List-Unsubscribe=One-Click`,
       `MIME-Version: 1.0`,
       `Content-Type: multipart/alternative; boundary="${boundary}"`,
       ``,

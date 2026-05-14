@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ruhi Institute — Connection Foundation · Gold Coast</title>
+<meta name="description" content="The Ruhi Institute — a Connection Foundation programme. Coming soon.">
+<link rel="icon" type="image/png" href="../images/logo-cfgc-transparent.png">
+<style>
+  :root {
+    --wine: #5B1F3A; --mulberry: #8B2C4F; --rose: #C97B8E; --blush: #E8B5BD;
+    --ember: #D45D5D; --cream: #F7F0E8; --ink: #2A1A22; --stone: #8A7A7E;
+    --border: color-mix(in oklab, var(--ink) 12%, transparent);
+    --max-width: 1280px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--cream); color: var(--ink);
+    font-size: 17px; line-height: 1.55; overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  h1, h2 { text-wrap: balance; }
+  a { color: var(--wine); }
+
+  .main-nav {
+    position: sticky; top: 0; z-index: 50;
+    padding: 18px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(247,240,232,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-img { height: 38px; width: auto; display: block; }
+  @media (max-width: 768px) { .nav-logo-img { height: 30px; } }
+  .nav-logo-text { font-size: 17px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
+  .nav-logo-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-top: 2px; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { color: var(--ink); font-size: 14px; text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--wine); }
+  .nav-cta {
+    background: var(--ember); color: #fff !important;
+    padding: 10px 22px; border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    border: none; box-shadow: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
+  @media (max-width: 768px) {
+    .main-nav { padding: 14px 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-links { gap: 0; }
+  }
+
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 120px 40px; }
+  .placeholder { max-width: 720px; text-align: center; }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ember); margin-bottom: 20px;
+  }
+  .placeholder h1 {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 500; letter-spacing: -0.035em;
+    color: var(--ink); line-height: 0.98;
+    margin-bottom: 28px;
+  }
+  .placeholder p {
+    font-size: 19px; color: var(--stone); line-height: 1.55;
+    max-width: 540px; margin: 0 auto 32px;
+  }
+  .placeholder-back {
+    display: inline-block;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--wine);
+    text-decoration: none; padding-bottom: 4px;
+    border-bottom: 1px solid color-mix(in oklab, var(--wine) 30%, transparent);
+    transition: border-color 0.2s;
+  }
+  .placeholder-back:hover { border-bottom-color: var(--wine); }
+
+  .main-footer {
+    background: var(--wine);
+    color: color-mix(in oklab, var(--cream) 70%, transparent);
+    padding: 56px 40px 28px;
+    text-align: center;
+  }
+  .footer-links { display: flex; justify-content: center; gap: 28px; margin-bottom: 24px; flex-wrap: wrap; }
+  .footer-links a {
+    color: color-mix(in oklab, var(--cream) 70%, transparent);
+    font-size: 14px; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--ember); }
+  .footer-meta {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    color: color-mix(in oklab, var(--cream) 50%, transparent);
+    line-height: 1.7; max-width: 600px; margin: 0 auto;
+    padding-top: 20px;
+    border-top: 1px solid color-mix(in oklab, var(--cream) 12%, transparent);
+  }
+  @media (max-width: 768px) {
+    main { padding: 80px 20px; }
+    .main-footer { padding: 40px 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="main-nav">
+  <a href="../index.html" class="nav-logo">
+    <img src="../images/logo-cfgc-transparent.png" alt="Connection Foundation Gold Coast" class="nav-logo-img">
+    <div>
+      <div class="nav-logo-text">Connection Foundation</div>
+      <div class="nav-logo-sub">Gold Coast · Australia</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html#programs">Programs</a>
+    <a href="../events.html">Events</a>
+    <a href="../index.html#join">Join</a>
+    <a href="../index.html#join" class="nav-cta">Join a circle</a>
+  </div>
+</nav>
+
+<main>
+  <div class="placeholder">
+    <div class="eyebrow">Programme · 04</div>
+    <h1>The Ruhi Institute</h1>
+    <p>Coming soon. We're putting this page together. In the meantime, leave your details on the home page and we'll be in touch with everything you need to know.</p>
+    <a href="../index.html#programs" class="placeholder-back">&larr; Back to programs</a>
+  </div>
+</main>
+
+<footer class="main-footer">
+  <div class="footer-links">
+    <a href="../index.html#programs">Programs</a>
+    <a href="../events.html">Events</a>
+    <a href="../index.html#join">Join</a>
+    <a href="mailto:cf.goldcoast@gmail.com">Contact</a>
+  </div>
+  <p class="footer-meta">
+    &copy; 2026 Connection Foundation &middot; Gold Coast, Australia &middot; Mermaid Waters, QLD<br>
+    We acknowledge the Kombumerri families of the Yugambeh Language Region, Traditional Custodians of this land.
+  </p>
+</footer>
+
+</body>
+</html>
