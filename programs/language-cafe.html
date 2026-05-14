@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Language Café — Connection Foundation · Gold Coast</title>
-<meta name="description" content="Language Café — a Connection Foundation programme. Coming soon.">
+<meta name="description" content="A welcoming space where language learning becomes the doorway to deeper human connection. Free weekly circles in Mermaid Waters, Gold Coast.">
 <link rel="icon" type="image/png" href="../images/logo-cfgc-transparent.png">
 <style>
   :root {
@@ -20,9 +20,8 @@
     background: var(--cream); color: var(--ink);
     font-size: 17px; line-height: 1.55; overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    display: flex; flex-direction: column; min-height: 100vh;
   }
-  h1, h2 { text-wrap: balance; }
+  h1, h2, h3 { text-wrap: balance; }
   a { color: var(--wine); }
 
   .main-nav {
@@ -33,8 +32,8 @@
     border-bottom: 1px solid var(--border);
   }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo-img { height: 38px; width: auto; display: block; }
-  @media (max-width: 768px) { .nav-logo-img { height: 30px; } }
+  .nav-logo-img { height: 56px; width: auto; display: block; }
+  @media (max-width: 768px) { .nav-logo-img { height: 44px; } }
   .nav-logo-text { font-size: 17px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
   .nav-logo-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-top: 2px; }
   .nav-links { display: flex; align-items: center; gap: 32px; }
@@ -54,37 +53,208 @@
     .nav-links { gap: 0; }
   }
 
-  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 120px 40px; }
-  .placeholder { max-width: 720px; text-align: center; }
+  /* ===== Layout ===== */
   .eyebrow {
     font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--ember); margin-bottom: 20px;
   }
-  .placeholder h1 {
-    font-size: clamp(40px, 5vw, 64px);
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 500; letter-spacing: -0.025em;
+    color: var(--ink); line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .section-title em { font-style: normal; color: var(--wine); }
+  .btn-primary {
+    display: inline-block;
+    background: var(--ember); color: #fff;
+    padding: 14px 28px; border-radius: 999px;
+    font-size: 15px; font-weight: 500; letter-spacing: 0;
+    text-decoration: none; border: none; box-shadow: none;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
+  .btn-ghost {
+    display: inline-block;
+    background: transparent; color: var(--ink);
+    padding: 13px 27px; border-radius: 999px;
+    border: 1px solid var(--ink);
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-ghost:hover { background: color-mix(in oklab, var(--ink) 6%, transparent); }
+
+  /* ===== Hero ===== */
+  .program-hero {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 96px 40px 80px;
+    text-align: center;
+  }
+  .program-hero-inner { max-width: 880px; margin: 0 auto; }
+  .program-hero h1 {
+    font-size: clamp(44px, 5.5vw, 72px);
     font-weight: 500; letter-spacing: -0.035em;
     color: var(--ink); line-height: 0.98;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
-  .placeholder p {
+  .program-hero h1 em { font-style: normal; color: var(--wine); }
+  .program-hero-tagline {
     font-size: 19px; color: var(--stone); line-height: 1.55;
-    max-width: 540px; margin: 0 auto 32px;
+    max-width: 600px; margin: 0 auto 36px;
   }
-  .placeholder-back {
-    display: inline-block;
+  .program-hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .program-hero-meta {
+    margin-top: 40px;
+    display: inline-flex;
+    gap: 20px;
     font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--wine);
-    text-decoration: none; padding-bottom: 4px;
-    border-bottom: 1px solid color-mix(in oklab, var(--wine) 30%, transparent);
+    text-transform: uppercase; color: var(--stone);
+  }
+  .program-hero-meta span:not(:last-child)::after {
+    content: '·'; margin-left: 20px; color: var(--border);
+  }
+
+  /* ===== Content sections ===== */
+  .content {
+    padding: 96px 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .content-wide { max-width: 880px; }
+  .content p {
+    font-size: 18px; color: var(--ink); line-height: 1.7;
+    margin-bottom: 22px;
+  }
+  .content p:last-child { margin-bottom: 0; }
+  .content p.stone { color: var(--stone); font-size: 17px; }
+  .content + .content { padding-top: 0; }
+  .content .eyebrow { text-align: center; }
+  .content .section-title { text-align: center; }
+  .content-intro { text-align: center; color: var(--stone); font-size: 18px; max-width: 720px; margin: 0 auto 56px; line-height: 1.55; }
+
+  /* ===== Flow (numbered list of steps) ===== */
+  .flow {
+    background: color-mix(in oklab, var(--blush) 40%, var(--cream));
+    padding: 96px 40px;
+  }
+  .flow-inner { max-width: var(--max-width); margin: 0 auto; }
+  .flow .eyebrow, .flow .section-title { text-align: center; }
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .flow-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px 28px;
     transition: border-color 0.2s;
   }
-  .placeholder-back:hover { border-bottom-color: var(--wine); }
+  .flow-card:hover { border-color: var(--ink); }
+  .flow-num {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ember);
+    margin-bottom: 12px;
+  }
+  .flow-card h3 {
+    font-size: 22px; font-weight: 500; letter-spacing: -0.015em;
+    color: var(--ink); margin-bottom: 12px; line-height: 1.2;
+  }
+  .flow-card p { font-size: 15px; color: var(--stone); line-height: 1.6; }
 
+  /* ===== Schedule cards ===== */
+  .schedule {
+    padding: 96px 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .schedule .eyebrow, .schedule .section-title { text-align: center; }
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 760px;
+    margin: 48px auto 0;
+  }
+  .schedule-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px 30px;
+    text-align: left;
+    transition: border-color 0.2s;
+  }
+  .schedule-card:hover { border-color: var(--ink); }
+  .schedule-day {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ember);
+    margin-bottom: 12px;
+  }
+  .schedule-time {
+    font-size: 28px; font-weight: 500; letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .schedule-loc { font-size: 14px; color: var(--stone); }
+  .schedule-note {
+    text-align: center;
+    font-size: 14px; color: var(--stone);
+    margin-top: 32px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== Open to ===== */
+  .open-to {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 96px 40px;
+  }
+  .open-to-inner { max-width: 880px; margin: 0 auto; }
+  .open-to .eyebrow { text-align: center; }
+  .open-to .section-title { text-align: center; }
+  .open-to ul {
+    list-style: none;
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 32px;
+  }
+  .open-to li {
+    font-size: 16px; color: var(--ink); line-height: 1.5;
+    padding-left: 28px; position: relative;
+  }
+  .open-to li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 12px; height: 1px; background: var(--ember);
+  }
+
+  /* ===== Closing CTA ===== */
+  .closing {
+    background: var(--wine);
+    color: var(--cream);
+    padding: 120px 40px;
+    text-align: center;
+  }
+  .closing h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 500; letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .closing p { font-size: 17px; color: color-mix(in oklab, var(--cream) 75%, transparent); margin-bottom: 32px; max-width: 540px; margin-left: auto; margin-right: auto; }
+
+  /* ===== Footer ===== */
   .main-footer {
     background: var(--wine);
     color: color-mix(in oklab, var(--cream) 70%, transparent);
     padding: 56px 40px 28px;
     text-align: center;
+    border-top: 1px solid color-mix(in oklab, var(--cream) 8%, transparent);
   }
   .footer-links { display: flex; justify-content: center; gap: 28px; margin-bottom: 24px; flex-wrap: wrap; }
   .footer-links a {
@@ -100,8 +270,14 @@
     padding-top: 20px;
     border-top: 1px solid color-mix(in oklab, var(--cream) 12%, transparent);
   }
-  @media (max-width: 768px) {
-    main { padding: 80px 20px; }
+
+  @media (max-width: 900px) {
+    .program-hero { padding: 64px 20px 56px; }
+    .content, .flow, .schedule, .open-to { padding: 64px 20px; }
+    .closing { padding: 80px 20px; }
+    .flow-grid { grid-template-columns: 1fr; }
+    .schedule-grid { grid-template-columns: 1fr; }
+    .open-to ul { grid-template-columns: 1fr; }
     .main-footer { padding: 40px 20px 24px; }
   }
 </style>
@@ -124,15 +300,103 @@
   </div>
 </nav>
 
-<main>
-  <div class="placeholder">
+<!-- HERO -->
+<section class="program-hero">
+  <div class="program-hero-inner">
     <div class="eyebrow">Programme · 01</div>
     <h1>Language Café</h1>
-    <p>Coming soon. We're putting this page together. In the meantime, leave your details on the home page and we'll be in touch with everything you need to know.</p>
-    <a href="../index.html#programs" class="placeholder-back">&larr; Back to programs</a>
+    <p class="program-hero-tagline">A welcoming space where language becomes the doorway to deeper human connection.</p>
+    <div class="program-hero-actions">
+      <a href="../index.html#join" class="btn-primary">Join a circle &rarr;</a>
+      <a href="#schedule" class="btn-ghost">See the schedule</a>
+    </div>
+    <div class="program-hero-meta">
+      <span>All levels welcome</span>
+      <span>Free, always</span>
+      <span>Mermaid Waters</span>
+    </div>
   </div>
-</main>
+</section>
 
+<!-- WHAT IT IS -->
+<section class="content content-wide">
+  <div class="eyebrow">What it is</div>
+  <h2 class="section-title">More than a language class — <em>a circle of people</em></h2>
+  <p>Language Café is a welcoming space where language learning becomes the doorway to deeper human connection — bringing diverse communities together through conversation, culture, and mutual understanding.</p>
+  <p>We are not a school. We do not test you, correct you mid-sentence, or hand out homework. We read short pieces together, talk about them in plain English, and let the conversation lead us wherever it wants to go.</p>
+  <p class="stone">Some weeks the topic is small. Some weeks it goes deep. Every week, the people are what makes it worth the hour.</p>
+</section>
+
+<!-- HOW A SESSION UNFOLDS -->
+<section class="flow">
+  <div class="flow-inner">
+    <div class="eyebrow">A session, step by step</div>
+    <h2 class="section-title">An hour together</h2>
+    <p class="content-intro">No agenda heavy enough to ruin a good conversation. Most sessions follow the same gentle rhythm.</p>
+    <div class="flow-grid">
+      <div class="flow-card">
+        <div class="flow-num">First 15 minutes</div>
+        <h3>We read</h3>
+        <p>A short passage — a story, a reflection, a piece of writing chosen for the week. We read it aloud together, taking turns, helping each other through the harder words.</p>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">Next 30 minutes</div>
+        <h3>We talk</h3>
+        <p>Open conversation in English. Questions, disagreements, personal stories — whatever the passage stirred up. No right answers. No raised hands.</p>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">Last 15 minutes</div>
+        <h3>We stay</h3>
+        <p>Tea, coffee, biscuits. The official session ends, but most people stay back to keep chatting, swap numbers, plan the week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="eyebrow">When we meet</div>
+  <h2 class="section-title">Two sessions a week</h2>
+  <p class="content-intro">Drop in to either one. No booking needed for your first session — just turn up.</p>
+  <div class="schedule-grid">
+    <div class="schedule-card">
+      <div class="schedule-day">Friday</div>
+      <div class="schedule-time">6:00 – 7:00 pm</div>
+      <div class="schedule-loc">Mermaid Waters, Gold Coast</div>
+    </div>
+    <div class="schedule-card">
+      <div class="schedule-day">Monday</div>
+      <div class="schedule-time">5:00 – 6:00 pm</div>
+      <div class="schedule-loc">Mermaid Waters, Gold Coast</div>
+    </div>
+  </div>
+  <p class="schedule-note">Sessions are held in a private home. We share the exact address once you have registered.</p>
+</section>
+
+<!-- OPEN TO -->
+<section class="open-to">
+  <div class="open-to-inner">
+    <div class="eyebrow">Open to</div>
+    <h2 class="section-title">Anyone, really</h2>
+    <ul>
+      <li>Beginners who can read a few words of English</li>
+      <li>Advanced speakers who want a place to actually talk</li>
+      <li>Newcomers to Australia looking for community</li>
+      <li>Locals curious about other backgrounds and stories</li>
+      <li>People who learn better through conversation than textbooks</li>
+      <li>Anyone, regardless of age, faith or background</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <h2>Come as you are.<br>Leave with something.</h2>
+  <p>There is no fee, no required reading, and no pitch. Just register and we will be in touch with the address and a warm welcome before your first session.</p>
+  <a href="../index.html#join" class="btn-primary" style="background:var(--ember);">Join a circle &rarr;</a>
+</section>
+
+<!-- FOOTER -->
 <footer class="main-footer">
   <div class="footer-links">
     <a href="../index.html#programs">Programs</a>
@@ -145,6 +409,8 @@
     We acknowledge the Kombumerri families of the Yugambeh Language Region, Traditional Custodians of this land.
   </p>
 </footer>
+
+<script src="/assets/welcome-splash.js" defer></script>
 
 </body>
 </html>

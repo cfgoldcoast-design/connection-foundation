@@ -52,53 +52,6 @@
   h1, h2, h3, .section-title { text-wrap: balance; }
   a { color: var(--wine); }
 
-  /* ===== WELCOME TO COUNTRY SPLASH ===== */
-  .wtc-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--wine);
-    color: var(--cream);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 800ms ease;
-    cursor: pointer;
-  }
-  .wtc-overlay.show { opacity: 1; pointer-events: auto; transition: opacity 400ms ease; }
-  .wtc-inner { max-width: 720px; text-align: center; }
-  .wtc-divider {
-    width: 64px;
-    height: 1px;
-    background: var(--rose);
-    margin: 0 auto 28px;
-  }
-  .wtc-title {
-    font-size: clamp(36px, 4.5vw, 48px);
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    line-height: 1.05;
-    margin-bottom: 28px;
-  }
-  .wtc-body {
-    font-size: 17px;
-    line-height: 1.55;
-    max-width: 600px;
-    margin: 0 auto;
-    color: color-mix(in oklab, var(--cream) 90%, transparent);
-  }
-  .wtc-hint {
-    margin-top: 40px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: color-mix(in oklab, var(--cream) 55%, transparent);
-  }
-
   /* ===== NAV ===== */
   .main-nav {
     position: sticky;
@@ -115,8 +68,8 @@
   }
   .main-nav.scrolled { box-shadow: 0 2px 24px color-mix(in oklab, var(--wine) 8%, transparent); }
   .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo-img { height: 38px; width: auto; display: block; }
-  @media (max-width: 768px) { .nav-logo-img { height: 30px; } }
+  .nav-logo-img { height: 56px; width: auto; display: block; }
+  @media (max-width: 768px) { .nav-logo-img { height: 44px; } }
   .nav-logo-text { font-size: 17px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
   .nav-logo-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-top: 2px; }
   .nav-links { display: flex; align-items: center; gap: 32px; }
@@ -532,16 +485,6 @@
 </head>
 <body>
 
-<!-- WELCOME TO COUNTRY SPLASH -->
-<div class="wtc-overlay" id="wtc-overlay" role="dialog" aria-label="Welcome to Country">
-  <div class="wtc-inner">
-    <div class="wtc-divider"></div>
-    <h2 class="wtc-title">Welcome to Country</h2>
-    <p class="wtc-body">In a spirit of reconciliation, we acknowledge the Traditional Custodians of country throughout Australia, and their connections to land, sea and community. We pay our respect to their Elders past and present and extend that respect to all Aboriginal and Torres Strait Islander peoples today.</p>
-    <p class="wtc-hint">Tap anywhere to continue</p>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav class="main-nav" id="nav">
   <a href="index.html" class="nav-logo">
@@ -712,31 +655,8 @@
   </p>
 </footer>
 
+<script src="/assets/welcome-splash.js" defer></script>
 <script>
-  // ===== Welcome to Country splash =====
-  (function () {
-    if (sessionStorage.getItem('wtc-seen') === '1') return;
-    const overlay = document.getElementById('wtc-overlay');
-    if (!overlay) return;
-
-    let dismissed = false;
-    function dismiss() {
-      if (dismissed) return;
-      dismissed = true;
-      sessionStorage.setItem('wtc-seen', '1');
-      overlay.style.transition = 'opacity 800ms ease';
-      overlay.classList.remove('show');
-      setTimeout(() => { overlay.remove(); }, 850);
-    }
-
-    // Show on next tick so the fade-in transition runs
-    requestAnimationFrame(() => overlay.classList.add('show'));
-    // Auto-dismiss after 10s
-    const auto = setTimeout(dismiss, 10000);
-    // Manual dismiss (click anywhere)
-    overlay.addEventListener('click', () => { clearTimeout(auto); dismiss(); });
-  })();
-
   // ===== Nav scroll effect =====
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
@@ -793,16 +713,28 @@
       });
 
       if (res.ok || res.status === 201) {
+        // Trigger welcome email + Google Sheet sync in parallel.
+        // Sheet sync is fire-and-forget — registration succeeds even if it fails.
+        const emailReq = fetch(`${SUPABASE_URL}/functions/v1/welcome-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY
+          },
+          body: JSON.stringify({ type: 'INSERT', record: payload })
+        });
+        const syncReq = fetch(`${SUPABASE_URL}/functions/v1/sync-to-google-sheet`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY
+          },
+          body: JSON.stringify({ type: 'INSERT', record: payload })
+        }).catch(err => { console.error('Sheet sync error:', err); return null; });
+
         let emailSent = false;
         try {
-          const emailRes = await fetch(`${SUPABASE_URL}/functions/v1/welcome-email`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_KEY
-            },
-            body: JSON.stringify({ type: 'INSERT', record: payload })
-          });
+          const emailRes = await emailReq;
           emailSent = emailRes.ok;
           if (!emailSent) {
             console.error('Email send failed:', emailRes.status, await emailRes.text());
@@ -810,6 +742,11 @@
         } catch (emailErr) {
           console.error('Email send error:', emailErr);
         }
+
+        // Await sync but never block UI on its failure
+        syncReq.then(r => {
+          if (r && !r.ok) console.error('Sheet sync HTTP', r.status);
+        });
 
         if (!emailSent) {
           btn.textContent = 'Join a circle →';
