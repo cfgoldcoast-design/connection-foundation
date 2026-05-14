@@ -32,10 +32,16 @@
     background: rgba(247,240,232,0.95); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
   .nav-logo-img { height: 80px; width: auto; display: block; }
   @media (max-width: 1024px) { .nav-logo-img { height: 64px; } }
   @media (max-width: 640px) { .nav-logo-img { height: 52px; } }
+  .nav-logo-text { font-size: 18px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; line-height: 1.15; }
+  .nav-logo-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-top: 3px; }
+  @media (max-width: 640px) {
+    .nav-logo-text { font-size: 15px; }
+    .nav-logo-sub { font-size: 10px; letter-spacing: 0.1em; }
+  }
   .nav-links { display: flex; align-items: center; gap: 32px; }
   .nav-links a {
     color: var(--ink);
@@ -289,7 +295,11 @@
 
 <nav class="main-nav">
   <a href="/" class="nav-logo" aria-label="Connection Foundation — home">
-    <img src="/images/logo-cfgc-transparent.png" alt="Connection Foundation Gold Coast" class="nav-logo-img">
+    <img src="/images/logo-cfgc-transparent.png" alt="" class="nav-logo-img">
+    <div>
+      <div class="nav-logo-text">Connection Foundation</div>
+      <div class="nav-logo-sub">Gold Coast · Australia</div>
+    </div>
   </a>
   <div class="nav-links">
     <a href="/index.html#welcome">Welcome</a>
