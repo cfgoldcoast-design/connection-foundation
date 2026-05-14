@@ -3,34 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connection Foundation — Free English Conversation · Gold Coast</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<title>Connection Foundation · Gold Coast · Australia</title>
+<meta name="description" content="A community walking together on the path of personal and collective transformation. Free programmes in Mermaid Waters, Gold Coast.">
+<link rel="icon" type="image/png" href="images/logo-cfgc-transparent.png">
 <style>
   :root {
-    --teal: #2B6B6B;
-    --teal-light: #3D8080;
-    --teal-pale: #EDF3F3;
-    --sage: #9CAF88;
-    --sand: #F5EDE0;
-    --warm-white: #FFF8F0;
-    --coral: #F4A261;
-    --charcoal: #2C3E50;
-    --mid: #5A6A7A;
-    --border: rgba(43,107,107,0.12);
+    /* Rosewood palette — locked */
+    --wine: #5B1F3A;
+    --mulberry: #8B2C4F;
+    --rose: #C97B8E;
+    --blush: #E8B5BD;
+    --ember: #D45D5D;
+    --cream: #F7F0E8;
+    --ink: #2A1A22;
+    --stone: #8A7A7E;
+    /* Semantic roles */
+    --bg: var(--cream);
+    --fg: var(--ink);
+    --primary: var(--wine);
+    --cta: var(--ember);
+    --muted: var(--stone);
+    --border: color-mix(in oklab, var(--ink) 12%, transparent);
+    --max-width: 1280px;
+    /* Legacy aliases */
+    --teal: var(--wine);
+    --teal-light: var(--mulberry);
+    --teal-pale: color-mix(in oklab, var(--blush) 40%, var(--cream));
+    --sage: var(--stone);
+    --sand: var(--blush);
+    --warm-white: var(--cream);
+    --coral: var(--ember);
+    --charcoal: var(--ink);
+    --mid: var(--stone);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'Lato', sans-serif;
-    background: var(--warm-white);
-    color: var(--charcoal);
-    font-size: 16px;
-    line-height: 1.75;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.55;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+  h1, h2, h3, .section-title { text-wrap: balance; }
+  a { color: var(--wine); }
 
   /* ===== NAV ===== */
   .main-nav {
@@ -41,936 +61,436 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(255,248,240,0.95);
+    background: rgba(247,240,232,0.95);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     transition: box-shadow 0.3s;
   }
-  .main-nav.scrolled { box-shadow: 0 2px 24px rgba(43,107,107,0.08); }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
+  .main-nav.scrolled { box-shadow: 0 2px 24px color-mix(in oklab, var(--wine) 8%, transparent); }
+  .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .nav-logo-img { height: 80px; width: auto; display: block; }
+  @media (max-width: 1024px) { .nav-logo-img { height: 64px; } }
+  @media (max-width: 640px) { .nav-logo-img { height: 52px; } }
+  .nav-logo-text { font-size: 18px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; line-height: 1.15; }
+  .nav-logo-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-top: 3px; }
+  @media (max-width: 640px) {
+    .nav-logo-text { font-size: 15px; }
+    .nav-logo-sub { font-size: 10px; letter-spacing: 0.1em; }
   }
-  .nav-logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--teal);
-    letter-spacing: 1px;
-    line-height: 1.1;
-  }
-  .nav-logo-sub {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--sage);
-    margin-top: 2px;
-  }
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
   .nav-links a {
-    color: var(--charcoal);
+    color: var(--ink);
     font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     text-decoration: none;
     transition: color 0.15s;
   }
-  .nav-links a:hover { color: var(--teal); }
-  .nav-links a.current { color: var(--teal); font-weight: 700; }
-  .nav-cta {
-    background: var(--teal);
-    color: #fff !important;
-    padding: 10px 22px;
-    border-radius: 24px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: none;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.1s;
+  .nav-links a:hover { color: var(--wine); }
+  .nav-links a.current { color: var(--wine); }
+  @media (max-width: 900px) {
+    .nav-links { gap: 20px; font-size: 13px; }
   }
-  .nav-cta:hover { background: var(--teal-light); transform: translateY(-1px); }
   @media (max-width: 768px) {
-    .main-nav { padding: 14px 20px; }
-    .nav-links a:not(.nav-cta) { display: none; }
-    .nav-links { gap: 0; }
+    .main-nav { flex-direction: column; gap: 14px; padding: 16px 20px; }
+    .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .nav-links a { font-size: 12px; letter-spacing: 0.04em; }
   }
 
   /* ===== HERO ===== */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 40px 80px;
-    position: relative;
-    overflow: hidden;
-    background: var(--warm-white);
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 120px 40px 96px;
+    text-align: center;
   }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(156,175,136,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(43,107,107,0.07) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  /* Decorative circles */
-  .hero-bg::before {
-    content: '';
-    position: absolute;
-    right: -120px; top: 10%;
-    width: 480px; height: 480px;
-    border-radius: 50%;
-    border: 1px solid rgba(43,107,107,0.08);
-  }
-  .hero-bg::after {
-    content: '';
-    position: absolute;
-    right: -60px; top: 5%;
-    width: 360px; height: 360px;
-    border-radius: 50%;
-    border: 1px solid rgba(43,107,107,0.06);
-  }
-
-  .hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(43,107,107,0.08);
-    border: 1px solid rgba(43,107,107,0.15);
-    border-radius: 20px;
-    padding: 6px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 24px;
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-badge-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--coral);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.3); }
-  }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 5vw, 64px);
+  .hero-inner { max-width: 960px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 11px;
     font-weight: 500;
-    line-height: 1.1;
-    color: var(--charcoal);
-    margin-bottom: 24px;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--teal);
-  }
-
-  .hero-sub {
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.65;
-    margin-bottom: 40px;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-  .hero-sub strong { color: var(--charcoal); font-weight: 700; }
-
-  .hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--teal);
-    color: #fff;
-    padding: 16px 32px;
-    border-radius: 32px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.2s;
-    box-shadow: 0 4px 24px rgba(43,107,107,0.25);
+    color: var(--ember);
+    margin-bottom: 20px;
   }
-  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(43,107,107,0.3); }
+  .eyebrow.stone { color: var(--stone); }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    line-height: 0.98;
+    margin-bottom: 28px;
+    text-wrap: balance;
+  }
+  .hero h1 em { font-style: normal; color: var(--wine); }
+  @media (max-width: 1024px) { .hero h1 { font-size: 56px; } }
+  @media (max-width: 640px) { .hero h1 { font-size: 40px; } }
 
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--teal);
-    padding: 16px 32px;
-    border-radius: 32px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 2px solid var(--teal);
-    transition: all 0.2s;
-  }
-  .btn-secondary:hover { background: var(--teal-pale); transform: translateY(-2px); }
-
-  .hero-stats {
-    display: flex;
-    gap: 32px;
-    margin-top: 48px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-    animation: fadeUp 0.6s 0.4s ease both;
-  }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--teal);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 12px;
-    color: var(--mid);
+  .hero-tagline {
     font-weight: 400;
-    margin-top: 4px;
-  }
-
-  /* Hero visual */
-  .hero-visual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-
-  .hero-logo-card {
-    background: var(--teal);
-    border-radius: 32px;
-    width: 220px; height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 24px 64px rgba(43,107,107,0.3);
-  }
-
-  .hero-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    width: 100%;
-  }
-  .hero-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px;
-    transition: transform 0.2s;
-  }
-  .hero-card:hover { transform: translateY(-3px); }
-  .hero-card-icon { font-size: 22px; margin-bottom: 8px; }
-  .hero-card h4 { font-size: 13px; font-weight: 700; color: var(--teal); margin-bottom: 4px; }
-  .hero-card p { font-size: 12px; color: var(--mid); line-height: 1.4; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    color: var(--stone);
+    font-size: 19px;
+    line-height: 1.55;
+    max-width: 580px;
+    margin: 0 auto;
   }
 
   /* ===== SECTIONS ===== */
-  section {
-    padding: 96px 40px;
-  }
-  .section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--coral);
-    margin-bottom: 12px;
-  }
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 500;
-    color: var(--charcoal);
-    line-height: 1.15;
-    margin-bottom: 20px;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    text-align: center;
   }
-  .section-title em { font-style: italic; color: var(--teal); }
-  .section-sub {
-    font-size: 17px;
-    font-weight: 300;
-    color: var(--mid);
-    max-width: 560px;
-    line-height: 1.7;
-    margin-bottom: 56px;
-  }
-
-  /* ===== HOW IT WORKS ===== */
-  .how-bg { background: var(--sand); }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-  }
-  .step {
-    background: var(--warm-white);
-    border-radius: 20px;
-    padding: 36px 28px;
-    position: relative;
-    border: 1px solid var(--border);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .step:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(43,107,107,0.1); }
-  .step-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 64px;
-    font-weight: 600;
-    color: rgba(43,107,107,0.1);
-    line-height: 1;
-    margin-bottom: 16px;
-  }
-  .step h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--teal);
-    margin-bottom: 12px;
-  }
-  .step p { font-size: 15px; color: var(--mid); line-height: 1.65; }
-
-  /* ===== WHY CF ===== */
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-  .why-card {
-    background: var(--warm-white);
-    border-radius: 20px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    display: flex;
-    gap: 20px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .why-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(43,107,107,0.08); }
-  .why-card-icon {
-    width: 48px; height: 48px;
-    background: var(--teal-pale);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-  .why-card h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    font-weight: 600;
-    color: var(--teal);
-    margin-bottom: 8px;
-  }
-  .why-card p { font-size: 14px; color: var(--mid); line-height: 1.65; }
-
-  /* ===== SESSIONS ===== */
-  .sessions-bg { background: var(--teal); }
-  .sessions-bg .section-title { color: #fff; }
-  .sessions-bg .section-label { color: var(--coral); }
-  .sessions-bg .section-sub { color: rgba(255,255,255,0.7); }
-
-  .sessions-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  .session-card {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
-    padding: 28px;
-    transition: background 0.2s;
-  }
-  .session-card:hover { background: rgba(255,255,255,0.13); }
-  .session-day {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--coral);
-    margin-bottom: 8px;
-  }
-  .session-time {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 4px;
-  }
-  .session-loc {
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 16px;
-  }
-  .session-tag {
-    display: inline-block;
-    background: rgba(255,255,255,0.12);
-    border-radius: 12px;
-    padding: 4px 12px;
-    font-size: 11px;
-    color: rgba(255,255,255,0.8);
-    font-weight: 700;
-    letter-spacing: 0.5px;
+  .section-title em { font-style: normal; color: var(--wine); }
+  .section-intro {
+    font-size: 18px;
+    color: var(--stone);
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+    line-height: 1.55;
   }
 
-  .location-note {
-    margin-top: 40px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px;
-    padding: 24px 28px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
+  /* Who we are */
+  .who-section {
+    padding: 120px 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
-  .location-note-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-  .location-note p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; }
-  .location-note strong { color: #fff; }
-
-  /* ===== TESTIMONIALS ===== */
-  .testimonials-bg { background: var(--sand); }
-
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .testimonial {
-    background: var(--warm-white);
-    border-radius: 20px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    position: relative;
-  }
-  .testimonial::before {
-    content: '"';
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 72px;
-    color: rgba(43,107,107,0.12);
-    position: absolute;
-    top: 12px; left: 24px;
-    line-height: 1;
-  }
-  .testimonial-text {
-    font-size: 15px;
-    color: var(--mid);
+  .who-section .eyebrow { text-align: center; }
+  .who-body { max-width: 880px; margin: 0 auto; }
+  .who-body p {
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--ink);
     line-height: 1.7;
     margin-bottom: 24px;
-    margin-top: 16px;
-    font-style: italic;
   }
-  .testimonial-author { display: flex; align-items: center; gap: 12px; }
-  .testimonial-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--teal-pale);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-  }
-  .testimonial-name { font-size: 13px; font-weight: 700; color: var(--charcoal); }
-  .testimonial-origin { font-size: 11px; color: var(--mid); }
 
-  /* ===== FORM ===== */
+  /* Commitments */
+  .commitments {
+    background: color-mix(in oklab, var(--blush) 40%, var(--cream));
+    padding: 120px 40px;
+  }
+  .commitments-inner { max-width: var(--max-width); margin: 0 auto; }
+  .commitments .eyebrow { text-align: center; }
+  .commitments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .commitment-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px 30px;
+    transition: border-color 0.2s;
+  }
+  .commitment-card:hover { border-color: var(--ink); }
+  .commitment-num {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--ember);
+    margin-bottom: 12px;
+  }
+  .commitment-card h3 {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.15;
+  }
+  .commitment-card p {
+    font-weight: 400;
+    color: var(--stone);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Programs */
+  .programs {
+    padding: 120px 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .programs .eyebrow { text-align: center; }
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .program-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px 30px;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .program-card:hover { border-color: var(--ink); }
+  .program-num {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--ember);
+    margin-bottom: 12px;
+  }
+  .program-card h3 {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.15;
+  }
+  .program-card p {
+    font-weight: 400;
+    color: var(--stone);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .program-arrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--wine);
+  }
+
+  /* Quote */
+  .quote-section {
+    background: var(--wine);
+    padding: 120px 40px;
+    text-align: center;
+  }
+  .quote-mark {
+    font-size: 80px;
+    line-height: 0;
+    color: var(--rose);
+    opacity: 0.6;
+    display: inline-block;
+    margin-bottom: 32px;
+  }
+  .quote-text {
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    line-height: 1.25;
+    max-width: 820px;
+    margin: 0 auto 40px;
+  }
+  .quote-cta {
+    display: inline-block;
+    background: var(--ember);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    text-decoration: none;
+    border: none;
+    box-shadow: none;
+    transition: background 0.2s;
+  }
+  .quote-cta:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
+  .quote-meta {
+    color: color-mix(in oklab, var(--cream) 60%, transparent);
+    font-size: 13px;
+    margin-top: 28px;
+  }
+
+  /* ===== JOIN / FORM ===== */
   .form-section {
-    background: var(--warm-white);
+    padding: 120px 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
-
   .form-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px;
     align-items: start;
   }
+  .form-info .eyebrow { text-align: left; }
+  .form-info h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  .form-info h2 em { font-style: normal; color: var(--wine); }
+  .form-info p { font-size: 16px; color: var(--stone); line-height: 1.65; margin-bottom: 16px; }
 
   .form-card {
-    background: #fff;
-    border-radius: 24px;
-    padding: 48px;
+    background: var(--cream);
     border: 1px solid var(--border);
-    box-shadow: 0 8px 48px rgba(43,107,107,0.07);
+    border-radius: 2px;
+    padding: 40px;
+    box-shadow: none;
   }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
+  .form-group { margin-bottom: 20px; }
   .form-group label {
     display: block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--mid);
+    color: var(--stone);
     margin-bottom: 8px;
   }
   .form-group input,
   .form-group select {
     width: 100%;
-    padding: 14px 18px;
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    font-family: 'Lato', sans-serif;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
     font-size: 15px;
-    color: var(--charcoal);
-    background: var(--warm-white);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    color: var(--ink);
+    background: var(--cream);
+    font-family: inherit;
+    transition: border-color 0.2s;
     outline: none;
     appearance: none;
   }
   .form-group input:focus,
-  .form-group select:focus {
-    border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(43,107,107,0.08);
-  }
+  .form-group select:focus { border-color: var(--wine); }
   .form-group select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A6A7A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A7A7E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 16px center;
     padding-right: 40px;
     cursor: pointer;
   }
-
+  .form-consent {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 28px 0 20px;
+    padding: 16px;
+    background: color-mix(in oklab, var(--blush) 25%, var(--cream));
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+  .form-consent input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--wine);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .form-consent label {
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.55;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 400;
+    margin: 0;
+    cursor: pointer;
+  }
   .form-submit {
     width: 100%;
-    background: var(--teal);
+    background: var(--ember);
     color: #fff;
     border: none;
-    padding: 18px;
-    border-radius: 14px;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    padding: 16px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
     cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 8px;
+    transition: background 0.2s;
+    box-shadow: none;
   }
-  .form-submit:hover { background: var(--teal-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(43,107,107,0.25); }
-
+  .form-submit:hover:not(:disabled) { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
   .form-privacy {
     font-size: 12px;
-    color: var(--mid);
+    color: var(--stone);
     text-align: center;
     margin-top: 16px;
     line-height: 1.5;
   }
-
-  .form-info h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 24px 0;
+  }
+  .form-success.visible { display: block; }
+  .form-success h3 {
+    font-size: 24px;
     font-weight: 500;
-    color: var(--teal);
-    margin-bottom: 20px;
-    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 12px;
   }
-  .form-info p { font-size: 15px; color: var(--mid); line-height: 1.7; margin-bottom: 16px; }
-
-  .form-perks {
-    margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .perk {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 14px;
-    color: var(--mid);
-  }
-  .perk-icon {
-    width: 28px; height: 28px;
-    background: var(--teal-pale);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* ===== WHATSAPP FLOAT ===== */
-  .wa-float {
-    position: fixed;
-    bottom: 28px; right: 28px;
-    z-index: 200;
-    width: 56px; height: 56px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
-  .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+  .form-success p { color: var(--stone); font-size: 15px; line-height: 1.6; }
 
   /* ===== FOOTER ===== */
   .main-footer {
-    background: var(--charcoal);
-    color: rgba(255, 248, 240, 0.7);
-    padding: 56px 40px 28px;
+    background: var(--wine);
+    color: color-mix(in oklab, var(--cream) 70%, transparent);
+    padding: 80px 40px 32px;
     text-align: center;
   }
-  .footer-bigger {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 24px;
-    color: rgba(255,248,240,0.85);
-    border-bottom: 1px solid rgba(244,162,97,0.5);
-    padding-bottom: 4px;
-    display: inline-block;
-    margin-bottom: 32px;
-    text-decoration: none;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .footer-bigger:hover { color: var(--coral); border-bottom-color: var(--coral); }
   .main-footer .footer-links {
     display: flex;
     justify-content: center;
     gap: 28px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     flex-wrap: wrap;
   }
   .main-footer .footer-links a {
-    color: rgba(255,248,240,0.6);
-    font-size: 13px;
+    color: color-mix(in oklab, var(--cream) 70%, transparent);
+    font-size: 14px;
     text-decoration: none;
     transition: color 0.2s;
   }
-  .main-footer .footer-links a:hover { color: var(--coral); }
+  .main-footer .footer-links a:hover { color: var(--ember); }
   .footer-meta {
     font-size: 11px;
-    color: rgba(255,248,240,0.4);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: color-mix(in oklab, var(--cream) 50%, transparent);
     line-height: 1.7;
     max-width: 600px;
     margin: 0 auto;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,248,240,0.1);
-  }
-
-  /* ===== SUCCESS STATE ===== */
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 48px 32px;
-  }
-  .form-success.visible { display: block; }
-  .form-success-icon { font-size: 48px; margin-bottom: 16px; }
-  .form-success h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    color: var(--teal);
-    margin-bottom: 12px;
-  }
-  .form-success p { color: var(--mid); font-size: 15px; }
-
-  /* ===== MODAL (QR + Feedback) ===== */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(44, 62, 80, 0.65);
-    backdrop-filter: blur(6px);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: modalFade 0.25s ease;
-  }
-  .modal-overlay.active { display: flex; }
-  @keyframes modalFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .modal-card {
-    background: var(--warm-white);
-    border-radius: 24px;
-    max-width: 480px;
-    width: 100%;
-    max-height: 92vh;
-    overflow-y: auto;
-    padding: 48px 40px;
-    position: relative;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  @keyframes modalPop {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  .modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: rgba(43,107,107,0.08);
-    border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    color: var(--teal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-  }
-  .modal-close:hover { background: rgba(43,107,107,0.18); }
-
-  .modal-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--coral);
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--charcoal);
-    line-height: 1.2;
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  .modal-sub {
-    font-size: 15px;
-    color: var(--mid);
-    line-height: 1.65;
-    text-align: center;
-    margin-bottom: 28px;
-  }
-
-  .qr-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  .qr-wrap img {
-    width: 260px;
-    height: 260px;
-    border-radius: 16px;
-    border: 8px solid #fff;
-    box-shadow: 0 8px 24px rgba(43,107,107,0.18);
-  }
-  .qr-hint {
-    text-align: center;
-    font-size: 13px;
-    color: var(--mid);
-    margin-top: 8px;
-  }
-
-  .modal-card .form-group { margin-bottom: 16px; }
-  .modal-card label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--charcoal);
-    margin-bottom: 6px;
-  }
-  .modal-card input,
-  .modal-card select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-size: 15px;
-    font-family: inherit;
-    background: #fff;
-    color: var(--charcoal);
-    transition: border-color 0.2s;
-  }
-  .modal-card input:focus,
-  .modal-card select:focus {
-    outline: none;
-    border-color: var(--teal);
-  }
-  .modal-submit {
-    width: 100%;
-    background: var(--teal);
-    color: #fff;
-    padding: 14px;
-    border: none;
-    border-radius: 28px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .modal-submit:hover:not(:disabled) { background: var(--teal-light); }
-  .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-
-  .modal-success {
-    display: none;
-    text-align: center;
-  }
-  .modal-success.active { display: block; }
-  .modal-success-icon {
-    font-size: 42px;
-    margin-bottom: 12px;
-  }
-
-  /* ===== EVENT BANNER ===== */
-  .event-banner {
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    margin: 60px 0;
-    border-radius: 20px;
-  }
-
-  .event-banner-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-  }
-
-  .event-banner-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(43, 107, 107, 0.65) 0%, rgba(43, 107, 107, 0.45) 100%);
-    z-index: 1;
-  }
-
-  .event-banner-content {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    width: 100%;
-    padding: 60px;
-    text-align: center;
-    color: white;
-  }
-
-  .event-banner-label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--coral);
-    margin-bottom: 16px;
-    font-weight: 700;
-  }
-
-  .event-banner h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    font-weight: 500;
-    margin-bottom: 24px;
-    line-height: 1.1;
-  }
-
-  .event-banner-details {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 32px;
-    font-size: 16px;
-  }
-
-  .event-detail-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    font-weight: 300;
-  }
-
-  .event-banner .btn-primary {
-    margin-top: 16px;
-  }
-
-  @media (max-width: 768px) {
-    .event-banner {
-      min-height: 400px;
-      margin: 40px 0;
-    }
-
-    .event-banner-content {
-      padding: 40px 24px;
-    }
-
-    .event-banner h2 {
-      font-size: 32px;
-    }
-
-    .event-banner-details {
-      font-size: 14px;
-    }
+    padding-top: 24px;
+    border-top: 1px solid color-mix(in oklab, var(--cream) 12%, transparent);
   }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
     .main-nav { padding: 14px 20px; }
-    .hero { padding: 100px 20px 60px; }
-    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-    .hero-visual { display: none; }
-    section { padding: 64px 20px; }
-    .steps { grid-template-columns: 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    .sessions-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .form-wrap { grid-template-columns: 1fr; }
-    .form-card { padding: 32px 24px; }
-    .main-footer { padding: 40px 20px 24px; }
-    .main-footer .footer-links { flex-wrap: wrap; justify-content: center; }
+    .commitments-grid, .programs-grid { grid-template-columns: 1fr; }
+    .who-section, .commitments, .programs, .form-section { padding: 64px 20px; }
+    .quote-section { padding: 80px 20px; }
+    .hero { padding: 80px 20px 56px; }
+    .form-wrap { grid-template-columns: 1fr; gap: 32px; }
+    .form-card { padding: 28px 24px; }
+    .main-footer { padding: 48px 20px 24px; }
+  }
+  @media (max-width: 768px) {
+    .main-footer .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
 </style>
 </head>
@@ -978,573 +498,221 @@
 
 <!-- NAV -->
 <nav class="main-nav" id="nav">
-  <a href="index.html" class="nav-logo">
-    <svg viewBox="224 238 576 560" width="38" height="37" xmlns="http://www.w3.org/2000/svg">
-      <path style="fill:#2B6B6B" d="M 498.52015,785.88531 C 481.89329,783.46405 461.1066,775.1309 449,766.03325 426.85709,749.3937 411.98262,726.68911 407.50133,702.68912 c -1.28313,-6.87191 -1.38233,-9.12757 -0.45081,-10.25 C 408.06022,691.22251 415.87956,691 457.62244,691 H 507 V 669.00402 647.00803 L 386.25,646.75402 265.5,646.5 l -0.5,-15 -0.5,-15 -19,-0.26231 c -16.42964,-0.22682 -19.1691,-0.48942 -20.25,-1.94112 C 224.26305,612.97103 224,581.12492 224,462.96386 224,319.2516 224.07261,313.24427 225.82874,311.65499 227.34958,310.27865 230.04702,310 241.84975,310 l 14.19228,0 -0.5455,-16.25 C 254.76094,271.83739 253.82855,273 272.13763,273 l 14.02422,0 -0.31663,-16.54531 c -0.26334,-13.76112 -0.0666,-16.71785 1.16908,-17.57061 2.10553,-1.45306 36.56864,-0.35429 51.81679,1.65204 31.43576,4.13627 64.2781,16.21206 89.16891,32.78649 14.0145,9.33204 34.41801,28.1237 45.25228,41.67739 10.86692,13.59454 20.1967,29.34092 26.95889,45.5 C 504.89193,371.68526 511,389.80874 511,392.51196 c 0,3.97545 1.77497,0.52162 4.35419,-8.47262 17.23513,-60.10217 63.07712,-109.47446 122.14581,-131.5523 13.35688,-4.99235 33.61885,-10.03136 48.14622,-11.97364 16.75566,-2.2402 49.79069,-3.22561 51.81497,-1.54561 1.27045,1.05438 1.53881,4.13322 1.53881,17.65465 V 273 h 13.42857 c 10.87446,0 13.72746,0.29889 15,1.57143 1.3048,1.3048 1.57143,4.44372 1.57143,18.5 V 310 l 12.25,0.11842 c 6.7375,0.0651 12.57189,0.0703 12.96531,0.0116 0.39342,-0.0588 1.85592,0.3268 3.25,0.85683 L 800,311.9505 v 150.82475 c 0,115.97481 -0.27728,151.10203 -1.2,152.02475 -0.84774,0.84774 -6.68734,1.2 -19.89301,1.2 -15.29463,0 -18.79286,0.26021 -19.24225,1.43128 -0.30207,0.7872 -0.34789,6.88744 -0.10182,13.55608 0.27222,7.37711 0.0401,12.88598 -0.59294,14.06872 C 757.94848,646.96479 755.74767,647 637.46482,647 H 517 v 26.02475 26.02475 l -2.5651,0.97525 C 512.89905,700.60868 492.82879,701 464.41585,701 H 416.9619 l 0.59003,2.75 c 3.47168,16.18058 11.92889,30.55547 26.11489,44.388 14.681,14.31519 30.26316,22.56591 50.83318,26.91607 7.7343,1.63566 27.28964,1.67329 35,0.0674 31.39945,-6.53996 56.56866,-25.39468 70.25454,-52.62898 C 603.52381,714.99176 607,705.31281 607,702.3185 607,701.25375 600.63636,701 573.93426,701 c -20.88071,0 -33.77854,-0.38147 -35,-1.03518 -2.19222,-1.17324 -2.63573,-5.86335 -0.73426,-7.76482 0.89142,-0.89142 11.01723,-1.2 39.37756,-1.2 33.12826,0 38.3463,0.20333 39.45347,1.53739 1.50985,1.81926 -0.004,12.0045 -3.25782,21.91544 -15.27566,46.53198 -66.82904,78.48416 -115.25306,71.43248 z M 485.69141,634.90186 c -6.18057,-3.26143 -27.04938,-9.88717 -37.49918,-11.90581 C 419.054,617.36727 390.20911,615.78773 324,616.19529 L 274.5,616.5 274.21502,626.75 273.93003,637 381.71502,636.9558 489.5,636.91161 Z M 749.78498,626.75 749.5,616.5 701,616.19613 c -74.35935,-0.46588 -111.39394,2.18682 -138.5,9.92043 -8.4078,2.39883 -25.62068,8.79376 -26.95,10.01248 C 535.00997,636.62414 581.09246,637 642.33498,637 h 107.73499 z m -242.79475,-15.5 c -0.009,-23.9121 -0.0896,-24.91927 -2.36783,-29.75 -4.73389,-10.03768 -12.26128,-15.28589 -28.6224,-19.95596 -13.36602,-3.81515 -22.1498,-8.70292 -30.61872,-17.0379 -10.24127,-10.0793 -14.70634,-19.97416 -15.997,-35.45032 -0.89188,-10.69436 0.005,-11.52103 11.67342,-10.76504 14.51116,0.94014 30.7059,7.52005 41.7641,16.96872 6.73157,5.75179 13.2098,13.80553 19.18776,23.85422 l 4.98899,8.38628 7.2e-4,-38.75 L 507,470 l -7.25,-0.0131 C 477.68784,469.94689 454.61305,459.62817 441.63802,444 434.52389,435.43117 428,418.03034 428,407.62402 c 0,-6.0353 1.96638,-6.99163 12.95971,-6.30286 25.8897,1.62208 45.43131,12.32042 63.34442,34.67884 l 2.80413,3.5 -0.49509,-10.5 c -0.63151,-13.39328 -4.68626,-34.11847 -9.60659,-49.10255 C 479.2157,325.7182 438.29359,282.86027 384.46936,262.03669 362.43053,253.51028 330.58797,248 303.35478,248 L 295,248 v 164 164 l 8.75,0.001 c 12.8591,0.002 45.7811,2.65226 61.3411,4.93886 35.45139,5.20973 62.81259,13.21105 93.96156,27.4775 14.43586,6.61173 34.73702,18.17342 42.02657,23.9345 2.43142,1.92161 4.75827,3.52854 5.17077,3.57096 0.4125,0.0424 0.7456,-11.06037 0.74023,-24.67287 z m 20.15672,18.37353 c 25.13215,-17.13392 61.1286,-33.06863 92.94186,-41.14299 25.6603,-6.51271 73.66904,-12.46317 100.66119,-12.47647 L 729,576 V 412 248 l -8.25,0.0158 c -50.26983,0.0964 -96.0498,14.90526 -131.21089,42.44384 -9.05342,7.09075 -25.77489,23.99639 -32.68038,33.04033 -19.98611,26.17528 -33.2588,57.41171 -37.87096,89.12687 -1.7342,11.92508 -1.16783,12.82546 3.40601,5.41469 10.44216,-16.91891 28.73305,-30.74432 47.58649,-35.96888 8.64421,-2.39543 22.06345,-3.54527 27.51073,-2.35728 5.48558,1.19633 6.23973,3.7029 4.72423,15.70185 -3.3583,26.58938 -18.63337,48.18205 -43.61872,61.65898 -7.77295,4.19267 -21.38947,9.25203 -28.22346,10.48671 -2.13018,0.38486 -4.17887,0.87261 -4.55264,1.0839 -0.37378,0.21129 2.29088,4.31469 5.92145,9.11866 22.56955,29.86401 26.69765,67.79499 9.27446,85.21818 -4.89795,4.89795 -12.56636,8.73272 -19.26632,9.63459 l -4.75,0.63939 v 31.37117 C 517,621.88297 517.17863,636 517.39695,636 c 0.21832,0 4.60582,-2.86941 9.75,-6.37647 z M 629.65446,607.10667 C 641.8105,606.498 682.86118,606 720.87818,606 H 790 V 463 320 H 779.5 769 v 118.06574 c 0,79.47336 -0.33837,118.698 -1.03518,120 -0.94759,1.77059 -2.21686,1.93426 -15,1.93426 H 739 v 11.17126 C 739,585.89847 738.91152,586 726.07795,586 c -34.99671,0 -84.18826,6.44584 -113.76161,14.90681 -10.88253,3.1135 -27.32068,8.87919 -28.57853,10.02393 -0.41921,0.38151 4.76761,-0.0738 11.52627,-1.01188 6.75866,-0.93803 22.23433,-2.20352 34.39038,-2.81219 z m -192.38582,2.4103 c -1.77724,-0.77261 -8.07724,-2.9704 -14,-4.88397 -34.99983,-11.30804 -70.42446,-16.92664 -115.57165,-18.3305 -24.18879,-0.75216 -22.79679,0.22459 -21.97162,-15.41713 L 286.29962,560 l -13.89981,-0.0153 c -7.64489,-0.008 -14.46768,-0.3758 -15.16173,-0.81639 -1.00214,-0.63616 -1.31094,-25.28561 -1.5,-119.73469 L 255.5,320.5 244.75,320.21617 234,319.93234 234,462.96617 V 606 l 67.25,0.0207 c 68.86469,0.0212 105.57853,1.02962 123.25,3.38543 5.5,0.73321 11.35,1.37418 13,1.42437 l 3,0.0913 z m 92.50375,-50.12391 c 16.83235,-9.86373 16.21939,-41.61646 -1.33306,-69.05535 -4.23847,-6.62581 -9.58924,-13.29324 -10.68933,-13.31968 -0.4125,-0.01 -0.75,19.38948 -0.75,43.10978 v 43.12781 l 4.25,-0.67947 c 2.3375,-0.37371 6.17258,-1.8061 8.52239,-3.18309 z m -33.28973,-8.43844 c -8.67435,-22.70051 -29.15431,-39.21266 -52.73266,-42.51619 -5.56991,-0.78039 -5.68619,-0.45291 -3.212,9.04617 2.12235,8.14823 6.56209,15.49368 12.81111,21.19567 7.04882,6.43178 13.07165,9.54671 25.65089,13.2663 5.775,1.70763 12.525,4.10573 15,5.3291 2.475,1.22338 4.65086,1.88426 4.83524,1.46861 0.18438,-0.41564 -0.87428,-3.92099 -2.35258,-7.78966 z M 285.5,416.5 v -133 L 275.25,283.21502 265,282.93003 V 416.5 550.06997 L 275.25,549.78498 285.5,549.5 Z m 473.5,0 V 283 H 749 739 V 416.5 550 h 10 10 z m -254,43.1158 c 0,-2.85355 -8.07253,-17.32306 -12.69811,-22.76059 -8.8436,-10.39596 -20.42902,-18.24188 -32.80189,-22.2142 -6.43927,-2.06734 -19.6238,-3.91721 -20.64446,-2.89655 -1.28131,1.28131 2.03505,12.28017 5.68353,18.84966 8.99444,16.19551 26.83213,26.57913 50.46093,29.37415 9.73353,1.15137 10,1.14198 10,-0.35247 z m 26.43153,-2.75446 c 14.12228,-3.50618 28.8474,-11.02127 38.91455,-19.86034 9.68492,-8.50348 18.46533,-23.5961 21.06514,-36.20884 2.63513,-12.78414 2.97618,-12.19542 -6.602,-11.39663 -29.20332,2.43547 -52.36456,22.42583 -63.32724,54.65745 -1.29621,3.81103 -2.66436,8.9804 -3.04032,11.48749 l -0.68357,4.55835 2.87096,-0.63414 c 1.57902,-0.34878 6.44014,-1.52028 10.80248,-2.60334 z M 495.5,753.96635 c -17.59883,-3.70149 -37.58478,-16.48594 -44.85999,-28.69568 -0.95057,-1.59532 0.85747,-4.93136 3.41427,-6.29972 1.75169,-0.93747 2.95692,-0.14363 9.42802,6.20985 13.05277,12.81555 26.76228,19.13124 44.18608,20.35562 20.16956,1.41733 39.4825,-6.1317 53.95298,-21.08911 6.61404,-6.8366 9.46545,-7.54564 11.59032,-2.88208 1.35755,2.9795 -1.45142,7.66681 -8.26635,13.79401 -11.17284,10.04535 -23.75049,16.22429 -38.8058,19.06389 -10.76299,2.03001 -19.43033,1.9008 -30.63953,-0.45678 z"/>
-    </svg>
+  <a href="/" class="nav-logo" aria-label="Connection Foundation — home">
+    <img src="/images/logo-cfgc-transparent.png" alt="" class="nav-logo-img">
     <div>
       <div class="nav-logo-text">Connection Foundation</div>
       <div class="nav-logo-sub">Gold Coast · Australia</div>
     </div>
   </a>
   <div class="nav-links">
-    <a href="#how">How it works</a>
-    <a href="#sessions">Sessions</a>
+    <a href="#welcome">Welcome</a>
+    <a href="#what-we-do">What we do</a>
+    <a href="#who-we-are">Who we are</a>
+    <a href="#programs">Programs</a>
     <a href="events.html">Events</a>
     <a href="#join">Join</a>
-    <a href="about.html">About us</a>
-    <a href="#join" class="nav-cta">Join a circle</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div style="position:absolute;inset:0;background-image:url('images/hero-bg.jpg');background-size:cover;background-position:center right;opacity:0.07;pointer-events:none;z-index:0;"></div>
+<section class="hero" id="welcome">
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        Now open · Mermaid Waters, Gold Coast
-      </div>
-      <h1>Practise English.<br><em>Find your people.</em></h1>
-      <p class="hero-sub">
-        Free weekly conversation circles for <strong>all levels</strong> — no pressure, no judgment, no cost.
-        Real conversations that actually matter.
-      </p>
-      <div class="hero-actions">
-        <a href="#join" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Join a circle
-        </a>
-        <a href="#how" class="btn-secondary">How it works</a>
+    <div class="eyebrow">About Connection Foundation</div>
+    <h1>Advancing individuals.<br><em>Strengthening communities.</em></h1>
+    <p class="hero-tagline">A community walking together on the path of personal and collective transformation.</p>
+  </div>
+</section>
 
+<!-- WHO WE ARE / WHAT WE DO -->
+<section class="who-section" id="what-we-do">
+  <div class="eyebrow stone">Who we are</div>
+  <h2 class="section-title">Where transformation <em>begins together</em></h2>
+  <div class="who-body">
+    <p>The Connection Foundation exists to empower individuals and communities to take charge of their own material, spiritual, and intellectual advancement — becoming both the architects of their personal growth and active contributors to the betterment of the society around them.</p>
+    <p>We believe that lasting transformation begins when people are given the tools, the knowledge, and the supportive relationships they need to recognise their own potential as agents of change. Our work is rooted in the conviction that every person carries within them the capacity to uplift not only their own life but the life of their community.</p>
+  </div>
+</section>
+
+<!-- COMMITMENTS / WHO WE ARE -->
+<section class="commitments" id="who-we-are">
+  <div class="commitments-inner">
+    <div class="eyebrow">What we are learning</div>
+    <h2 class="section-title">Four interconnected <em>commitments</em></h2>
+    <p class="section-intro">Through our work alongside communities, we are continually deepening our understanding of these four commitments.</p>
+    <div class="commitments-grid">
+      <div class="commitment-card">
+        <div class="commitment-num">01</div>
+        <h3>Protagonists of Transformation</h3>
+        <p>Empowering individuals to see themselves as protagonists — capable of transforming both their own lives and the world around them through purposeful, sustained action.</p>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">40+</div>
-          <div class="stat-label">Active members</div>
-        </div>
-        <div>
-          <div class="stat-num">3</div>
-          <div class="stat-label">Weekly sessions</div>
-        </div>
-        <div>
-          <div class="stat-num">3+</div>
-          <div class="stat-label">Years running</div>
-        </div>
+      <div class="commitment-card">
+        <div class="commitment-num">02</div>
+        <h3>Capacity From Within</h3>
+        <p>Equipping individuals to facilitate educational processes and accompany others along their path of development — raising capacity from within the very populations we serve.</p>
       </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-logo-card">
-        <svg viewBox="224 238 576 560" width="130" height="126" xmlns="http://www.w3.org/2000/svg">
-          <path style="fill:#FFF8F0" d="M 498.52015,785.88531 C 481.89329,783.46405 461.1066,775.1309 449,766.03325 426.85709,749.3937 411.98262,726.68911 407.50133,702.68912 c -1.28313,-6.87191 -1.38233,-9.12757 -0.45081,-10.25 C 408.06022,691.22251 415.87956,691 457.62244,691 H 507 V 669.00402 647.00803 L 386.25,646.75402 265.5,646.5 l -0.5,-15 -0.5,-15 -19,-0.26231 c -16.42964,-0.22682 -19.1691,-0.48942 -20.25,-1.94112 C 224.26305,612.97103 224,581.12492 224,462.96386 224,319.2516 224.07261,313.24427 225.82874,311.65499 227.34958,310.27865 230.04702,310 241.84975,310 l 14.19228,0 -0.5455,-16.25 C 254.76094,271.83739 253.82855,273 272.13763,273 l 14.02422,0 -0.31663,-16.54531 c -0.26334,-13.76112 -0.0666,-16.71785 1.16908,-17.57061 2.10553,-1.45306 36.56864,-0.35429 51.81679,1.65204 31.43576,4.13627 64.2781,16.21206 89.16891,32.78649 14.0145,9.33204 34.41801,28.1237 45.25228,41.67739 10.86692,13.59454 20.1967,29.34092 26.95889,45.5 C 504.89193,371.68526 511,389.80874 511,392.51196 c 0,3.97545 1.77497,0.52162 4.35419,-8.47262 17.23513,-60.10217 63.07712,-109.47446 122.14581,-131.5523 13.35688,-4.99235 33.61885,-10.03136 48.14622,-11.97364 16.75566,-2.2402 49.79069,-3.22561 51.81497,-1.54561 1.27045,1.05438 1.53881,4.13322 1.53881,17.65465 V 273 h 13.42857 c 10.87446,0 13.72746,0.29889 15,1.57143 1.3048,1.3048 1.57143,4.44372 1.57143,18.5 V 310 l 12.25,0.11842 c 6.7375,0.0651 12.57189,0.0703 12.96531,0.0116 0.39342,-0.0588 1.85592,0.3268 3.25,0.85683 L 800,311.9505 v 150.82475 c 0,115.97481 -0.27728,151.10203 -1.2,152.02475 -0.84774,0.84774 -6.68734,1.2 -19.89301,1.2 -15.29463,0 -18.79286,0.26021 -19.24225,1.43128 -0.30207,0.7872 -0.34789,6.88744 -0.10182,13.55608 0.27222,7.37711 0.0401,12.88598 -0.59294,14.06872 C 757.94848,646.96479 755.74767,647 637.46482,647 H 517 v 26.02475 26.02475 l -2.5651,0.97525 C 512.89905,700.60868 492.82879,701 464.41585,701 H 416.9619 l 0.59003,2.75 c 3.47168,16.18058 11.92889,30.55547 26.11489,44.388 14.681,14.31519 30.26316,22.56591 50.83318,26.91607 7.7343,1.63566 27.28964,1.67329 35,0.0674 31.39945,-6.53996 56.56866,-25.39468 70.25454,-52.62898 C 603.52381,714.99176 607,705.31281 607,702.3185 607,701.25375 600.63636,701 573.93426,701 c -20.88071,0 -33.77854,-0.38147 -35,-1.03518 -2.19222,-1.17324 -2.63573,-5.86335 -0.73426,-7.76482 0.89142,-0.89142 11.01723,-1.2 39.37756,-1.2 33.12826,0 38.3463,0.20333 39.45347,1.53739 1.50985,1.81926 -0.004,12.0045 -3.25782,21.91544 -15.27566,46.53198 -66.82904,78.48416 -115.25306,71.43248 z M 485.69141,634.90186 c -6.18057,-3.26143 -27.04938,-9.88717 -37.49918,-11.90581 C 419.054,617.36727 390.20911,615.78773 324,616.19529 L 274.5,616.5 274.21502,626.75 273.93003,637 381.71502,636.9558 489.5,636.91161 Z M 749.78498,626.75 749.5,616.5 701,616.19613 c -74.35935,-0.46588 -111.39394,2.18682 -138.5,9.92043 -8.4078,2.39883 -25.62068,8.79376 -26.95,10.01248 C 535.00997,636.62414 581.09246,637 642.33498,637 h 107.73499 z m -242.79475,-15.5 c -0.009,-23.9121 -0.0896,-24.91927 -2.36783,-29.75 -4.73389,-10.03768 -12.26128,-15.28589 -28.6224,-19.95596 -13.36602,-3.81515 -22.1498,-8.70292 -30.61872,-17.0379 -10.24127,-10.0793 -14.70634,-19.97416 -15.997,-35.45032 -0.89188,-10.69436 0.005,-11.52103 11.67342,-10.76504 14.51116,0.94014 30.7059,7.52005 41.7641,16.96872 6.73157,5.75179 13.2098,13.80553 19.18776,23.85422 l 4.98899,8.38628 7.2e-4,-38.75 L 507,470 l -7.25,-0.0131 C 477.68784,469.94689 454.61305,459.62817 441.63802,444 434.52389,435.43117 428,418.03034 428,407.62402 c 0,-6.0353 1.96638,-6.99163 12.95971,-6.30286 25.8897,1.62208 45.43131,12.32042 63.34442,34.67884 l 2.80413,3.5 -0.49509,-10.5 c -0.63151,-13.39328 -4.68626,-34.11847 -9.60659,-49.10255 C 479.2157,325.7182 438.29359,282.86027 384.46936,262.03669 362.43053,253.51028 330.58797,248 303.35478,248 L 295,248 v 164 164 l 8.75,0.001 c 12.8591,0.002 45.7811,2.65226 61.3411,4.93886 35.45139,5.20973 62.81259,13.21105 93.96156,27.4775 14.43586,6.61173 34.73702,18.17342 42.02657,23.9345 2.43142,1.92161 4.75827,3.52854 5.17077,3.57096 0.4125,0.0424 0.7456,-11.06037 0.74023,-24.67287 z m 20.15672,18.37353 c 25.13215,-17.13392 61.1286,-33.06863 92.94186,-41.14299 25.6603,-6.51271 73.66904,-12.46317 100.66119,-12.47647 L 729,576 V 412 248 l -8.25,0.0158 c -50.26983,0.0964 -96.0498,14.90526 -131.21089,42.44384 -9.05342,7.09075 -25.77489,23.99639 -32.68038,33.04033 -19.98611,26.17528 -33.2588,57.41171 -37.87096,89.12687 -1.7342,11.92508 -1.16783,12.82546 3.40601,5.41469 10.44216,-16.91891 28.73305,-30.74432 47.58649,-35.96888 8.64421,-2.39543 22.06345,-3.54527 27.51073,-2.35728 5.48558,1.19633 6.23973,3.7029 4.72423,15.70185 -3.3583,26.58938 -18.63337,48.18205 -43.61872,61.65898 -7.77295,4.19267 -21.38947,9.25203 -28.22346,10.48671 -2.13018,0.38486 -4.17887,0.87261 -4.55264,1.0839 -0.37378,0.21129 2.29088,4.31469 5.92145,9.11866 22.56955,29.86401 26.69765,67.79499 9.27446,85.21818 -4.89795,4.89795 -12.56636,8.73272 -19.26632,9.63459 l -4.75,0.63939 v 31.37117 C 517,621.88297 517.17863,636 517.39695,636 c 0.21832,0 4.60582,-2.86941 9.75,-6.37647 z M 629.65446,607.10667 C 641.8105,606.498 682.86118,606 720.87818,606 H 790 V 463 320 H 779.5 769 v 118.06574 c 0,79.47336 -0.33837,118.698 -1.03518,120 -0.94759,1.77059 -2.21686,1.93426 -15,1.93426 H 739 v 11.17126 C 739,585.89847 738.91152,586 726.07795,586 c -34.99671,0 -84.18826,6.44584 -113.76161,14.90681 -10.88253,3.1135 -27.32068,8.87919 -28.57853,10.02393 -0.41921,0.38151 4.76761,-0.0738 11.52627,-1.01188 6.75866,-0.93803 22.23433,-2.20352 34.39038,-2.81219 z m -192.38582,2.4103 c -1.77724,-0.77261 -8.07724,-2.9704 -14,-4.88397 -34.99983,-11.30804 -70.42446,-16.92664 -115.57165,-18.3305 -24.18879,-0.75216 -22.79679,0.22459 -21.97162,-15.41713 L 286.29962,560 l -13.89981,-0.0153 c -7.64489,-0.008 -14.46768,-0.3758 -15.16173,-0.81639 -1.00214,-0.63616 -1.31094,-25.28561 -1.5,-119.73469 L 255.5,320.5 244.75,320.21617 234,319.93234 234,462.96617 V 606 l 67.25,0.0207 c 68.86469,0.0212 105.57853,1.02962 123.25,3.38543 5.5,0.73321 11.35,1.37418 13,1.42437 l 3,0.0913 z m 92.50375,-50.12391 c 16.83235,-9.86373 16.21939,-41.61646 -1.33306,-69.05535 -4.23847,-6.62581 -9.58924,-13.29324 -10.68933,-13.31968 -0.4125,-0.01 -0.75,19.38948 -0.75,43.10978 v 43.12781 l 4.25,-0.67947 c 2.3375,-0.37371 6.17258,-1.8061 8.52239,-3.18309 z m -33.28973,-8.43844 c -8.67435,-22.70051 -29.15431,-39.21266 -52.73266,-42.51619 -5.56991,-0.78039 -5.68619,-0.45291 -3.212,9.04617 2.12235,8.14823 6.56209,15.49368 12.81111,21.19567 7.04882,6.43178 13.07165,9.54671 25.65089,13.2663 5.775,1.70763 12.525,4.10573 15,5.3291 2.475,1.22338 4.65086,1.88426 4.83524,1.46861 0.18438,-0.41564 -0.87428,-3.92099 -2.35258,-7.78966 z M 285.5,416.5 v -133 L 275.25,283.21502 265,282.93003 V 416.5 550.06997 L 275.25,549.78498 285.5,549.5 Z m 473.5,0 V 283 H 749 739 V 416.5 550 h 10 10 z m -254,43.1158 c 0,-2.85355 -8.07253,-17.32306 -12.69811,-22.76059 -8.8436,-10.39596 -20.42902,-18.24188 -32.80189,-22.2142 -6.43927,-2.06734 -19.6238,-3.91721 -20.64446,-2.89655 -1.28131,1.28131 2.03505,12.28017 5.68353,18.84966 8.99444,16.19551 26.83213,26.57913 50.46093,29.37415 9.73353,1.15137 10,1.14198 10,-0.35247 z m 26.43153,-2.75446 c 14.12228,-3.50618 28.8474,-11.02127 38.91455,-19.86034 9.68492,-8.50348 18.46533,-23.5961 21.06514,-36.20884 2.63513,-12.78414 2.97618,-12.19542 -6.602,-11.39663 -29.20332,2.43547 -52.36456,22.42583 -63.32724,54.65745 -1.29621,3.81103 -2.66436,8.9804 -3.04032,11.48749 l -0.68357,4.55835 2.87096,-0.63414 c 1.57902,-0.34878 6.44014,-1.52028 10.80248,-2.60334 z M 495.5,753.96635 c -17.59883,-3.70149 -37.58478,-16.48594 -44.85999,-28.69568 -0.95057,-1.59532 0.85747,-4.93136 3.41427,-6.29972 1.75169,-0.93747 2.95692,-0.14363 9.42802,6.20985 13.05277,12.81555 26.76228,19.13124 44.18608,20.35562 20.16956,1.41733 39.4825,-6.1317 53.95298,-21.08911 6.61404,-6.8366 9.46545,-7.54564 11.59032,-2.88208 1.35755,2.9795 -1.45142,7.66681 -8.26635,13.79401 -11.17284,10.04535 -23.75049,16.22429 -38.8058,19.06389 -10.76299,2.03001 -19.43033,1.9008 -30.63953,-0.45678 z"/>
-        </svg>
+      <div class="commitment-card">
+        <div class="commitment-num">03</div>
+        <h3>Coordination &amp; Accompaniment</h3>
+        <p>Building thoughtful arrangements that coordinate collective efforts and ensure every participant is accompanied, encouraged, and supported along their journey.</p>
       </div>
-      <div class="hero-cards">
-        <div class="hero-card">
-          <div class="hero-card-icon">🗣️</div>
-          <h4>All levels</h4>
-          <p>From beginner to fluent — everyone is welcome</p>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-icon">💸</div>
-          <h4>100% free</h4>
-          <p>No fees, no subscriptions, ever</p>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-icon">🤝</div>
-          <h4>Real community</h4>
-          <p>Friends, not just classmates</p>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-icon">📍</div>
-          <h4>Mermaid Waters</h4>
-          <p>Mermaid Waters, GC</p>
-        </div>
+      <div class="commitment-card">
+        <div class="commitment-num">04</div>
+        <h3>A Nurturing Environment</h3>
+        <p>Fostering an environment of mutual support where genuine bonds of community are nurtured — a space where every voice matters and every contribution is valued.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how-bg" id="how">
-  <div class="section-inner">
-    <div class="section-label">How it works</div>
-    <h2 class="section-title">Simple, warm,<br><em>and genuinely different</em></h2>
-    <p class="section-sub">No textbooks, no tests, no awkward silence. Just real people having real conversations.</p>
-    <div style="width:100%;height:340px;border-radius:20px;overflow:hidden;margin-bottom:40px;position:relative;">
-    <img src="images/hero-bg.jpg" 
-         alt="People in conversation around a table with coffee" 
-         style="width:100%;height:100%;object-fit:cover;object-position:center center;"
-         loading="lazy"/>
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 40%, rgba(43,107,107,0.45) 100%);"></div>
-    <div style="position:absolute;bottom:24px;left:32px;">
-      <span style="background:rgba(255,255,255,0.95);color:var(--teal);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:8px 18px;border-radius:20px;">Real sessions, real people</span>
-    </div>
-  </div>
-  <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h3>Read together</h3>
-        <p>Each session we read a short passage aloud as a group. Any level can follow along — the text is always accessible and thought-provoking.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h3>Discuss freely</h3>
-        <p>We share what resonated, what surprised us, what we disagree with. In English — but without pressure. There are no wrong answers, no corrections mid-sentence.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h3>Connect & grow</h3>
-        <p>Every week you leave with better English and stronger friendships. Many members also join community service activities together.</p>
-      </div>
-    </div>
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="eyebrow">Our programs</div>
+  <h2 class="section-title">A growing family of <em>programs</em></h2>
+  <p class="section-intro">Through these, we walk alongside individuals and communities on the path of transformation.</p>
+  <div class="programs-grid">
+    <a class="program-card" href="programs/language-cafe.html">
+      <div class="program-num">01</div>
+      <h3>Language Café</h3>
+      <p>A welcoming space where language learning becomes the doorway to deeper human connection — bringing diverse communities together through conversation, culture, and mutual understanding.</p>
+      <div class="program-arrow">Learn more &rarr;</div>
+    </a>
+    <a class="program-card" href="programs/dsa.html">
+      <div class="program-num">02</div>
+      <h3>A Discourse on Social Action</h3>
+      <p>A reflective space that draws individuals into meaningful conversations about the forces shaping society and the role each person can play in contributing to social progress.</p>
+      <div class="program-arrow">Learn more &rarr;</div>
+    </a>
+    <a class="program-card" href="programs/agents-for-change.html">
+      <div class="program-num">03</div>
+      <h3>The Agents for Change Program</h3>
+      <p>An empowering journey for young people, developing their capacity to become protagonists of transformation within their own communities — building vision, purpose, and the skills to act.</p>
+      <div class="program-arrow">Learn more &rarr;</div>
+    </a>
+    <a class="program-card" href="programs/ruhi-institute.html">
+      <div class="program-num">04</div>
+      <h3>The Ruhi Institute</h3>
+      <p>A sequence of courses designed to build the capacity of individuals to serve their communities — developing spiritual insight, practical skills, and the ability to accompany others in their own growth.</p>
+      <div class="program-arrow">Learn more &rarr;</div>
+    </a>
   </div>
 </section>
 
-<!-- VIDEO: REAL SESSION -->
-<section style="background: var(--sand);">
-  <div class="section-inner">
-    <div class="section-label">See it for yourself</div>
-    <h2 class="section-title">A real session,<br><em>in their own words</em></h2>
-    <p class="section-sub">This is what a Connection Foundation circle looks like.</p>
-    <div style="max-width:860px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(43,107,107,0.15);position:relative;padding-bottom:56.25%;height:0;">
-      <iframe src="https://www.youtube.com/embed/BQ1oa4aXs6c" title="Connection Foundation — A real session" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-    </div>
-    <p style="max-width:860px;margin:16px auto 0;font-family:'Lato',sans-serif;font-size:13px;color:var(--mid);text-align:center;">Filmed at a real session in Mermaid Waters, Gold Coast.</p>
-  </div>
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-mark">&ldquo;</div>
+  <p class="quote-text">When individuals are empowered and communities are united in purpose, the seeds of a better world are already taking root.</p>
+  <a href="#join" class="quote-cta">Join a circle &rarr;</a>
+  <p class="quote-meta">Mermaid Waters &middot; Gold Coast &middot; Australia</p>
 </section>
 
-<!-- WHY CF -->
-<section id="why">
-  <div class="section-inner">
-    <div class="section-label">Why Connection Foundation</div>
-    <h2 class="section-title">Not just another<br><em>language group</em></h2>
-    <p class="section-sub">Gold Coast has plenty of English groups. Here is what makes this one different.</p>
-    <div style="width:100%;height:300px;border-radius:20px;overflow:hidden;margin-bottom:40px;position:relative;">
-      <img src="images/why-different.jpg" 
-           alt="Participant raising hand to speak during a session"
-           style="width:100%;height:100%;object-fit:cover;object-position:50% 30%;"/>
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 50%, rgba(43,107,107,0.35) 100%);"></div>
-      <div style="position:absolute;bottom:22px;left:28px;">
-        <span style="background:rgba(255,255,255,0.95);color:var(--teal);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 16px;border-radius:20px;">Every voice matters</span>
-      </div>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-card-icon">🛡️</div>
-        <div>
-          <h4>Zero judgment</h4>
-          <p>No corrections mid-sentence. No embarrassing moments. A space where making mistakes is part of the process, not something to fear.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-card-icon">🌍</div>
-        <div>
-          <h4>Open to everyone</h4>
-          <p>Every background, every belief, every nationality. Our core value is unity in diversity — conversations are richer when everyone brings a different perspective.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-card-icon">💬</div>
-        <div>
-          <h4>Conversations that matter</h4>
-          <p>We explore topics like virtues, resilience, community, and purpose. Not just grammar — real things people actually want to talk about.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-card-icon">🌱</div>
-        <div>
-          <h4>More than English</h4>
-          <p>Members visit aged care homes, organise beach cleanups, and support each other through the challenges of life in Australia. Language is the door. Community is the destination.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROGRAMMES (inline block, no section) -->
-<div style="background: var(--warm-white); padding: 0 40px 80px;">
-  <div style="max-width: 1100px; margin: 0 auto;">
-    <div class="section-label" style="margin-bottom: 20px;">Our programmes</div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="programmes-grid">
-      <div class="why-card">
-        <div class="why-card-icon">💬</div>
-        <div>
-          <h4>Language Café</h4>
-          <p>Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
-          <span style="display:inline-block;margin-top:12px;background:var(--teal-pale);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:0.5px;padding:4px 12px;border-radius:12px;">All levels welcome</span>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-card-icon">📖</div>
-        <div>
-          <h4>DSA — Discourse on Social Action</h4>
-          <p>A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
-          <span style="display:inline-block;margin-top:12px;background:var(--teal-pale);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:0.5px;padding:4px 12px;border-radius:12px;">Intermediate English</span>
-        </div>
-      </div>
-    </div>
-    <p style="text-align:center;font-family:'Lato',sans-serif;font-size:14px;color:var(--mid);margin-top:24px;">Not sure which one is for you? <a href="#join" style="color:var(--teal);font-weight:700;">Tell us when you register</a> and we'll guide you.</p>
-  </div>
-</div>
-
-<style>
-  @media (max-width: 768px) {
-    .programmes-grid { grid-template-columns: 1fr !important; }
-  }
-</style>
-
-<!-- SESSIONS -->
-<section class="sessions-bg" id="sessions">
-  <div class="section-inner" style="position:relative;z-index:1;">
-    <div class="section-label">Sessions</div>
-    <h2 class="section-title">Join us this week</h2>
-    <p class="section-sub">Active groups running in Mermaid Waters. Drop in anytime — no booking needed for your first session.</p>
-    <div class="sessions-grid">
-      <div class="session-card">
-        <div class="session-day">DSA · Friday</div>
-        <div class="session-time">4:00 – 5:00 pm</div>
-        <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
-        <span class="session-tag">Intermediate English</span>
-      </div>
-      <div class="session-card">
-        <div class="session-day">DSA · Friday</div>
-        <div class="session-time">5:00 – 6:00 pm</div>
-        <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">A structured study circle exploring purpose, service, and how to contribute meaningfully to the world around you.</p>
-        <span class="session-tag">Intermediate English</span>
-      </div>
-      <div class="session-card">
-        <div class="session-day">Language Café · Friday</div>
-        <div class="session-time">6:00 – 7:00 pm</div>
-        <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
-        <span class="session-tag">All levels welcome</span>
-      </div>
-      <div class="session-card">
-        <div class="session-day">Language Café · Monday</div>
-        <div class="session-time">5:00 – 6:00 pm</div>
-        <div class="session-loc">Mermaid Waters, Gold Coast</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;margin:12px 0 14px;">Practice English through real, meaningful conversations in a safe, welcoming space. No pressure, no judgment — just connection.</p>
-        <span class="session-tag">All levels welcome</span>
-      </div>
-    </div>
-    <div class="location-note">
-      <div class="location-note-icon">📍</div>
-      <p>Sessions are held in private homes in the <strong>Mermaid Waters area</strong>. Exact address is shared after you register. We are also expanding to new time slots and cities — let us know what works for you in the form below.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials-bg" id="testimonials" style="position:relative;">
-  <div style="position:absolute;inset:0;background-image:url('images/hero-bg.jpg');background-size:cover;background-position:center;opacity:0.06;pointer-events:none;"></div>
-  <div class="section-inner">
-    <div class="section-label">What members say</div>
-    <h2 class="section-title">Real stories,<br><em>real connection</em></h2>
-    <p class="section-sub">From members who showed up not knowing anyone, and stayed because they found something they weren't expecting.</p>
-    <div class="testimonials-grid">
-      <div class="testimonial">
-        <p class="testimonial-text">I arrived in Australia six months ago and was too scared to speak English anywhere. After my first session I felt like I had known these people for years.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" style="overflow:hidden;padding:0;"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=80&h=80&q=80" style="width:100%;height:100%;object-fit:cover;" alt="Maria"/></div>
-          <div>
-            <div class="testimonial-name">Maria C.</div>
-            <div class="testimonial-origin">Brazil · Member since 2024</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial-text">It's not just about English. The conversations are deep, the people are warm, and every Friday I leave feeling more grounded about life here.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" style="overflow:hidden;padding:0;"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80" style="width:100%;height:100%;object-fit:cover;" alt="Andres"/></div>
-          <div>
-            <div class="testimonial-name">Andrés M.</div>
-            <div class="testimonial-origin">Colombia · Member since 2023</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial-text">I've tried other conversation groups but they felt forced. Here it's different. Nobody is trying to impress anyone. We just talk, and it's beautiful.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" style="overflow:hidden;padding:0;"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&h=80&q=80" style="width:100%;height:100%;object-fit:cover;" alt="Yuki"/></div>
-          <div>
-            <div class="testimonial-name">Yuki T.</div>
-            <div class="testimonial-origin">Japan · Member since 2024</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JOIN FORM -->
+<!-- JOIN / FORM -->
 <section class="form-section" id="join">
-  <div class="section-inner">
-    <div class="form-wrap">
-      <div class="form-info">
-        <div class="section-label">Join us</div>
-        <h2 class="section-title">Ready to<br><em>find your circle?</em></h2>
-        <p>Fill in the form and we will reach out with session details, location, and a warm welcome before your first meeting.</p>
-        <p>No commitment required. Come once, come every week — it's up to you.</p>
-        <div class="form-perks">
-          <div class="perk">
-            <div class="perk-icon">✓</div>
-            <span>Confirmation email with everything you need to know</span>
-          </div>
-          <div class="perk">
-            <div class="perk-icon">✓</div>
-            <span>WhatsApp group link sent in your welcome email</span>
-          </div>
-          <div class="perk">
-            <div class="perk-icon">✓</div>
-            <span>Weekly reminder before each session</span>
-          </div>
-          <div class="perk">
-            <div class="perk-icon">✓</div>
-            <span>Zero spam — we only send what matters</span>
-          </div>
-        </div>
-      </div>
+  <div class="form-wrap">
+    <div class="form-info">
+      <div class="eyebrow">Join us</div>
+      <h2>Tell us a little<br><em>about you.</em></h2>
+      <p>Leave your details and we will be in touch with the next step — session details, location, and a warm welcome.</p>
+      <p>No commitment. Come once, come often — it's up to you.</p>
+    </div>
 
-      <div class="form-card">
-        <div id="form-main">
-          <div class="form-group">
-            <label>Your name</label>
-            <input type="text" id="f-name" placeholder="First name is fine" autocomplete="given-name"/>
-          </div>
-          <div class="form-group">
-            <label>Email address</label>
-            <input type="email" id="f-email" placeholder="you@email.com" autocomplete="email"/>
-          </div>
-          <div class="form-group">
-            <label>English level</label>
-            <select id="f-level">
-              <option value="" disabled selected>Select your level</option>
-              <option value="beginner">Beginner — I understand very little</option>
-              <option value="elementary">Elementary — I know the basics</option>
-              <option value="intermediate">Intermediate — I can hold a conversation</option>
-              <option value="advanced">Advanced — I want to refine my fluency</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Preferred session</label>
-            <select id="f-session">
-              <option value="" disabled selected>Choose a session</option>
-              <option value="dsa-fri-4pm">DSA — Friday 4:00–5:00 pm</option>
-              <option value="dsa-fri-5pm">DSA — Friday 5:00–6:00 pm</option>
-              <option value="cafe-fri-6pm">Language Café — Friday 6:00–7:00 pm</option>
-              <option value="cafe-mon-5pm">Language Café — Monday 5:00–6:00 pm</option>
-              <option value="any">Any — I am flexible</option>
-            </select>
-          </div>
-          <button class="form-submit" id="form-btn" onclick="submitForm()">Reserve my spot →</button>
-          <p class="form-privacy">We respect your privacy. No spam, unsubscribe anytime.</p>
+    <div class="form-card">
+      <div id="form-main">
+        <div class="form-group">
+          <label for="f-name">Name</label>
+          <input type="text" id="f-name" placeholder="First name is fine" autocomplete="given-name"/>
         </div>
-        <div class="form-success" id="form-success">
-          <div class="form-success-icon">🌱</div>
-          <h3>Welcome to the circle!</h3>
-          <p>Check your inbox — we've sent you a welcome email with session details, location, and your link to join our WhatsApp group. See you soon.</p>
+        <div class="form-group">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" placeholder="you@email.com" autocomplete="email"/>
         </div>
+        <div class="form-group">
+          <label for="f-suburb">Suburb</label>
+          <input type="text" id="f-suburb" placeholder="Mermaid Waters" autocomplete="address-level2"/>
+        </div>
+        <div class="form-group">
+          <label for="f-interest">Preferred interest</label>
+          <select id="f-interest">
+            <option value="" disabled selected>Choose one</option>
+            <option value="language-cafe">Language Café</option>
+            <option value="dsa">DSA — Discourse on Social Action</option>
+            <option value="unsure">Don't know yet</option>
+          </select>
+        </div>
+        <div class="form-consent">
+          <input type="checkbox" id="f-consent"/>
+          <label for="f-consent">I consent to Connection Foundation collecting and using my personal information as described in the Privacy Policy. I understand I can request access, correction, or deletion of my information at any time by emailing <a href="mailto:cf.goldcoast@gmail.com" style="color:var(--wine);text-decoration:underline;">cf.goldcoast@gmail.com</a>. (Required — Australian Privacy Principles compliance)</label>
+        </div>
+        <button class="form-submit" id="form-btn" onclick="submitForm()">Join a circle &rarr;</button>
+        <p class="form-privacy">No spam. Unsubscribe anytime.</p>
       </div>
-
+      <div class="form-success" id="form-success">
+        <h3>Welcome to the circle.</h3>
+        <p>Check your inbox — we have sent you a welcome email with everything you need. See you soon.</p>
+      </div>
     </div>
   </div>
 </section>
-
-<!-- FLOAT JOIN BUTTON -->
-<a href="#join" class="wa-float" aria-label="Join a circle" style="background:var(--teal);box-shadow:0 4px 20px rgba(43,107,107,0.35);">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-    <circle cx="9" cy="7" r="4"/>
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-  </svg>
-</a>
 
 <!-- FOOTER -->
 <footer class="main-footer">
-  <a href="about.html" class="footer-bigger">The bigger picture →</a>
   <div class="footer-links">
-    <a href="#how">How it works</a>
-    <a href="#sessions">Sessions</a>
+    <a href="#programs">Programs</a>
     <a href="events.html">Events</a>
     <a href="#join">Join</a>
-    <a href="about.html">About us</a>
     <a href="mailto:cf.goldcoast@gmail.com">Contact</a>
   </div>
   <p class="footer-meta">
-    © 2026 Connection Foundation · Gold Coast, Australia · Mermaid Waters, QLD<br>
+    &copy; 2026 Connection Foundation &middot; Gold Coast, Australia &middot; Mermaid Waters, QLD<br>
     We acknowledge the Kombumerri families of the Yugambeh Language Region, Traditional Custodians of this land.
   </p>
 </footer>
 
-<!-- QR MODAL (desktop: show QR to scan from phone) -->
-<div class="modal-overlay" id="qr-modal">
-  <div class="modal-card">
-    <button class="modal-close" onclick="closeModal('qr-modal')" aria-label="Close">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
-    </button>
-    <div class="modal-label">You came along — thank you</div>
-    <h3 class="modal-title">Thanks for being here</h3>
-    <p class="modal-sub">Open the camera on your phone and scan the code below to register your visit and stay in touch.</p>
-    <div class="qr-wrap">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fconnection-foundation.vercel.app%2F%3Ffeedback%3D1" alt="QR code — scan with your phone"/>
-    </div>
-    <p class="qr-hint">It takes less than a minute.</p>
-  </div>
-</div>
-
-<!-- FEEDBACK MODAL (auto-opens on ?feedback=1, usually via QR scan on phone) -->
-<div class="modal-overlay" id="feedback-modal">
-  <div class="modal-card">
-    <button class="modal-close" onclick="closeModal('feedback-modal')" aria-label="Close">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
-    </button>
-    <div id="feedback-form-view">
-      <div class="modal-label">You came along — thank you</div>
-      <h3 class="modal-title">Thanks for joining our <em style="font-style:italic;color:var(--teal);">Get-Together</em></h3>
-      <p class="modal-sub">We hope the afternoon was as warm for you as it was for us. Leave us your details so we can stay in touch and send you the next session info.</p>
-      <div class="form-group">
-        <label for="fb-name">Full name</label>
-        <input type="text" id="fb-name" placeholder="Your name" autocomplete="name"/>
-      </div>
-      <div class="form-group">
-        <label for="fb-email">Email address</label>
-        <input type="email" id="fb-email" placeholder="you@email.com" autocomplete="email"/>
-      </div>
-      <div class="form-group">
-        <label for="fb-phone">Phone number</label>
-        <input type="tel" id="fb-phone" placeholder="04xx xxx xxx" autocomplete="tel"/>
-      </div>
-      <div class="form-group">
-        <label for="fb-session">Session or group you're interested in</label>
-        <select id="fb-session">
-          <option value="" disabled selected>Choose an option</option>
-          <option value="dsa-fri-4pm">DSA — Friday 4:00–5:00 pm</option>
-          <option value="dsa-fri-5pm">DSA — Friday 5:00–6:00 pm</option>
-          <option value="cafe-fri-6pm">Language Café — Friday 6:00–7:00 pm</option>
-          <option value="cafe-mon-5pm">Language Café — Monday 5:00–6:00 pm</option>
-          <option value="unsure">Not sure yet — just keep me posted</option>
-        </select>
-      </div>
-      <button class="modal-submit" id="fb-btn" onclick="submitFeedback()">Send my details →</button>
-    </div>
-    <div class="modal-success" id="feedback-success-view">
-      <div class="modal-success-icon">🌱</div>
-      <h3 class="modal-title">Thank you!</h3>
-      <p class="modal-sub">We've got your details. We'll be in touch soon with more about the sessions.</p>
-    </div>
-  </div>
-</div>
-
+<script src="/assets/welcome-splash.js" defer></script>
 <script>
-  // === MODAL HANDLING ===
-  // Google Apps Script Web App endpoint that appends a row to the
-  // "Get-together registration april 2026" sheet in cf.goldcoast@gmail.com's Drive.
-  // Setup instructions are in README.md ("Event feedback — Google Sheet").
-  const FEEDBACK_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxpRc9a63jaqq7v8fx08EnJr6wW_j0hvynCYv13FDdGXKGYg9r-ih61_J4SXGXB-nbW8w/exec';
-
-  function openQrModal() { document.getElementById('qr-modal').classList.add('active'); }
-  function openFeedbackModal() { document.getElementById('feedback-modal').classList.add('active'); }
-  function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-  // Close on backdrop click + Escape
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) overlay.classList.remove('active');
-    });
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.active').forEach(o => o.classList.remove('active'));
-    }
-  });
-
-  // Auto-open feedback modal if URL has ?feedback=1 (QR scan lands here)
-  if (new URLSearchParams(window.location.search).get('feedback') === '1') {
-    window.addEventListener('DOMContentLoaded', openFeedbackModal);
-  }
-
-  async function submitFeedback() {
-    const name = document.getElementById('fb-name').value.trim();
-    const email = document.getElementById('fb-email').value.trim();
-    const phone = document.getElementById('fb-phone').value.trim();
-    const session = document.getElementById('fb-session').value;
-    const btn = document.getElementById('fb-btn');
-
-    if (!name || !email || !phone || !session) {
-      alert('Please fill in all fields before continuing.');
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert('Please enter a valid email address.');
-      return;
-    }
-
-    if (!FEEDBACK_WEBHOOK_URL || FEEDBACK_WEBHOOK_URL.indexOf('script.google.com') === -1) {
-      alert('The feedback form is not yet connected to the Google Sheet. Please contact cf.goldcoast@gmail.com');
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    try {
-      // text/plain avoids CORS preflight with Google Apps Script Web Apps
-      const res = await fetch(FEEDBACK_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          name, email, phone, session,
-          event: 'Community Get-Together — April 2026',
-          submitted_at: new Date().toISOString()
-        })
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      document.getElementById('feedback-form-view').style.display = 'none';
-      document.getElementById('feedback-success-view').classList.add('active');
-    } catch (e) {
-      console.error('Feedback submit error:', e);
-      btn.disabled = false;
-      btn.textContent = 'Send my details →';
-      alert('Something went wrong. Please try again or contact cf.goldcoast@gmail.com');
-    }
-  }
-
-  // Nav scroll effect
+  // ===== Nav scroll effect =====
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // Form submission
+  // ===== Form submission =====
   async function submitForm() {
     const name = document.getElementById('f-name').value.trim();
     const email = document.getElementById('f-email').value.trim();
-    const level = document.getElementById('f-level').value;
-    const session = document.getElementById('f-session').value;
+    const suburb = document.getElementById('f-suburb').value.trim();
+    const interest = document.getElementById('f-interest').value;
+    const consent = document.getElementById('f-consent').checked;
+    const btn = document.getElementById('form-btn');
 
-    if (!name || !email || !level || !session) {
+    if (!name || !email || !suburb || !interest) {
       alert('Please fill in all fields before continuing.');
       return;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert('Please enter a valid email address.');
       return;
     }
+    if (!consent) {
+      alert('Please tick the consent box to continue.');
+      return;
+    }
 
-    const btn = document.getElementById('form-btn');
-    btn.textContent = 'Sending...';
+    btn.textContent = 'Sending…';
     btn.disabled = true;
 
     const SUPABASE_URL = 'https://kbondjwqgndghtyxddlm.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtib25kandxZ25kZ2h0eXhkZGxtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNzY0MDMsImV4cCI6MjA5MTg1MjQwM30.PshuZ-9sO4szzxwSP0S6LFYQ6c8IIdGBU74NczI4NTQ';
+
+    const payload = {
+      name,
+      email,
+      suburb,
+      preferred_interest: interest,
+      consent_at: new Date().toISOString(),
+      source: 'landing_page'
+    };
 
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/members`, {
@@ -1554,57 +722,68 @@
           'apikey': SUPABASE_KEY,
           'Prefer': 'return=minimal'
         },
-        body: JSON.stringify({ name, email, english_level: level, preferred_session: session, source: 'landing_page' })
+        body: JSON.stringify(payload)
       });
 
       if (res.ok || res.status === 201) {
-        // Registration succeeded, now trigger welcome email
+        // Trigger welcome email + Google Sheet sync in parallel.
+        // Sheet sync is fire-and-forget — registration succeeds even if it fails.
+        const emailReq = fetch(`${SUPABASE_URL}/functions/v1/welcome-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY
+          },
+          body: JSON.stringify({ type: 'INSERT', record: payload })
+        });
+        const syncReq = fetch(`${SUPABASE_URL}/functions/v1/sync-to-google-sheet`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY
+          },
+          body: JSON.stringify({ type: 'INSERT', record: payload })
+        }).catch(err => { console.error('Sheet sync error:', err); return null; });
+
         let emailSent = false;
         try {
-          const emailRes = await fetch(`${SUPABASE_URL}/functions/v1/welcome-email`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_KEY,
-            },
-            body: JSON.stringify({
-              type: 'INSERT',
-              record: { name, email, english_level: level, preferred_session: session, source: 'landing_page' }
-            })
-          });
+          const emailRes = await emailReq;
           emailSent = emailRes.ok;
           if (!emailSent) {
             console.error('Email send failed:', emailRes.status, await emailRes.text());
           }
-        } catch(emailErr) {
+        } catch (emailErr) {
           console.error('Email send error:', emailErr);
         }
 
+        // Await sync but never block UI on its failure
+        syncReq.then(r => {
+          if (r && !r.ok) console.error('Sheet sync HTTP', r.status);
+        });
+
         if (!emailSent) {
-          btn.textContent = 'Reserve my spot →';
+          btn.textContent = 'Join a circle →';
           btn.disabled = false;
-          alert('Registration saved, but we had trouble sending your welcome email. Please check your inbox or contact us at cf.goldcoast@gmail.com');
+          alert('Your details are saved, but we had trouble sending the welcome email. Please check your inbox shortly or contact cf.goldcoast@gmail.com');
           return;
         }
 
         document.getElementById('form-main').style.display = 'none';
         document.getElementById('form-success').classList.add('visible');
       } else if (res.status === 409) {
-        btn.textContent = 'Reserve my spot →';
+        btn.textContent = 'Join a circle →';
         btn.disabled = false;
-        alert('This email is already registered! Check your inbox for the welcome email, or contact us at cf.goldcoast@gmail.com');
-        return;
+        alert('This email is already registered. Check your inbox for the welcome email, or contact cf.goldcoast@gmail.com');
       } else {
         const errText = await res.text();
         console.error('Supabase error:', res.status, errText);
-        btn.textContent = 'Reserve my spot →';
+        btn.textContent = 'Join a circle →';
         btn.disabled = false;
-        alert('Registration failed. Please try again or contact us at cf.goldcoast@gmail.com');
-        return;
+        alert('Registration failed. Please try again or contact cf.goldcoast@gmail.com');
       }
-    } catch(e) {
+    } catch (e) {
       console.error('Fetch error:', e);
-      btn.textContent = 'Reserve my spot →';
+      btn.textContent = 'Join a circle →';
       btn.disabled = false;
       alert('Something went wrong. Please check your connection and try again.');
     }
