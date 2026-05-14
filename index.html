@@ -67,23 +67,30 @@
     transition: box-shadow 0.3s;
   }
   .main-nav.scrolled { box-shadow: 0 2px 24px color-mix(in oklab, var(--wine) 8%, transparent); }
-  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo-img { height: 56px; width: auto; display: block; }
-  @media (max-width: 768px) { .nav-logo-img { height: 44px; } }
-  .nav-logo-text { font-size: 17px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
-  .nav-logo-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-top: 2px; }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-logo-img { height: 80px; width: auto; display: block; }
+  @media (max-width: 1024px) { .nav-logo-img { height: 64px; } }
+  @media (max-width: 640px) { .nav-logo-img { height: 52px; } }
   .nav-links { display: flex; align-items: center; gap: 32px; }
-  .nav-links a { color: var(--ink); font-size: 14px; text-decoration: none; transition: color 0.15s; }
-  .nav-links a:hover { color: var(--wine); }
-  .nav-links a.current { color: var(--wine); font-weight: 500; }
-  .nav-cta {
-    background: var(--ember); color: #fff !important;
-    padding: 10px 22px; border-radius: 999px;
-    font-size: 14px; font-weight: 500; letter-spacing: 0;
-    border: none; box-shadow: none;
-    transition: background 0.2s;
+  .nav-links a {
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.15s;
   }
-  .nav-cta:hover { background: color-mix(in oklab, var(--ember) 88%, var(--ink)); }
+  .nav-links a:hover { color: var(--wine); }
+  .nav-links a.current { color: var(--wine); }
+  @media (max-width: 900px) {
+    .nav-links { gap: 20px; font-size: 13px; }
+  }
+  @media (max-width: 768px) {
+    .main-nav { flex-direction: column; gap: 14px; padding: 16px 20px; }
+    .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .nav-links a { font-size: 12px; letter-spacing: 0.04em; }
+  }
 
   /* ===== HERO ===== */
   .hero {
@@ -477,8 +484,6 @@
     .main-footer { padding: 48px 20px 24px; }
   }
   @media (max-width: 768px) {
-    .nav-links a:not(.nav-cta) { display: none; }
-    .nav-links { gap: 0; }
     .main-footer .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
 </style>
@@ -487,23 +492,21 @@
 
 <!-- NAV -->
 <nav class="main-nav" id="nav">
-  <a href="index.html" class="nav-logo">
-    <img src="images/logo-cfgc-transparent.png" alt="Connection Foundation Gold Coast" class="nav-logo-img">
-    <div>
-      <div class="nav-logo-text">Connection Foundation</div>
-      <div class="nav-logo-sub">Gold Coast · Australia</div>
-    </div>
+  <a href="/" class="nav-logo" aria-label="Connection Foundation — home">
+    <img src="/images/logo-cfgc-transparent.png" alt="Connection Foundation Gold Coast" class="nav-logo-img">
   </a>
   <div class="nav-links">
+    <a href="#welcome">Welcome</a>
+    <a href="#what-we-do">What we do</a>
+    <a href="#who-we-are">Who we are</a>
     <a href="#programs">Programs</a>
     <a href="events.html">Events</a>
     <a href="#join">Join</a>
-    <a href="#join" class="nav-cta">Join a circle</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="welcome">
   <div class="hero-inner">
     <div class="eyebrow">About Connection Foundation</div>
     <h1>Advancing individuals.<br><em>Strengthening communities.</em></h1>
@@ -511,8 +514,8 @@
   </div>
 </section>
 
-<!-- WHO WE ARE -->
-<section class="who-section">
+<!-- WHO WE ARE / WHAT WE DO -->
+<section class="who-section" id="what-we-do">
   <div class="eyebrow stone">Who we are</div>
   <h2 class="section-title">Where transformation <em>begins together</em></h2>
   <div class="who-body">
@@ -521,8 +524,8 @@
   </div>
 </section>
 
-<!-- COMMITMENTS -->
-<section class="commitments">
+<!-- COMMITMENTS / WHO WE ARE -->
+<section class="commitments" id="who-we-are">
   <div class="commitments-inner">
     <div class="eyebrow">What we are learning</div>
     <h2 class="section-title">Four interconnected <em>commitments</em></h2>
